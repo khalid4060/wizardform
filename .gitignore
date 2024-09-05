@@ -1,0 +1,39 @@
+# Dependency Modules
+node_modules
+
+# App Packaged
+dist
+build
+*.zip
+
+# Test
+coverage
+
+# NPM
+.npm
+package-lock.json
+yarn.lock
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Patches
+patches
+
+
+# OSX
+.DS_Store
+.history
+client/lessonFiles/app/data
+client/lessonFiles/app/source
+client/lessonFiles
+public/testlessons/
+
+# Temp
+POC 1- PW_EN_4_LO16
+POC 2- PW_EN_4_LO07
+public/grade-5-poc
