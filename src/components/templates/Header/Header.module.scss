@@ -1,0 +1,20 @@
+.headerContainer {
+    width: 100%;
+    // min-height: 48px;
+    // max-height: auto;
+    height: 48px;
+    background: var(--Colors-Subject-Arabic-30, #B2EAD2);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.surveyTitle {
+    //styleName: Heading/Medium/bold;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    color: #004A2A;
+}
