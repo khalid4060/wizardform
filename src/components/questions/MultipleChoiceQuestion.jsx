@@ -70,10 +70,15 @@ const MultipleChoiceQuestion = ({ questionData }) => {
   };
 
   return (
-    <div>
-      <h2 dangerouslySetInnerHTML={parseHtmlContent(statementContent)} />
-      {stem_image && <img src={stem_image.file_name[0]} alt="Question" />}
-      <p>Select the Correct Answer:</p>
+    <div className={'mulitpleChoiceContainer'}>
+      {/* Question Statement */}
+      <div className={'contentBox'}>
+        <h2 dangerouslySetInnerHTML={parseHtmlContent(statementContent)} />
+        {/* {stem_image && <img src={stem_image.file_name[0]} alt="Question" />} */}
+      </div>
+      {/* Question Statement */}
+
+      <p className={'instructionHeading'}>Select the Correct Answer:</p>
 
       <div className="optionsContainer">
         {options.map((opt) => (
@@ -116,12 +121,11 @@ const MultipleChoiceQuestion = ({ questionData }) => {
                 disabled={submitted}
               />
             </div>
-            <div className="optionLabel">
-              <h3
-                htmlFor={`option-${opt.option_id}`}
-                dangerouslySetInnerHTML={parseHtmlContent(opt.html)}
-              />
-            </div>
+            <div 
+              className="optionLabel"
+              htmlFor={`option-${opt.option_id}`}
+              dangerouslySetInnerHTML={parseHtmlContent(opt.html)}
+            />
           </label>
         ))}
       </div>

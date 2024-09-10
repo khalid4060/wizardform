@@ -4,6 +4,8 @@ import WizardProgressBar from '../../elements/WizardProgressBar/WizardProgressBa
 import MCQ from '../../widgets/MCQ/MCQ';
 import Footer from '@components/templates/Footer/Footer';
 import styles from './Questions.module.scss';
+import MultipleChoiceQuestion from '../../questions/MultipleChoiceQuestion';
+import { dummyData } from '../../../utils/const';
 
 const Questions = () => {
   return (
@@ -12,7 +14,7 @@ const Questions = () => {
       <div className='mainContainer'>
         <div className={styles.container}>
           <WizardProgressBar />
-          <MCQ />
+          <MultipleChoiceQuestion questionData={dummyData} />
           <Footer />
         </div>
       </div>
