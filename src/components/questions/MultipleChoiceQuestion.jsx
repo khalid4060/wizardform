@@ -6,68 +6,74 @@ const parseHtmlContent = (htmlString) => {
   return { __html: htmlString };
 };
 
-const MultipleChoiceQuestion = ({ questionData, submitted, attempts }) => {
-  const [statementContent, setStatementContent] = useState('');
-  const [seeWhyContent, setSeeWhyContent] = useState('');
-  const [options, setOptions] = useState([]);
-  const [feedback, setFeedback] = useState({});
-  const [selectedOption, setSelectedOption] = useState(null);
-  // const [submitted, setSubmitted] = useState(false);
-  // const [attempts, setAttempts] = useState(0);
+const MultipleChoiceQuestion = ({
+  submitted,
+  statementContent,
+  selectedOption,
+  options,
+  handleOptionChange,
+}) => {
+  // const [statementContent, setStatementContent] = useState('');
+  // const [seeWhyContent, setSeeWhyContent] = useState('');
+  // const [options, setOptions] = useState([]);
+  // const [feedback, setFeedback] = useState({});
+  // const [selectedOption, setSelectedOption] = useState(null);
+  // // const [submitted, setSubmitted] = useState(false);
+  // // const [attempts, setAttempts] = useState(0);
 
-  const {
-    statement,
-    stem_image,
-    see_why,
-    options: optionsData,
-    feedback: feedbackData,
-  } = questionData;
+  // const {
+  //   statement,
+  //   stem_image,
+  //   see_why,
+  //   options: optionsData,
+  //   feedback: feedbackData,
+  // } = questionData;
 
-  useEffect(() => {
-    // Load statement content
-    setStatementContent(statement.content[0].file_name[0]);
+  // useEffect(() => {
+  //   // Load statement content
+  //   setStatementContent(statement.content[0].file_name[0]);
 
-    // Load see why content
-    setSeeWhyContent(see_why.content[0].file_name[0]);
+  //   // Load see why content
+  //   setSeeWhyContent(see_why.content[0].file_name[0]);
 
-    // Load options
-    const loadedOptions = optionsData.map((opt) => ({
-      ...opt,
-      html: opt.content[0].file_name[0],
-    }));
-    setOptions(loadedOptions);
+  //   // Load options
+  //   const loadedOptions = optionsData.map((opt) => ({
+  //     ...opt,
+  //     html: opt.content[0].file_name[0],
+  //   }));
+  //   setOptions(loadedOptions);
 
-    // Load feedback
-    const feedbacks = {
-      correct: feedbackData.correct.content[0].file_name[0],
-      incorrect: feedbackData.incorrect.content[0].file_name[0],
-    };
-    setFeedback(feedbacks);
-  }, [statement, see_why, optionsData, feedbackData]);
+  //   // Load feedback
+  //   const feedbacks = {
+  //     correct: feedbackData.correct.content[0].file_name[0],
+  //     incorrect: feedbackData.incorrect.content[0].file_name[0],
+  //   };
+  //   setFeedback(feedbacks);
+  // }, [statement, see_why, optionsData, feedbackData]);
 
-  const handleOptionChange = (optionId) => {
-    setSelectedOption(optionId);
-  };
+  // const handleOptionChange = (optionId) => {
+  //   setSelectedOption(optionId);
+  // };
 
-  const handleSubmit = () => {
-    if (submitted) return;
-    setAttempts(attempts + 1);
-    setSubmitted(true);
-  };
+  // // const handleSubmit = () => {
+  // //   if (submitted) return;
+  // //   setAttempts(attempts + 1);
+  // //   setSubmitted(true);
+  // // };
 
-  const renderFeedback = () => {
-    const correctOption = options.find((opt) => opt.is_correct);
+  // const renderFeedback = () => {
+  //   const correctOption = options.find((opt) => opt.is_correct);
 
-    if (selectedOption === correctOption.option_id) {
-      return (
-        <div className="feedback-correct">Correct! {feedback.correct}</div>
-      );
-    } else {
-      return (
-        <div className="feedback-incorrect">Oops, almost there. Try again.</div>
-      );
-    }
-  };
+  //   if (selectedOption === correctOption.option_id) {
+  //     return (
+  //       <div className="feedback-correct">Correct! {feedback.correct}</div>
+  //     );
+  //   } else {
+  //     return (
+  //       <div className="feedback-incorrect">Oops, almost there. Try again.</div>
+  //     );
+  //   }
+  // };
 
   return (
     <div className={'mulitpleChoiceContainer'}>
@@ -121,7 +127,7 @@ const MultipleChoiceQuestion = ({ questionData, submitted, attempts }) => {
                 disabled={submitted}
               />
             </div>
-            <div 
+            <div
               className="optionLabel"
               htmlFor={`option-${opt.option_id}`}
               dangerouslySetInnerHTML={parseHtmlContent(opt.html)}
@@ -134,11 +140,11 @@ const MultipleChoiceQuestion = ({ questionData, submitted, attempts }) => {
         Submit
       </button> */}
 
-      {submitted && renderFeedback()}
+      {/* {submitted && renderFeedback()} */}
 
-      {submitted && (
+      {/* {submitted && (
         <div dangerouslySetInnerHTML={parseHtmlContent(seeWhyContent)} />
-      )}
+      )} */}
     </div>
   );
 };
