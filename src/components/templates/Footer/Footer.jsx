@@ -3,7 +3,7 @@ import styles from './Footer.module.scss';
 import AngleLeftIcon from '../../../assets/icons/angle-left.svg';
 import AngleRightIcon from '../../../assets/icons/angle-right.svg';
 
-const Footer = () => {
+const Footer = ({ handleSubmit }) => {
   return (
     <div className={styles.footerContainer}>
       <div>
@@ -17,7 +17,7 @@ const Footer = () => {
       <div>
         <button className={`${styles.btn} ${styles.btnSecondary}`}>
           <div className={styles.btnContent}>
-            <div>Submit Answer</div>
+            <button onClick={handleSubmit}>Submit Answer</button>
             <div><img src={AngleRightIcon} /></div>
           </div>
         </button>

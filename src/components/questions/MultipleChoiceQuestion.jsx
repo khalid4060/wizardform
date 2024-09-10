@@ -6,14 +6,14 @@ const parseHtmlContent = (htmlString) => {
   return { __html: htmlString };
 };
 
-const MultipleChoiceQuestion = ({ questionData }) => {
+const MultipleChoiceQuestion = ({ questionData, submitted, attempts }) => {
   const [statementContent, setStatementContent] = useState('');
   const [seeWhyContent, setSeeWhyContent] = useState('');
   const [options, setOptions] = useState([]);
   const [feedback, setFeedback] = useState({});
   const [selectedOption, setSelectedOption] = useState(null);
-  const [submitted, setSubmitted] = useState(false);
-  const [attempts, setAttempts] = useState(0);
+  // const [submitted, setSubmitted] = useState(false);
+  // const [attempts, setAttempts] = useState(0);
 
   const {
     statement,
@@ -130,9 +130,9 @@ const MultipleChoiceQuestion = ({ questionData }) => {
         ))}
       </div>
 
-      <button onClick={handleSubmit} disabled={submitted}>
+      {/* <button onClick={handleSubmit} disabled={submitted}>
         Submit
-      </button>
+      </button> */}
 
       {submitted && renderFeedback()}
 
