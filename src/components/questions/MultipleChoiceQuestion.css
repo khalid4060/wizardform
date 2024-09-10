@@ -160,6 +160,30 @@
   /* background-color: #fdecea;  */
 }
 
+@media only screen and (max-width: 1024px) {
+  .contentBox {
+    height: 200px;
+  }
+
+  .optionsContainer {
+    height: 774px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .mulitpleChoiceContainer {
+    padding: 0 1rem 2rem 1rem;
+  }
+
+  .contentBox {
+    height: 180px;
+  }
+
+  .optionsContainer {
+    height: 563px;
+  }
+}
+
 /* .cardBox.incorrect:after {
   content: '✖';
   font-size: 20px;
