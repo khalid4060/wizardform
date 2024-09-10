@@ -89,6 +89,7 @@ const Questions = () => {
             submitted={submitted}
             renderFeedback={renderFeedback}
             seeWhyContent={seeWhyContent}
+            selectedOption={selectedOption}
           />
         </div>
       </div>

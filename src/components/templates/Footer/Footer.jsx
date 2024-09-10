@@ -3,7 +3,13 @@ import styles from './Footer.module.scss';
 import AngleLeftIcon from '../../../assets/icons/angle-left.svg';
 import AngleRightIcon from '../../../assets/icons/angle-right.svg';
 
-const Footer = ({ handleSubmit, renderFeedback, submitted, seeWhyContent }) => {
+const Footer = ({
+  handleSubmit,
+  renderFeedback,
+  submitted,
+  seeWhyContent,
+  selectedOption,
+}) => {
   const parseHtmlContent = (htmlString) => {
     return { __html: htmlString };
   };
@@ -26,7 +32,9 @@ const Footer = ({ handleSubmit, renderFeedback, submitted, seeWhyContent }) => {
       <div>
         <button className={`${styles.btn} ${styles.btnSecondary}`}>
           <div className={styles.btnContent}>
-            <button onClick={handleSubmit}>Submit Answer</button>
+            <button onClick={handleSubmit} disabled={!selectedOption}>
+              Submit Answer
+            </button>
             <div>
               <img src={AngleRightIcon} />
             </div>
