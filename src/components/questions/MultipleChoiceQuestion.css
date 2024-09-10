@@ -1,12 +1,14 @@
 /* Style for options container */
 .mulitpleChoiceContainer {
   padding: 0 6rem 5rem 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .contentBox {
-  min-height: 174px;
   padding: 0 0 24px 0;
-  height: auto;
+  height: 150px;
   /* //styleName: EN-POC-28-Bold;
   // font-family: 'English Signika'; */
   font-size: 1.5rem;
@@ -18,7 +20,7 @@
 }
 
 .optionsContainer {
-  height: 256px;
+  height: 290px;
   display: grid;
   grid-template-columns: repeat(2, 1fr); 
   grid-gap: 10px;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import Header from '../Header/Header';
 import WizardProgressBar from '../../elements/WizardProgressBar/WizardProgressBar';
 import MCQ from '../../widgets/MCQ/MCQ';
@@ -20,15 +20,21 @@ const Questions = () => {
   return (
     <div>
       <Header />
-      <div className='mainContainer'>
+      <div className="mainContainer">
         <div className={styles.container}>
-          <WizardProgressBar />
-          <MultipleChoiceQuestion questionData={dummyData} submitted={submitted} attempts={attempts} />
+          <div>
+            <WizardProgressBar />
+            <MultipleChoiceQuestion
+              questionData={dummyData}
+              submitted={submitted}
+              attempts={attempts}
+            />
+          </div>
           <Footer handleSubmit={handleSubmit} />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Questions;

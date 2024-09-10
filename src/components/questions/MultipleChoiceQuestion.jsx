@@ -72,16 +72,18 @@ const MultipleChoiceQuestion = ({ questionData, submitted, attempts }) => {
   return (
     <div className={'mulitpleChoiceContainer'}>
       {/* Question Statement */}
-      <div className={'contentBox'}>
-        <h2 dangerouslySetInnerHTML={parseHtmlContent(statementContent)} />
+      <div className={'contentBox'} style={{ background: '#A6E4E2' }}>
+        {/* <h2 dangerouslySetInnerHTML={parseHtmlContent(statementContent)} /> */}
         {/* {stem_image && <img src={stem_image.file_name[0]} alt="Question" />} */}
       </div>
       {/* Question Statement */}
 
-      <p className={'instructionHeading'}>Select the Correct Answer:</p>
+      <div style={{ background: '#A6E4E2', minHeight: '24px' }}>
+        {/* <p className={'instructionHeading'}></p> */}
+      </div>
 
-      <div className="optionsContainer">
-        {options.map((opt) => (
+      <div className="optionsContainer" style={{ background: '#A6E4E2' }}>
+        {/* {options.map((opt) => (
           <label
             for={`option-${opt.option_id}`}
             className={`cardBox ${
@@ -127,7 +129,7 @@ const MultipleChoiceQuestion = ({ questionData, submitted, attempts }) => {
               dangerouslySetInnerHTML={parseHtmlContent(opt.html)}
             />
           </label>
-        ))}
+        ))} */}
       </div>
 
       {/* <button onClick={handleSubmit} disabled={submitted}>
