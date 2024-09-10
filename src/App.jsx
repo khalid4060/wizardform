@@ -1,14 +1,15 @@
-import React, { useEffect, useState, Suspense ,useRef} from "react";
-import classNames from "classnames";
-import { useSelector, useDispatch } from "react-redux";
-import { getContent } from "@utils/functionHelper";
-import { updateLessonData } from "@store/actions/lesson";
+import React, { useEffect, useState, Suspense, useRef } from 'react';
+import classNames from 'classnames';
+import { useSelector, useDispatch } from 'react-redux';
+import { getContent } from '@utils/functionHelper';
+import { updateLessonData } from '@store/actions/lesson';
 import { createSelector } from 'reselect';
-import axios from "axios";
-import { saveTranslation } from "@store/actions/translation";
-import { fetchJSONData } from "@utils/templateLoader";
+import axios from 'axios';
+import { saveTranslation } from '@store/actions/translation';
+import { fetchJSONData } from '@utils/templateLoader';
 import '@assets/js/global-jquery.js';
-
+import MultipleChoiceQuestion from './components/questions/MultipleChoiceQuestion';
+import { dummyData } from './utils/const';
 const selectTemplateData = createSelector(
   (state) => state.templateData,
   (templateData) => templateData
@@ -52,9 +53,9 @@ export default function MainPage() {
     const scaleVal = 1 / scale;
     const scaleY = shellHeight / newShellHeight;
     window.scaleVal = scaleVal;
-    mainContainer.style.transformOrigin = "left top";
-    mainContainer.style.msTransformOrigin = "left top";
-    mainContainer.style.WebkitTransformOrigin = "left top";
+    mainContainer.style.transformOrigin = 'left top';
+    mainContainer.style.msTransformOrigin = 'left top';
+    mainContainer.style.WebkitTransformOrigin = 'left top';
 
     mainContainer.style.transform = `scale( ${scaleVal} )`;
     mainContainer.style.msTransform = `scale( ${scaleVal} )`;
@@ -69,9 +70,9 @@ export default function MainPage() {
     mainContainer.style.height = `${shellHeight}px`;
     mainContainer.dataset.scale = scaleVal;
     mainContainer.dataset.scaleY = scaleY;
-    const r = document.querySelector(":root");
-    r.style.setProperty("--scale", scaleVal);
-    r.style.setProperty("--scaleY", scaleY);
+    const r = document.querySelector(':root');
+    r.style.setProperty('--scale', scaleVal);
+    r.style.setProperty('--scaleY', scaleY);
   };
 
   useEffect(() => {
@@ -87,7 +88,6 @@ export default function MainPage() {
       // if( templateData.page )
       dispatch(updateLessonData(templateData.page));
     } else {
-     
       if (!attemptLoad) {
         // console.log(pageData, "load page data")
         fetchJSONData();
@@ -100,10 +100,12 @@ export default function MainPage() {
     let axioFetch;
     if (process.env.NODE_ENV === 'development') {
       // Fetch from local path in development
-      axioFetch =  axios.get('json/translation.json');
+      axioFetch = axios.get('json/translation.json');
     } else {
       // Fetch from the base folder in production using the custom environment variable
-      axioFetch =  axios.get(`${import.meta.env.VITE_BASE_URL}json/translation.json`);
+      axioFetch = axios.get(
+        `${import.meta.env.VITE_BASE_URL}json/translation.json`
+      );
     }
     axioFetch.then((response) => {
       if (response.data) {
@@ -126,15 +128,18 @@ export default function MainPage() {
   }, []);
 
   const pageClasses = classNames({
-    "main-page-container": true,
+    'main-page-container': true,
   });
 
   return (
-    data && !loading && (
+    data &&
+    !loading && (
       <div className={pageClasses}>
         <div className="presentation-wrapper">
           <Suspense fallback={<h1>loading....</h1>}>
-            {getContent(data.content)}
+            {/* {getContent(data.content)} */}
+            {/* <FormInput size={'medium'} /> */}
+            <MultipleChoiceQuestion questionData={dummyData} />
           </Suspense>
         </div>
       </div>

@@ -1,0 +1,129 @@
+/* Style for options container */
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Style for the default radio button and label */
+.option {
+  width: 44px;
+  height: 100%;
+  background: #ecedef;
+  border-right: 1px solid #6d7684;
+  display: flex;
+  justify-content: center;
+
+  /* display: flex;
+  align-items: center;
+  padding: 15px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  min-width: 200px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease; */
+}
+
+.option input[type='radio'] {
+  margin-right: 10px;
+}
+
+.option:hover {
+  background-color: #f9f9f9;
+}
+
+/* Style for when an option is selected */
+.option.selected {
+  border-color: #007bff;
+}
+
+/* Style for correct answer selection */
+.option.correct {
+  border-right: 2px solid #4caf50;
+  background-color: #e8f5e9;
+}
+
+/* .option.correct:after {
+  content: '✔'; 
+  font-size: 20px;
+  color: #4caf50;
+  margin-left: 10px;
+} */
+
+/* Style for incorrect answer selection */
+.option.incorrect {
+  border-right: 2px solid #f44336;
+  background-color: #fdecea;
+}
+
+/* .option.incorrect:after {
+  content: '✖'; 
+  font-size: 20px;
+  color: #f44336;
+  margin-left: 10px;
+} */
+
+/* Feedback message for correct answer */
+.feedback-correct {
+  color: #4caf50;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #e8f5e9;
+  border: 1px solid #4caf50;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+/* Feedback message for incorrect answer */
+.feedback-incorrect {
+  color: #f44336;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #fdecea;
+  border: 1px solid #f44336;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+.optionsContainer {
+  height: 256px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+.cardBox {
+  height: 120px;
+  width: 100%;
+  border: 1px solid #6d7684;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-wrap: wrap;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.optionLabel {
+  padding: 1.5rem 2rem 1.5rem 2rem;
+}
+
+.cardBox.selected {
+  border-color: #007bff; /* Blue border */
+}
+
+.cardBox.correct {
+  border: 2px solid #4caf50; /* Green border */
+  /* background-color: #e8f5e9;  */
+}
+
+.cardBox.incorrect {
+  border: 2px solid #f44336; /* Red border */
+  /* background-color: #fdecea;  */
+}
+
+/* .cardBox.incorrect:after {
+  content: '✖';
+  font-size: 20px;
+  color: #f44336;
+  margin-left: 10px;
+} */
