@@ -1,6 +1,8 @@
 import React from 'react';
 import SoundIcon from '../../../assets/icons/volume-up.svg';
 import LightBulbIcon from '../../../assets/icons/lightbulb.svg';
+import DownloadIcon from '../../../assets/icons/download.svg';
+import ReadPassageIcon from '../../../assets/icons/read-passage.svg';
 import styles from './WizardProgressBar.module.scss';
 
 const WizardProgressBar = () => {
@@ -39,7 +41,15 @@ const WizardProgressBar = () => {
                 </div>
             </div>
             <div className={styles.helpContainer}>
-                <div className={styles.audioBtn}><img width={'17px'} height={'14px'} src={SoundIcon} /></div>
+                <div className={styles.helperBtnContainer}>
+                    <div className={styles.helperBtnSection}><img width={'17px'} height={'14px'} src={SoundIcon} /></div>
+                    <div className={styles.helperBtnSection}><img width={'17px'} height={'14px'} src={DownloadIcon} /></div>
+                    <div className={`${styles.helperBtnSection} ${styles.readBtn}`} style={{ justifyContent: 'space-evenly'}}><img width={'17px'} height={'14px'} src={ReadPassageIcon} /><span>Read Passage</span></div>
+                </div>
+                <div className={styles.screenHeadingContainer}>
+                    <div className={styles.screenTitle}>Title</div>
+                    <div className={styles.screenSubtitle}>Subtitle</div>
+                </div>
                 <div className={styles.helpBtnContainer}>
                     <div>Need Help?</div>
                     <div className={styles.lightBulbBtn}>
