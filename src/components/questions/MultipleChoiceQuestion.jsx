@@ -78,7 +78,7 @@ const MultipleChoiceQuestion = ({ questionData, submitted, attempts }) => {
       </div>
       {/* Question Statement */}
 
-      <div style={{ background: '#A6E4E2', minHeight: '24px' }}>
+      <div className='contentLabelStmt' style={{ background: '#A6E4E2' }}>
         {/* <p className={'instructionHeading'}></p> */}
       </div>
 

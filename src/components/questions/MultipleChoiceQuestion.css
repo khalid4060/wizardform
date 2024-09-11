@@ -19,6 +19,10 @@
   color: #485465;
 }
 
+.contentLabelStmt{
+  min-width: 24px;
+}
+
 .optionsContainer {
   height: 290px;
   display: grid;
