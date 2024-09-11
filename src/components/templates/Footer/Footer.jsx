@@ -23,7 +23,7 @@ const Footer = ({
   return (
     <>
       <div className={styles.footerContainer}>
-        <div className={`${styles.btnPrimary} ${styles.btnContent}`}>
+        <div onClick={() => handleSubmit('back')} className={`${styles.btnPrimary} ${styles.btnContent}`}>
           <button>
             {' '}
             <img src={AngleLeftIcon} />
@@ -47,7 +47,7 @@ const Footer = ({
         {/* CORRECT-ANSWER-MESSAGE */}
 
         {/* WRONG-ANSWER-MESSAGE */}
-        <div className={`${styles.error} ${styles.messageContainer}`}>
+        {/* <div className={`${styles.error} ${styles.messageContainer}`}>
           <div className={styles.leftContent}>
             <div className={styles.audioBtn}>
               <img width={'17px'} height={'14px'} src={SoundIcon} />
@@ -69,7 +69,7 @@ const Footer = ({
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* WRONG-ANSWER-MESSAGE */}
 
         {/* {submitted && renderFeedback()} */}
@@ -77,8 +77,10 @@ const Footer = ({
           <div dangerouslySetInnerHTML={parseHtmlContent(seeWhyContent)} />
         )} */}
 
-        <div className={` ${styles.btnSecondary}`}>
-          <button onClick={handleSubmit} disabled={!selectedOption}>
+        <div onClick={() => handleSubmit('next')} className={` ${styles.btnSecondary}`}>
+          <button 
+            // disabled={!selectedOption}
+          >
             {btnAction ? 'Submit Answer' : 'Next'} <img src={AngleRightIcon} />
           </button>
         </div>
@@ -103,11 +105,8 @@ const Footer = ({
           {/* CORRECT-ANSWER-MESSAGE */}
 
           {/* WRONG-ANSWER-MESSAGE */}
-          <div className={`${styles.error} ${styles.messageContainer}`}>
+          {/* <div className={`${styles.error} ${styles.messageContainer}`}>
             <div className={styles.leftContent}>
-              {/* <div className={styles.audioBtn}>
-                <img width={'17px'} height={'14px'} src={SoundIcon} />
-              </div> */}
               <div className={styles.wrongIcon}>
                 <img src={WrongIcon} />
               </div>
@@ -125,7 +124,7 @@ const Footer = ({
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
           {/* WRONG-ANSWER-MESSAGE */}
 
           {/* {submitted && renderFeedback()} */}
@@ -134,15 +133,17 @@ const Footer = ({
         )} */}
         </div>
         <div className={styles.mobileButtonContainer}>
-          <div className={`${styles.btnPrimary} ${styles.btnContent}`}>
+          <div onClick={() => handleSubmit('back')} className={`${styles.btnPrimary} ${styles.btnContent}`}>
             <button>
               {' '}
               <img src={AngleLeftIcon} />
               <span> Go Back</span>
             </button>
           </div>
-          <div className={` ${styles.btnSecondary}`}>
-            <button onClick={handleSubmit} disabled={!selectedOption}>
+          <div onClick={() => handleSubmit('next')} className={` ${styles.btnSecondary}`}>
+            <button 
+              // disabled={!selectedOption}
+            >
               <span>{btnAction ? 'Submit Answer' : 'Next'} </span>
               <img src={AngleRightIcon} />
             </button>

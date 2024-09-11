@@ -31,4 +31,61 @@ code {
   background: #B2EAD2;
   height: 100%;
   position: relative;
+  overflow: hidden;
+}
+
+.card {
+  animation: fade 250ms ease-in-out forwards;
+  display: none;
+}
+
+.card.active-forward {
+  animation: slide-forward 250ms 125ms ease-in-out both;
+  display: block;
+}
+
+.card.active-backward {
+  animation: slide-backward 250ms 125ms ease-in-out both;
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+@keyframes slide-forward {
+  0% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-backward {
+  0% {
+    transform: translateX(-200%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(.75);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
 }
