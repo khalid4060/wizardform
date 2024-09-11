@@ -7,7 +7,7 @@ import styles from './Questions.module.scss';
 import MultipleChoiceQuestion from '../../questions/MultipleChoiceQuestion';
 import { dummyData } from '../../../utils/const';
 
-const Questions = () => {
+const Questions = ({headerAction}) => {
   const [statementContent, setStatementContent] = useState('');
   const [seeWhyContent, setSeeWhyContent] = useState('');
   const [options, setOptions] = useState([]);
@@ -15,6 +15,7 @@ const Questions = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const [attempts, setAttempts] = useState(0);
+  const [onAction, setOnAction] = useState(false);
 
   const {
     statement,
@@ -71,8 +72,8 @@ const Questions = () => {
   };
   return (
     <div>
-      <Header />
-      <div className="mainContainer">
+      <Header onAction={onAction} setOnAction={setOnAction} />
+      <div className={`${onAction ? "ActionStyle" : "mainContainer"}`}>
         <div className={styles.container}>
           <div>
             <WizardProgressBar />

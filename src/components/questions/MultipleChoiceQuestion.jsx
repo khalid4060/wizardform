@@ -16,18 +16,18 @@ const MultipleChoiceQuestion = ({
   return (
     <div className={style.mulitpleChoiceContainer}>
       {/* Question Statement */}
-      <div className={style.contentBox}>
-        <h2 dangerouslySetInnerHTML={parseHtmlContent(statementContent)} />
+      <div className={style.contentBox} style={{ backgroundColor: '#A6E4E2' }}>
+        {/* <h2 dangerouslySetInnerHTML={parseHtmlContent(statementContent)} /> */}
         {/* {stem_image && <img src={stem_image.file_name[0]} alt="Question" />} */}
       </div>
       {/* Question Statement */}
 
-      <div className={style.contentLabelStmt}>
-        <p className={'instructionHeading'}></p>
+      <div className={style.contentLabelStmt} style={{ backgroundColor: '#A6E4E2' }}>
+        {/* <p className={'instructionHeading'}></p> */}
       </div>
 
-      <div className={style.optionsContainer}>
-        {options.map((opt) => (
+      <div className={style.optionsContainer} style={{ backgroundColor: '#A6E4E2' }}>
+        {/* {options.map((opt) => (
           <label
             for={`option-${opt.option_id}`}
             className={`${style.cardBox} ${
@@ -89,7 +89,7 @@ const MultipleChoiceQuestion = ({
                 </span>
               )}
           </label>
-        ))}
+        ))} */}
       </div>
 
       {/* <button onClick={handleSubmit} disabled={submitted}>

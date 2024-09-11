@@ -11,7 +11,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #B2EAD2;
+  // background-color: #B2EAD2;
 }
 
 code {
@@ -20,6 +20,13 @@ code {
 }
 
 .mainContainer {
+  // padding: 1rem;
+  // background: #B2EAD2;
+  height: 100%;
+  position: relative;
+}
+
+.ActionStyle {
   padding: 1rem;
   background: #B2EAD2;
   height: 100%;

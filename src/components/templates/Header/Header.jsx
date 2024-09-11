@@ -3,7 +3,10 @@ import MenuIcon from '../../../assets/icons/menu-icon.svg';
 import ResizerIcon from '../../../assets/icons/compress-alt-solid.svg';
 import styles from './Header.module.scss';
 
-const Header = () => {
+const Header = ({ onAction,setOnAction }) => {
+  const handleclick=()=>{
+    setOnAction(!onAction)
+  }
   return (
     <div className={styles.headerContainer}>
       <div>
@@ -12,7 +15,7 @@ const Header = () => {
       <div className={styles.surveyTitle}>
         Solar Energy
       </div>
-      <div>
+      <div onClick={handleclick}>
         <img src={ResizerIcon} />
       </div>
     </div>
