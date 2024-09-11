@@ -7,7 +7,18 @@ import AngleRightIcon from '../../../assets/icons/angle-right.svg';
 import WrongIcon from '../../../assets/icons/wrong-icon.svg';
 import RedRightIcon from '../../../assets/icons/red-right-icon.svg';
 
-const Footer = ({ handleSubmit }) => {
+const Footer = ({
+  handleSubmit,
+  feedback,
+  renderFeedback,
+  submitted,
+  seeWhyContent,
+  selectedOption,
+}) => {
+  console.log('feedback', feedback)
+  const parseHtmlContent = (htmlString) => {
+    return { __html: htmlString };
+  };
   return (
     <div className={styles.footerContainer}>
       <button className={`${styles.btn} ${styles.btnPrimary}`}>
@@ -46,9 +57,14 @@ const Footer = ({ handleSubmit }) => {
         </div> */}
         {/* WRONG-ANSWER-MESSAGE */}
 
+        {/* {submitted && renderFeedback()} */}
+        {/* {submitted && (
+          <div dangerouslySetInnerHTML={parseHtmlContent(seeWhyContent)} />
+        )} */}
+
       <button className={`${styles.btn} ${styles.btnSecondary}`}>
         <div className={styles.btnContent}>
-          <button onClick={handleSubmit}>Submit Answer  <img src={AngleRightIcon} /></button>
+          <button onClick={handleSubmit} disabled={!selectedOption}>Submit Answer  <img src={AngleRightIcon} /></button>
         </div>
       </button>
     </div>

@@ -20,20 +20,20 @@
 }
 
 .contentLabelStmt{
-  min-width: 24px;
+  min-height: 24px;
 }
 
 .optionsContainer {
   height: 290px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr); 
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
 }
 
 .cardBox {
   height: 120px;
   width: 100%;
-  border: 1px solid #6D7684;
+  border: 1px solid #6d7684;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -49,7 +49,7 @@
   line-height: 32px;
   letter-spacing: var(--Sizes0);
   text-align: left;
-  color: #006E8E;
+  color: #006e8e;
 }
 
 /* Style for the default radio button and label */
@@ -82,13 +82,14 @@
 
 /* Style for when an option is selected */
 .option.selected {
-  border-color: #007bff;
+  border-color: #047fff;
+  background: #b3d8ff;
 }
 
 /* Style for correct answer selection */
 .option.correct {
-  border-right: 2px solid #4caf50;
-  background-color: #e8f5e9;
+  border-right: 2px solid #70bf42;
+  background-color: #d4ebc6;
 }
 
 /* .option.correct:after {
@@ -100,8 +101,8 @@
 
 /* Style for incorrect answer selection */
 .option.incorrect {
-  border-right: 2px solid #f44336;
-  background-color: #fdecea;
+  border-right: 2px solid #ff6d6d;
+  background-color: #ffd3d3;
 }
 
 /* .option.incorrect:after {
@@ -119,13 +120,13 @@
 
 .optionLabel {
   padding: 1.5rem 2rem 1.5rem 2rem;
-    width: 90%;
-    /* // font-family: 'English Signika'; */
-    font-size: 22px;
-    font-weight: 300;
-    line-height: 27.1px;
-    letter-spacing: var(--Sizes0);
-    text-align: left;
+  width: 90%;
+  /* // font-family: 'English Signika'; */
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 27.1px;
+  letter-spacing: var(--Sizes0);
+  text-align: left;
 }
 
 /* Feedback message for correct answer */
@@ -194,3 +195,13 @@
   color: #f44336;
   margin-left: 10px;
 } */
+
+.correctSymbol {
+  font-size: 15px;
+  color: green;
+}
+
+.incorrectSymbol {
+  font-size: 20px;
+  color: #ff6d6d;
+}
