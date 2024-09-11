@@ -21,9 +21,9 @@ const Footer = ({
   };
   return (
     <div className={styles.footerContainer}>
-      <button className={`${styles.btn} ${styles.btnPrimary}`}>
+      <button onClick={() => handleSubmit('back')} className={`${styles.btn} ${styles.btnPrimary}`}>
         <div className={styles.btnContent}>
-          <button> <img src={AngleLeftIcon} />Go Back</button>
+          <button><img src={AngleLeftIcon} />Go Back</button>
         </div>
       </button>
 
@@ -62,9 +62,9 @@ const Footer = ({
           <div dangerouslySetInnerHTML={parseHtmlContent(seeWhyContent)} />
         )} */}
 
-      <button className={`${styles.btn} ${styles.btnSecondary}`}>
+      <button onClick={() => handleSubmit('next')} className={`${styles.btn} ${styles.btnSecondary}`}>
         <div className={styles.btnContent}>
-          <button onClick={handleSubmit} disabled={!selectedOption}>Submit Answer  <img src={AngleRightIcon} /></button>
+          <button>Next  <img src={AngleRightIcon} /></button>
         </div>
       </button>
     </div>
