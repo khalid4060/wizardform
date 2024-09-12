@@ -1,0 +1,99 @@
+{
+  "mcq": {
+    "type": "mcq",
+    "mcqType": "text",
+    "multiple_answer": false,
+    "submit_limit": 2,
+    "columns": 2,
+    "shuffled": true,
+    "allow_tryagain": true,
+    "statement": {
+      "content": [
+        {
+          "component_name": "html",
+          "component_id": "stmt_id_1",
+          "file_name": ["html"]
+        }
+      ]
+    },
+    "stem_image": {
+      "component_name": "image",
+      "component_id": "stem_img_id_1",
+      "file_name": ["html"]
+    },
+    "see_why": {
+      "content": [
+        {
+          "component_name": "html",
+          "component_id": "why_id_1",
+          "file_name": ["see_why_file.html"]
+        }
+      ]
+    },
+    "split_content": {
+      "content": {
+        "component_name": "html",
+        "component_id": "id",
+        "filename": ["html"]
+      },
+      "audio": {
+        "component_name": "audio",
+        "component_id": "id",
+        "filename": ["audio"]
+      }
+    },
+    "options": [
+      {
+        "option_id": 1,
+        "is_correct": true,
+        "content": [
+          {
+            "component_name": "html",
+            "component_id": "opt1_id",
+            "file_name": ["html"]
+          }
+        ]
+      },
+      {
+        "option_id": 2,
+        "is_correct": false,
+        "content": [
+          {
+            "component_name": "html",
+            "component_id": "opt2_id",
+            "file_name": ["html"]
+          }
+        ]
+      }
+    ],
+    "feedback": {
+      "correct": {
+        "content": [
+          {
+            "component_name": "html",
+            "component_id": "correct_fb_id",
+            "file_name": ["correct_feedback.html"]
+          }
+        ]
+      },
+      "incorrect": {
+        "content": [
+          {
+            "component_name": "html",
+            "component_id": "incorrect_fb_id",
+            "file_name": ["incorrect_feedback.html"]
+          }
+        ]
+      },
+      "partial": {
+        "content": [
+          {
+            "component_name": "html",
+            "component_id": "partial_fb_id",
+            "file_name": ["partial_feedback.html"]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,24 +1,20 @@
 .headerContainer {
-    width: 100%;
-    // min-height: 48px;
-    // max-height: auto;
-    height: 48px;
-    background: var(--Colors-Subject-Arabic-30, #B2EAD2);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1rem 0 1rem;
-
-    img{
-        cursor: pointer;
-    }
+  width: 100%;
+  // min-height: 48px;
+  // max-height: auto;
+  height: 48px;
+  background: var(--Colors-Subject-Arabic-30, #b2ead2);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem;
 }
 
 .surveyTitle {
-    //styleName: Heading/Medium/bold;
-    font-size: 24px;
-    font-weight: 700;
-    text-align: center;
-    color: #004A2A;
+  //styleName: Heading/Medium/bold;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  color: #004a2a;
 }

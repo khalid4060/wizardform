@@ -1,33 +1,97 @@
 import React, { useState, useEffect } from 'react';
-import style from'./MultipleChoiceQuestion.module.scss'; // Add CSS styles here
+import style from './MultipleChoiceQuestion.module.scss'; // Add CSS styles here
+import CustomImage from '../elements/CustomImage/CustomImage';
+import { createSelector } from 'reselect';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchJSONData } from '@utils/templateLoader';
 
 // Utility function to parse HTML content
 const parseHtmlContent = (htmlString) => {
   return { __html: htmlString };
 };
 
+const selectTemplateData = createSelector(
+  (state) => state.templateData,
+  (templateData) => templateData
+);
+fetchJSONData();
 const MultipleChoiceQuestion = ({
   submitted,
   statementContent,
   selectedOption,
   options,
   handleOptionChange,
+  stem_image,
 }) => {
+  const data = useSelector(selectTemplateData);
+
+  const [statement, setStatement] = useState();
+  const [ste_image_url, setStem_image_url] = useState();
+  const [option, setOption] = useState();
+  const [finalData, setfinalData] = useState([]);
+
+  useEffect(() => {
+    if (Object.keys(data).length > 1) {
+      console.log(data, 'data');
+      const {
+        mcq: {
+          statement: {
+            content: [
+              {
+                component_name,
+                component_id,
+                file_name: [stm_filename],
+              },
+            ],
+          },
+          stem_image: {
+            component_name: stemImageComponentName,
+            component_id: stemImageComponentId,
+            file_name: stemImageFileName,
+          },
+          options,
+        },
+      } = data;
+
+      const finalobj = {
+        statement: data[stm_filename][component_id].data,
+        stem_image: data[stm_filename][stemImageComponentId]?.url,
+      };
+      setStatement(data[stm_filename][component_id].data);
+      setStem_image_url(data[stm_filename][stemImageComponentId]?.url);
+      setfinalData(finalobj);
+      setOption(options);
+    }
+  }, [data]);
+
+  console.log(finalData, 'template data');
   return (
     <div className={style.mulitpleChoiceContainer}>
       {/* Question Statement */}
-      <div className={style.contentBox} style={{ backgroundColor: '#A6E4E2' }}>
-        {/* <h2 dangerouslySetInnerHTML={parseHtmlContent(statementContent)} /> */}
-        {/* {stem_image && <img src={stem_image.file_name[0]} alt="Question" />} */}
+      <div className={style.contentBox}>
+        <h2>{statement}</h2>
+        {/* {ste_image_url && (
+          <CustomImage
+            src={ste_image_url} // Change this to a real image URL
+            alt="Example Image"
+            fallbackSrc="https://via.placeholder.com/150" // Fallback image URL
+            loader={<p>Loading image...</p>} // Custom loader text
+            errorMessage={<p>Oops! Could not load the image.</p>} // Custom error message
+            className={style.imageDiv}
+            primeryClass={style.image}
+          />
+        )} */}
       </div>
+
       {/* Question Statement */}
 
-      <div className={style.contentLabelStmt} style={{ backgroundColor: '#A6E4E2' }}>
-        {/* <p className={'instructionHeading'}></p> */}
-      </div>
+      {/* <div className={style.contentLabelStmt}>
+        <p className={'instructionHeading'}></p>
+      </div> */}
+      <h3 className={style.subHeading}>Select the Correct Answer:</h3>
 
-      <div className={style.optionsContainer} style={{ backgroundColor: '#A6E4E2' }}>
-        {/* {options.map((opt) => (
+      <div className={style.optionsContainer}>
+        {options.map((opt) => (
           <label
             for={`option-${opt.option_id}`}
             className={`${style.cardBox} ${
@@ -76,7 +140,7 @@ const MultipleChoiceQuestion = ({
             {submitted &&
               selectedOption === opt.option_id &&
               opt.is_correct && (
-                <div>
+                <div className={style.symbol}>
                   <span className={style.correctSymbol}>&#10004;</span>
                 </div>
               )}
@@ -84,12 +148,12 @@ const MultipleChoiceQuestion = ({
             {submitted &&
               selectedOption === opt.option_id &&
               !opt.is_correct && (
-                <span className={style.incorrectSymbol}>
-                  &#10060;
-                </span>
+                <div className={style.symbol}>
+                  <span className={style.incorrectSymbol}>&#10060;</span>
+                </div>
               )}
           </label>
-        ))} */}
+        ))}
       </div>
 
       {/* <button onClick={handleSubmit} disabled={submitted}>

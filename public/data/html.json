@@ -1,0 +1,21 @@
+{
+  "html": {
+    "stmt_id_1": {
+      "data": "Which of the following statements most accurately describes a key aspect of Solar Energy, as outlined in the passage, in terms of its functionality, applications, and overall benefits to both individuals and the environment?",
+      "audio": {
+        "component_name": "audio",
+        "component_id": "id",
+        "filename": ["audio"]
+      }
+    },
+    "opt1_id": {
+      "data": "This is some content."
+    },
+    "opt2_id": {
+      "data": "This is some content."
+    },
+    "stem_img_id_1": {
+      "url": "./source/LFYFILXPXSCLUHDEMPMS6KCVCVY/PW_MA3_MOD_018_DOK_IMG_001.png"
+    }
+  }
+}

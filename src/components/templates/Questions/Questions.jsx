@@ -7,17 +7,38 @@ import styles from './Questions.module.scss';
 import MultipleChoiceQuestion from '../../questions/MultipleChoiceQuestion';
 import { dummyData } from '../../../utils/const';
 import { data } from '../../../utils/formData';
+const parseHtmlContent = (htmlString) => {
+  return { __html: htmlString };
+};
+const shuffleArray = (array) => {
+  let currentIndex = array.length,
+    randomIndex;
 
+  // While there remain elements to shuffle...
+  while (currentIndex !== 0) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
+};
 const Questions = () => {
   /**--------------------New States------------------------------------------- */
-  const [formData, setFormData] = useState(data);
+  const [formData, setFormData] = useState(dummyData);
   const [currentSlide, setCurrentSide] = useState(() => ({
     id: null,
     index: null,
     type: null,
     wizard: null,
   }));
-  const [btnActionType, setBtnActionType] = useState('next');
+  const [btnActionType, setBtnActionType] = useState('submit');
   /**--------------------New States------------------------------------------- */
   const [statementContent, setStatementContent] = useState('');
   const [seeWhyContent, setSeeWhyContent] = useState('');
@@ -28,27 +49,32 @@ const Questions = () => {
   const [attempts, setAttempts] = useState(0);
   const [onAction, setOnAction] = useState(false);
 
+  const [isAnswerCorrect, setisAnswerCorrect] = useState();
+  const correctOption = options.find((opt) => opt.is_correct);
+
   const {
     statement,
     stem_image,
     see_why,
     options: optionsData,
     feedback: feedbackData,
-  } = dummyData;
+  } = dummyData[0];
 
   useEffect(() => {
     // Load statement content
-    setStatementContent(statement.content[0].file_name[0]);
+    // setStatementContent(statement.content[0].file_name[0]);
 
     // Load see why content
-    setSeeWhyContent(see_why.content[0].file_name[0]);
+    // setSeeWhyContent(see_why.content[0].file_name[0]);
 
     // Load options
-    const loadedOptions = optionsData.map((opt) => ({
-      ...opt,
-      html: opt.content[0].file_name[0],
-    }));
-    setOptions(loadedOptions);
+    const shuffledOptions = shuffleArray(
+      optionsData.map((opt) => ({
+        ...opt,
+        html: opt.content[0].file_name[0],
+      }))
+    );
+    setOptions(shuffledOptions);
 
     // Load feedback
     const feedbacks = {
@@ -74,9 +100,28 @@ const Questions = () => {
         type: formData[nextIndex].type,
         wizard: formData[nextIndex],
       });
-      setBtnActionType('next')
+      setBtnActionType('submit')
+
+      setSelectedOption(null);
+      setSubmitted(false);
+      setAttempts(-1);
     }
 
+    if (actionType === 'submit') {
+      if (currentSlide.type === 'mcq') {
+        if (attempts <= 3) {
+          setAttempts(attempts + 1);
+          setSubmitted(true);
+        }
+        setisAnswerCorrect(selectedOption === correctOption.option_id);
+      }
+    }
+    if (actionType === 'tryagain') {
+      if (currentSlide.type === 'mcq') {
+        setSelectedOption(null);
+        setSubmitted(false);
+      }
+    }
     if (actionType === 'back') {
       const prevIndex = currentSlide.index - 1;
       const tempFormData = [...formData];
@@ -94,20 +139,19 @@ const Questions = () => {
 
   const renderFeedback = () => {
     const correctOption = options.find((opt) => opt.is_correct);
-
     if (selectedOption === correctOption.option_id) {
       return (
-        <div className="feedback-correct">Correct! {feedback.correct}</div>
+        <div dangerouslySetInnerHTML={parseHtmlContent(feedback.correct)} />
       );
     } else {
       return (
-        <div className="feedback-incorrect">Oops, almost there. Try again.</div>
+        <div dangerouslySetInnerHTML={parseHtmlContent(feedback.incorrect)} />
       );
     }
   };
 
   const handleOptionChange = (optionId) => {
-    // setSelectedOption(optionId);
+    setSelectedOption(optionId);
   };
 
   const renderSlide = (slide) => {
@@ -116,15 +160,15 @@ const Questions = () => {
       case 'mcq':
         return (component = (
           <MultipleChoiceQuestion
-            // questionData={dummyData}
-            // submitted={submitted}
-            // attempts={attempts}
-            statementContent={slide.statement}
-            options={slide.options}
-            selectedOption={slide.answer}
-            isCorrect={slide.isCorrect}
-            handleOptionChange={handleOptionChange}
-          />
+              questionData={dummyData}
+              submitted={submitted}
+              attempts={attempts}
+              statementContent={statementContent}
+              options={options}
+              selectedOption={selectedOption}
+              handleOptionChange={handleOptionChange}
+              stem_image={stem_image}
+            />
         ));
     }
 
@@ -150,25 +194,25 @@ const Questions = () => {
     });
   }, []);
 
-  useEffect(() => {
-    const multiStepForm = document.querySelector("[data-multi-step]")
-    const formSteps = [...multiStepForm.querySelectorAll("[data-step]")]
-    let currentStep = formSteps.findIndex(step => {
-      return step.classList.contains("active")
-    })
-    formSteps.forEach(step => {
-      step.addEventListener("animationend", e => {
-        formSteps[currentStep].classList.remove("hide")
-        e.target.classList.toggle("hide", !e.target.classList.contains("active"))
-      })
-    })
+  // useEffect(() => {
+  //   const multiStepForm = document.querySelector("[data-multi-step]")
+  //   const formSteps = [...multiStepForm.querySelectorAll("[data-step]")]
+  //   let currentStep = formSteps.findIndex(step => {
+  //     return step.classList.contains("active")
+  //   })
+  //   formSteps.forEach(step => {
+  //     step.addEventListener("animationend", e => {
+  //       formSteps[currentStep].classList.remove("hide")
+  //       e.target.classList.toggle("hide", !e.target.classList.contains("active"))
+  //     })
+  //   })
     
-    function showCurrentStep() {
-      formSteps.forEach((step, index) => {
-        step.classList.toggle("active", index === currentStep)
-      })
-    }
-  }, [])
+  //   function showCurrentStep() {
+  //     formSteps.forEach((step, index) => {
+  //       step.classList.toggle("active", index === currentStep)
+  //     })
+  //   }
+  // }, [])
 
   console.log('currentSlide', currentSlide.wizard);
 
@@ -179,9 +223,9 @@ const Questions = () => {
         <div className={styles.container}>
           <div>
             <WizardProgressBar formData={formData} currentSlide={currentSlide} />
-            <form data-multi-step class="multi-step-form">
+            {/* <form data-multi-step class="multi-step-form"> */}
             {renderWizards()}
-            </form>
+            {/* </form> */}
             {/* <MultipleChoiceQuestion
               questionData={dummyData}
               submitted={submitted}
@@ -190,6 +234,7 @@ const Questions = () => {
               options={options}
               selectedOption={selectedOption}
               handleOptionChange={handleOptionChange}
+              stem_image={stem_image}
             /> */}
           </div>
           <Footer
@@ -199,6 +244,8 @@ const Questions = () => {
             renderFeedback={renderFeedback}
             seeWhyContent={seeWhyContent}
             selectedOption={selectedOption}
+            isAnswerCorrect={isAnswerCorrect}
+            attempts={attempts}
           />
         </div>
       </div>

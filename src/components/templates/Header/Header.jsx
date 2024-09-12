@@ -5,7 +5,16 @@ import styles from './Header.module.scss';
 
 const Header = ({ onAction,setOnAction }) => {
   const handleclick=()=>{
-    setOnAction(!onAction)
+    var element = document.getElementById("root");
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) { // For Firefox
+      element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) { // For Chrome, Safari, and Opera
+      element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) { // For IE/Edge
+      element.msRequestFullscreen();
+    }
   }
   return (
     <div className={styles.headerContainer}>

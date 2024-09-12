@@ -1,14 +1,30 @@
 /* Style for options container */
 .mulitpleChoiceContainer {
-  padding: 0 6rem 5rem 6rem;
+  padding: 0 3rem 12rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
+  max-height: calc(100dvh - 110px);
+  overflow-y: auto;
+
+  @media (max-width: 767px) {
+    max-height: inherit;
+    overflow-y: inherit;
+  }
+}
+
+.mulitpleChoiceContainer::-webkit-scrollbar {
+  width: 0px;
+}
+.subHeading {
+  margin: 0;
+  font-size: 20px;
+  color: #006e8e;
 }
 
 .contentBox {
-  padding: 0 0 24px 0;
-  height: 150px;
+  padding: 0 0 35px 0;
+  height: auto;
   /* //styleName: EN-POC-28-Bold;
   // font-family: 'English Signika'; */
   font-size: 1.5rem;
@@ -17,17 +33,37 @@
   letter-spacing: var(--Sizes0);
   text-align: left;
   color: #485465;
+  @media (max-width: 767px) {
+    padding-bottom: 1rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1.75rem;
+
+    @media (max-width: 767px) {
+      font-size: 1rem;
+      line-height: normal;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
 }
 
-.contentLabelStmt{
+.contentLabelStmt {
   min-height: 24px;
 }
 
 .optionsContainer {
-  height: 290px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
+  grid-gap: 13px 18px;
+
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 .cardBox {
@@ -40,6 +76,7 @@
   text-wrap: wrap;
   border-radius: 5px;
   overflow: hidden;
+  position: relative;
 }
 
 .instructionHeading {
@@ -72,8 +109,33 @@
   transition: all 0.3s ease; */
 }
 
-.option input[type='radio'] {
-  margin-right: 10px;
+.option {
+  input[type='radio'] {
+    margin-right: 10px;
+    opacity: 0;
+  }
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 1px solid #485465;
+    position: absolute;
+    top: 55px;
+    left: 14px;
+    background-color: transparent;
+  }
+
+  &.selected {
+    &::before {
+      border: 5px solid #047fff;
+      background: #fff;
+      width: 8px;
+      height: 8px;
+    }
+  }
 }
 
 .option:hover {
@@ -90,6 +152,9 @@
 .option.correct {
   border-right: 2px solid #70bf42;
   background-color: #d4ebc6;
+  &::before {
+    border-color: #70bf42;
+  }
 }
 
 /* .option.correct:after {
@@ -103,6 +168,9 @@
 .option.incorrect {
   border-right: 2px solid #ff6d6d;
   background-color: #ffd3d3;
+  &::before {
+    border-color: #ff6d6d;
+  }
 }
 
 /* .option.incorrect:after {
@@ -165,27 +233,9 @@
   /* background-color: #fdecea;  */
 }
 
-@media only screen and (max-width: 1024px) {
-  .contentBox {
-    height: 200px;
-  }
-
-  .optionsContainer {
-    height: 774px;
-  }
-}
-
 @media only screen and (max-width: 600px) {
   .mulitpleChoiceContainer {
     padding: 0 1rem 2rem 1rem;
-  }
-
-  .contentBox {
-    height: 180px;
-  }
-
-  .optionsContainer {
-    height: 563px;
   }
 }
 
@@ -195,13 +245,33 @@
   color: #f44336;
   margin-left: 10px;
 } */
-
+.symbol {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .correctSymbol {
-  font-size: 15px;
+  font-size: 20px;
   color: green;
+  position: absolute;
+  top: 2.8rem;
+  right: 1rem;
 }
 
 .incorrectSymbol {
   font-size: 20px;
   color: #ff6d6d;
+  position: absolute;
+  top: 2.8rem;
+  right: 1rem;
+}
+.imageDiv {
+  height: 177px;
+  display: flex;
+  justify-content: center;
+}
+.image {
+  width: 510px;
+  height: 287px;
 }
