@@ -1,9 +1,20 @@
 /* Style for options container */
 .mulitpleChoiceContainer {
-  padding: 0 3rem 3rem;
+  padding: 0 3rem 12rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  max-height: calc(100dvh - 110px);
+  overflow-y: auto;
+
+  @media (max-width: 767px) {
+    max-height: inherit;
+    overflow-y: inherit;
+  }
+}
+
+.mulitpleChoiceContainer::-webkit-scrollbar {
+  width: 0px;
 }
 .subHeading {
   margin: 0;
@@ -13,7 +24,7 @@
 
 .contentBox {
   padding: 0 0 35px 0;
-  height: 150px;
+  height: auto;
   /* //styleName: EN-POC-28-Bold;
   // font-family: 'English Signika'; */
   font-size: 1.5rem;
@@ -222,13 +233,10 @@
   /* background-color: #fdecea;  */
 }
 
-
 @media only screen and (max-width: 600px) {
   .mulitpleChoiceContainer {
     padding: 0 1rem 2rem 1rem;
   }
-
-  
 }
 
 /* .cardBox.incorrect:after {
@@ -254,11 +262,12 @@
 .incorrectSymbol {
   font-size: 20px;
   color: #ff6d6d;
-   position: absolute;
+  position: absolute;
   top: 2.8rem;
   right: 1rem;
 }
 .imageDiv {
+  height: 177px;
   display: flex;
   justify-content: center;
 }

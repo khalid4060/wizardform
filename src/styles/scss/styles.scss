@@ -2,19 +2,23 @@
 * {
   box-sizing: border-box;
 }
-
 body {
   margin: 0;
   padding: 0;
   font-family: 'Signika', sans-serif !important;
 }
-
 .mainContainer {
   padding: 0 1rem 1rem;
   background: #b2ead2;
   height: 100%;
   position: relative;
+  height: calc(100dvh - 50px);
+
+  @media (max-width: 767px) {
+    height: auto;
+  }
 }
+
 button {
   cursor: pointer;
 }

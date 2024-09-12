@@ -70,18 +70,18 @@ const MultipleChoiceQuestion = ({
       {/* Question Statement */}
       <div className={style.contentBox}>
         <h2>{statement}</h2>
+        {ste_image_url && (
+          <CustomImage
+            src={ste_image_url} // Change this to a real image URL
+            alt="Example Image"
+            fallbackSrc="https://via.placeholder.com/150" // Fallback image URL
+            loader={<p>Loading image...</p>} // Custom loader text
+            errorMessage={<p>Oops! Could not load the image.</p>} // Custom error message
+            className={style.imageDiv}
+            primeryClass={style.image}
+          />
+        )}
       </div>
-      {/* {ste_image_url && (
-        <CustomImage
-          src={ste_image_url} // Change this to a real image URL
-          alt="Example Image"
-          fallbackSrc="https://via.placeholder.com/150" // Fallback image URL
-          loader={<p>Loading image...</p>} // Custom loader text
-          errorMessage={<p>Oops! Could not load the image.</p>} // Custom error message
-          className={style.imageDiv}
-          primeryClass={style.image}
-        />
-      )} */}
 
       {/* Question Statement */}
 

@@ -9,6 +9,25 @@ import { dummyData } from '../../../utils/const';
 const parseHtmlContent = (htmlString) => {
   return { __html: htmlString };
 };
+const shuffleArray = (array) => {
+  let currentIndex = array.length,
+    randomIndex;
+
+  // While there remain elements to shuffle...
+  while (currentIndex !== 0) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
+};
 const Questions = () => {
   const [statementContent, setStatementContent] = useState('');
   const [seeWhyContent, setSeeWhyContent] = useState('');
@@ -35,11 +54,13 @@ const Questions = () => {
     setSeeWhyContent(see_why.content[0].file_name[0]);
 
     // Load options
-    const loadedOptions = optionsData.map((opt) => ({
-      ...opt,
-      html: opt.content[0].file_name[0],
-    }));
-    setOptions(loadedOptions);
+    const shuffledOptions = shuffleArray(
+      optionsData.map((opt) => ({
+        ...opt,
+        html: opt.content[0].file_name[0],
+      }))
+    );
+    setOptions(shuffledOptions);
 
     // Load feedback
     const feedbacks = {
