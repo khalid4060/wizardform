@@ -1,0 +1,138 @@
+{
+    "alphanumericalid": {
+      "type": "fib",
+      "fibType": "blankOnText",
+      "submit_limit": 3,
+      "allow_show_answer": true,
+      "shuffled": false,
+      "wordbank_layout": "layout-1",
+      "wordbank_distractor": [
+        "Conversion",
+        "Efficiency",
+        "Homes",
+        "Climate Change",
+        "Transmission",
+        "Installation",
+        "Utilities",
+        "Reduction"
+      ],
+      "statement": {
+        "component_name": "html",
+        "component_id": "statement1",
+        "filename": ["statement.html"]
+      },
+      "sentence": {
+        "component_name": "html",
+        "component_id": "Fill in the blanks with the correct key aspects of Solar Energy.",
+        "filename": ["html"]
+      },
+      "items": [
+        {
+          "id": 1,
+          "item_id": "The _____ process converts sunlight to DC, then to AC for various uses.",
+          "withBlankPicker": false,
+          "allowEquivalentNumber": false,
+          "simplestFormFraction": false,
+          "decimals": null,
+          "answer": "Conversion",
+          "inputType": "alpla-numeric",
+          "swappable": false,
+          "swap_group_id": null,
+          "position": null
+        },
+        {
+          "id": 2,
+          "item_id": "Solar energy helps lower maintenance _____ costs.",
+          "withBlankPicker": false,
+          "allowEquivalentNumber": false,
+          "simplestFormFraction": false,
+          "decimals": null,
+          "answer": "Efficiency",
+          "inputType": "alpla-numeric",
+          "swappable": false,
+          "swap_group_id": null,
+          "position": null
+        },
+        {
+          "id": 3,
+          "item_id": "Solar energy powers _____, businesses, and satellites efficiently.",
+          "withBlankPicker": false,
+          "allowEquivalentNumber": false,
+          "simplestFormFraction": false,
+          "decimals": null,
+          "answer": "Homes",
+          "inputType": "alpla-numeric",
+          "swappable": false,
+          "swap_group_id": null,
+          "position": null
+        },
+        {
+          "id": 4,
+          "item_id": "Solar energy reduces emissions and pollution, combating _____.",
+          "withBlankPicker": false,
+          "allowEquivalentNumber": false,
+          "simplestFormFraction": false,
+          "decimals": null,
+          "answer": "Climate Change",
+          "inputType": "alpla-numeric",
+          "swappable": false,
+          "swap_group_id": null,
+          "position": null
+        }
+      ],
+      "feedback": {
+        "correct": {
+          "content": [
+            {
+              "component_name": "Well done, it’s a correct answer.",
+              "component_id": "correctFeedback",
+              "file_name": ["correct.html"]
+            }
+          ],
+          "audio": {
+            "component_name": "audio",
+            "component_id": "correctAudio",
+            "file_name": ["correct.mp3"]
+          }
+        },
+        "incorrect": {
+          "content": [
+            {
+              "component_name": "Oops, almost there. Try one more time.",
+              "component_id": "incorrectFeedback",
+              "file_name": ["incorrect.html"]
+            }
+          ],
+          "audio": {
+            "component_name": "audio",
+            "component_id": "incorrectAudio",
+            "file_name": ["incorrect.mp3"]
+          }
+        },
+        "partial": {
+          "content": [
+            {
+              "component_name": "html",
+              "component_id": "partialFeedback",
+              "file_name": ["partial.html"]
+            }
+          ],
+          "audio": {
+            "component_name": "audio",
+            "component_id": "partialAudio",
+            "file_name": ["partial.mp3"]
+          }
+        }
+      },
+      "see_why": {
+        "content": [
+          {
+            "component_name": "container",
+            "component_id": "seeWhyContent",
+            "file_name": ["seeWhy.html"]
+          }
+        ]
+      }
+    }
+  }
+  

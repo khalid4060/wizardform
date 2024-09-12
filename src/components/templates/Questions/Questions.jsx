@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
 import Header from '../Header/Header';
 import WizardProgressBar from '../../elements/WizardProgressBar/WizardProgressBar';
-import MCQ from '../../widgets/MCQ/MCQ';
 import Footer from '@components/templates/Footer/Footer';
 import styles from './Questions.module.scss';
 import MultipleChoiceQuestion from '../../questions/MultipleChoiceQuestion';
 import { dummyData } from '../../../utils/const';
-import { data } from '../../../utils/formData';
+import { fetchJSONData } from '../../../utils/templateLoader';
+import FillInTheBlanks from '../../fib/FillInTheBlanks';
+
+const selectTemplateData = createSelector(
+  (state) => state.templateData,
+  (templateData) => templateData
+);
+
 const parseHtmlContent = (htmlString) => {
   return { __html: htmlString };
 };
+
 const shuffleArray = (array) => {
   let currentIndex = array.length,
     randomIndex;
@@ -29,8 +38,9 @@ const shuffleArray = (array) => {
 
   return array;
 };
+
 const Questions = () => {
-  /**--------------------New States------------------------------------------- */
+  const templateData = useSelector(selectTemplateData);
   const [formData, setFormData] = useState(dummyData);
   const [currentSlide, setCurrentSide] = useState(() => ({
     id: null,
@@ -39,15 +49,17 @@ const Questions = () => {
     wizard: null,
   }));
   const [btnActionType, setBtnActionType] = useState('submit');
-  /**--------------------New States------------------------------------------- */
   const [statementContent, setStatementContent] = useState('');
   const [seeWhyContent, setSeeWhyContent] = useState('');
   const [options, setOptions] = useState([]);
   const [feedback, setFeedback] = useState({});
+  const [feedbackMessage, setFeedbackMessage] = useState('');
+  const [feedbackType, setFeedbackType] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const [onAction, setOnAction] = useState(false);
+  const [fibData, setFibData] = useState([]);
 
   const [isAnswerCorrect, setisAnswerCorrect] = useState();
   const correctOption = options.find((opt) => opt.is_correct);
@@ -84,15 +96,63 @@ const Questions = () => {
     setFeedback(feedbacks);
   }, [statement, see_why, optionsData, feedbackData]);
 
+  const resetFibForm = () => {
+    const updatedDataSets = [...fibData];
+    const dataSet = updatedDataSets[0];
+
+    dataSet.inputs = Array(dataSet.questions.length).fill('');
+    dataSet.feedback = Array(dataSet.questions.length).fill(null);
+    dataSet.isSubmitted = false;
+
+    setFibData(updatedDataSets);
+    setFeedbackMessage('');
+  };
+
+  const handleFIBSubmit = () => {
+    const updatedDataSets = [...fibData];
+    const currentDataSet = updatedDataSets[0];
+
+    if (currentDataSet.isSubmitted && currentDataSet.feedback.includes(false)) {
+      setSubmitted(false);
+      resetFibForm();
+    } else {
+      const newFeedback = currentDataSet?.inputs?.map((input, index) => {
+        const correctAnswer = currentDataSet.correctAnswers[index];
+        const normalizedInput = input.trim().toLowerCase();
+        if (Array.isArray(correctAnswer)) {
+          return correctAnswer.some(
+            (answer) => answer.trim().toLowerCase() === normalizedInput
+          );
+        }
+        return correctAnswer.trim().toLowerCase() === normalizedInput;
+      });
+
+      currentDataSet.feedback = newFeedback;
+      currentDataSet.isSubmitted = true;
+      setSubmitted(true);
+
+      let allCorrect = newFeedback.every((val) => val === true);
+      let feedbackType = allCorrect ? 'correct' : 'incorrect';
+      setisAnswerCorrect(feedbackType === 'correct');
+      setFeedbackType(feedbackType);
+      setFeedbackMessage(
+        allCorrect
+          ? currentDataSet.feedbackContent.correct
+          : currentDataSet.feedbackContent.incorrect
+      );
+      setFibData(updatedDataSets);
+    }
+  };
+
   const handleSubmit = (actionType) => {
-    // if (submitted) return;
-    // setAttempts(attempts + 1);
-    // setSubmitted(true);
-    /** The below code doesn't contain any validations, it simply navigate user to next slide */
     if (actionType === 'next') {
       const nextIndex = currentSlide.index + 1;
       const tempFormData = [...formData];
-      tempFormData[currentSlide.index] = { ...tempFormData[currentSlide.index], submitted: true, visited: true }
+      tempFormData[currentSlide.index] = {
+        ...tempFormData[currentSlide.index],
+        submitted: true,
+        visited: true,
+      };
       setFormData(tempFormData);
       setCurrentSide({
         id: formData[nextIndex].id,
@@ -100,7 +160,7 @@ const Questions = () => {
         type: formData[nextIndex].type,
         wizard: formData[nextIndex],
       });
-      setBtnActionType('submit')
+      setBtnActionType('submit');
 
       setSelectedOption(null);
       setSubmitted(false);
@@ -115,17 +175,28 @@ const Questions = () => {
         }
         setisAnswerCorrect(selectedOption === correctOption.option_id);
       }
+
+      if (currentSlide.type === 'fib') {
+        handleFIBSubmit();
+      }
     }
     if (actionType === 'tryagain') {
       if (currentSlide.type === 'mcq') {
         setSelectedOption(null);
         setSubmitted(false);
       }
+      if (currentSlide.type === 'fib') {
+        setSubmitted(false);
+        resetFibForm();
+      }
     }
     if (actionType === 'back') {
       const prevIndex = currentSlide.index - 1;
       const tempFormData = [...formData];
-      tempFormData[currentSlide.index] = { ...tempFormData[currentSlide.index], visited: true }
+      tempFormData[currentSlide.index] = {
+        ...tempFormData[currentSlide.index],
+        visited: true,
+      };
       setFormData(tempFormData);
       setCurrentSide({
         id: formData[prevIndex].id,
@@ -133,19 +204,45 @@ const Questions = () => {
         type: formData[prevIndex].type,
         wizard: formData[prevIndex],
       });
-      setBtnActionType('back')
+      setBtnActionType('back');
     }
   };
 
   const renderFeedback = () => {
-    const correctOption = options.find((opt) => opt.is_correct);
-    if (selectedOption === correctOption.option_id) {
+    if (currentSlide.type === 'mcq') {
+      const correctOption = options.find((opt) => opt.is_correct);
+      if (selectedOption === correctOption.option_id) {
+        return (
+          <div dangerouslySetInnerHTML={parseHtmlContent(feedback.correct)} />
+        );
+      } else {
+        return (
+          <div dangerouslySetInnerHTML={parseHtmlContent(feedback.incorrect)} />
+        );
+      }
+    }
+
+    if (currentSlide.type === 'fib') {
       return (
-        <div dangerouslySetInnerHTML={parseHtmlContent(feedback.correct)} />
-      );
-    } else {
-      return (
-        <div dangerouslySetInnerHTML={parseHtmlContent(feedback.incorrect)} />
+        <div dangerouslySetInnerHTML={parseHtmlContent(feedbackMessage)} />
+        // <div
+        //   className={`feedback-message ${
+        //     feedbackType === 'correct' ? 'correct' : 'incorrect'
+        //   }`}
+        // >
+        //   <div className="icon">{feedbackType === 'correct' ? '✔️' : '❌'}</div>
+        //   <div className="message-text">{feedbackMessage}</div>
+        //   {feedbackType === 'correct' ? (
+        //     <button className="see-why-btn">
+        //       See Why?
+        //       <span className="arrow">❯</span>
+        //     </button>
+        //   ) : (
+        //     <button className="show-answer-btn">
+        //       Show Answer <span className="arrow">❯</span>
+        //     </button>
+        //   )}
+        // </div>
       );
     }
   };
@@ -160,32 +257,47 @@ const Questions = () => {
       case 'mcq':
         return (component = (
           <MultipleChoiceQuestion
-              questionData={dummyData}
-              submitted={submitted}
-              attempts={attempts}
-              statementContent={statementContent}
-              options={options}
-              selectedOption={selectedOption}
-              handleOptionChange={handleOptionChange}
-              stem_image={stem_image}
-            />
+            questionData={dummyData}
+            submitted={submitted}
+            attempts={attempts}
+            statementContent={statementContent}
+            options={options}
+            selectedOption={selectedOption}
+            handleOptionChange={handleOptionChange}
+            stem_image={stem_image}
+          />
+        ));
+      case 'fib':
+        return (component = (
+          <FillInTheBlanks
+            setFibData={setFibData}
+            templateData={templateData}
+          />
         ));
     }
-
     return component;
-  }
+  };
 
   const renderWizards = () => {
     return formData.map((slide, index) => {
       return (
-        <div className={`card ${slide.id === currentSlide.id? btnActionType === 'next'? 'active-forward' : 'active-backward' : ''} data-step`}>
+        <div
+          className={`card ${
+            slide.id === currentSlide.id
+              ? btnActionType === 'next'
+                ? 'active-forward'
+                : 'active-backward'
+              : ''
+          } data-step`}
+        >
           {renderSlide(slide)}
         </div>
       );
-    })
+    });
   };
 
   useEffect(() => {
+    fetchJSONData();
     setCurrentSide({
       id: formData[0].id,
       index: 0,
@@ -194,48 +306,42 @@ const Questions = () => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   const multiStepForm = document.querySelector("[data-multi-step]")
-  //   const formSteps = [...multiStepForm.querySelectorAll("[data-step]")]
-  //   let currentStep = formSteps.findIndex(step => {
-  //     return step.classList.contains("active")
-  //   })
-  //   formSteps.forEach(step => {
-  //     step.addEventListener("animationend", e => {
-  //       formSteps[currentStep].classList.remove("hide")
-  //       e.target.classList.toggle("hide", !e.target.classList.contains("active"))
-  //     })
-  //   })
-    
-  //   function showCurrentStep() {
-  //     formSteps.forEach((step, index) => {
-  //       step.classList.toggle("active", index === currentStep)
-  //     })
-  //   }
-  // }, [])
+  useEffect(() => {
+    const multiStepForm = document.querySelector('[data-multi-step]');
+    const formSteps = [...multiStepForm?.querySelectorAll('[data-step]')];
+    let currentStep = formSteps.findIndex((step) => {
+      return step.classList.contains('active');
+    });
+    formSteps.forEach((step) => {
+      step.addEventListener('animationend', (e) => {
+        formSteps[currentStep].classList.remove('hide');
+        e.target.classList.toggle(
+          'hide',
+          !e.target.classList.contains('active')
+        );
+      });
+    });
 
-  console.log('currentSlide', currentSlide.wizard);
+    function showCurrentStep() {
+      formSteps.forEach((step, index) => {
+        step.classList.toggle('active', index === currentStep);
+      });
+    }
+  }, []);
 
   return (
     <div>
       <Header onAction={onAction} setOnAction={setOnAction} />
-      <div className={`${onAction ? "ActionStyle" : "mainContainer"}`}>
+      <div className={`${onAction ? 'ActionStyle' : 'mainContainer'}`}>
         <div className={styles.container}>
           <div>
-            <WizardProgressBar formData={formData} currentSlide={currentSlide} />
-            {/* <form data-multi-step class="multi-step-form"> */}
-            {renderWizards()}
-            {/* </form> */}
-            {/* <MultipleChoiceQuestion
-              questionData={dummyData}
-              submitted={submitted}
-              attempts={attempts}
-              statementContent={statementContent}
-              options={options}
-              selectedOption={selectedOption}
-              handleOptionChange={handleOptionChange}
-              stem_image={stem_image}
-            /> */}
+            <WizardProgressBar
+              formData={formData}
+              currentSlide={currentSlide}
+            />
+            <form data-multi-step class="multi-step-form">
+              {renderWizards()}
+            </form>
           </div>
           <Footer
             handleSubmit={handleSubmit}
@@ -243,7 +349,7 @@ const Questions = () => {
             feedback={feedback}
             renderFeedback={renderFeedback}
             seeWhyContent={seeWhyContent}
-            selectedOption={selectedOption}
+            selectedOption={currentSlide.type === 'fib' ? true : selectedOption}
             isAnswerCorrect={isAnswerCorrect}
             attempts={attempts}
           />

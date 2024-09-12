@@ -30,7 +30,7 @@ export const data = [
     },
     {
         id: 's2',
-        type: 'mcq',
+        type: 'fib',
         statement: "Question-Statement-2",
         visited: false,
         submitted: false,

@@ -46,7 +46,7 @@ export default function ComponentName(props) {
   });
 
   const { data } = state;
-
+console.log('data-----------------', data)
   return data ? (
     <div ref={containerRef} className={templateContainerClass}>
       content here

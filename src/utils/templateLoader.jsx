@@ -57,6 +57,10 @@ export async function fetchJSONData() {
   const templates = [
     'mcq',
     'html',
+    'page',
+    'image',
+    'fib',
+    'html'
     // rest of the json files
   ];
 

@@ -1,0 +1,139 @@
+{
+  "fib": {
+    "alphanumericalid": {
+      "type": "fib",
+      "fibType": "blankOnText",
+      "submit_limit": 3,
+      "allow_show_answer": true,
+      "shuffled": false,
+      "wordbank_layout": "layout-1",
+      "wordbank_distractor": [
+        "Conversion",
+        "Efficiency",
+        "Homes",
+        "Climate Change",
+        "Transmission",
+        "Installation",
+        "Utilities",
+        "Reduction"
+      ],
+      "statement": {
+        "component_name": "html",
+        "component_id": "fib_statement",
+        "filename": ["html"]
+      },
+      "sentence": {
+        "component_name": "html",
+        "component_id": "fib_questions",
+        "filename": ["html"]
+      },
+      "items": [
+        {
+          "id": 1,
+          "item_id": "",
+          "withBlankPicker": false,
+          "allowEquivalentNumber": false,
+          "simplestFormFraction": false,
+          "decimals": null,
+          "answer": "Conversion",
+          "inputType": "alpla-numeric",
+          "swappable": false,
+          "swap_group_id": null,
+          "position": null
+        },
+        {
+          "id": 2,
+          "item_id": "",
+          "withBlankPicker": false,
+          "allowEquivalentNumber": false,
+          "simplestFormFraction": false,
+          "decimals": null,
+          "answer": "Efficiency",
+          "inputType": "alpla-numeric",
+          "swappable": false,
+          "swap_group_id": null,
+          "position": null
+        },
+        {
+          "id": 3,
+          "item_id": "",
+          "withBlankPicker": false,
+          "allowEquivalentNumber": false,
+          "simplestFormFraction": false,
+          "decimals": null,
+          "answer": "Homes",
+          "inputType": "alpla-numeric",
+          "swappable": false,
+          "swap_group_id": null,
+          "position": null
+        },
+        {
+          "id": 4,
+          "item_id": "",
+          "withBlankPicker": false,
+          "allowEquivalentNumber": false,
+          "simplestFormFraction": false,
+          "decimals": null,
+          "answer": "Climate Change",
+          "inputType": "alpla-numeric",
+          "swappable": false,
+          "swap_group_id": null,
+          "position": null
+        }
+      ],
+      "feedback": {
+        "correct": {
+          "content": [
+            {
+              "component_name": "html",
+              "component_id": "correctFeedback",
+              "file_name": ["html"]
+            }
+          ],
+          "audio": {
+            "component_name": "audio",
+            "component_id": "correctAudio",
+            "file_name": ["correct.mp3"]
+          }
+        },
+        "incorrect": {
+          "content": [
+            {
+              "component_name": "html",
+              "component_id": "incorrectFeedback",
+              "file_name": ["html"]
+            }
+          ],
+          "audio": {
+            "component_name": "audio",
+            "component_id": "incorrectAudio",
+            "file_name": ["incorrect.mp3"]
+          }
+        },
+        "partial": {
+          "content": [
+            {
+              "component_name": "html",
+              "component_id": "partialFeedback",
+              "file_name": ["html"]
+            }
+          ],
+          "audio": {
+            "component_name": "audio",
+            "component_id": "partialAudio",
+            "file_name": ["partial.mp3"]
+          }
+        }
+      },
+      "see_why": {
+        "content": [
+          {
+            "component_name": "container",
+            "component_id": "seeWhyContent",
+            "file_name": ["seeWhy.html"]
+          }
+        ]
+      }
+    }
+  }
+}
