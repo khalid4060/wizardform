@@ -14,57 +14,89 @@ const Footer = ({
   submitted,
   seeWhyContent,
   selectedOption,
+  isAnswerCorrect,
 }) => {
-  console.log('feedback', feedback)
   const parseHtmlContent = (htmlString) => {
     return { __html: htmlString };
   };
+  console.log('feedback', isAnswerCorrect);
+
   return (
     <div className={styles.footerContainer}>
       <button className={`${styles.btn} ${styles.btnPrimary}`}>
         <div className={styles.btnContent}>
-          <button> <img src={AngleLeftIcon} />Go Back</button>
+          <button>
+            {' '}
+            <img src={AngleLeftIcon} />
+            Go Back
+          </button>
         </div>
       </button>
 
       {/* CORRECT-ANSWER-MESSAGE */}
-      {/* <div className={`${styles.success} ${styles.messageContainer}`}>
-        <div className={styles.leftContent}>
-          <div className={styles.audioBtn}><img width={'17px'} height={'14px'} src={SoundIcon} /></div>
-          <div className={styles.correctIcon}><img src={CorrectIcon} /></div>
-          <div className={styles.successMsg}>Well done, it’s a correct answer.</div>
-        </div>
-        <div className={styles.rightContent}>
-          <div className={styles.btnContent}>
-            <button className={`${styles.successMsg} ${styles.seeWhyBtn}`} onClick={handleSubmit}>See Why?  <img src={AngleRightIcon} /></button>
+      {isAnswerCorrect && (
+        <div className={`${styles.success} ${styles.messageContainer}`}>
+          <div className={styles.leftContent}>
+            <div className={styles.audioBtn}>
+              <img width={'17px'} height={'14px'} src={SoundIcon} />
+            </div>
+            <div className={styles.correctIcon}>
+              <img src={CorrectIcon} />
+            </div>
+            <div className={styles.successMsg}>
+              {submitted && renderFeedback()}
+            </div>
+          </div>
+          <div className={styles.rightContent}>
+            <div className={styles.btnContent}>
+              <button
+                className={`${styles.successMsg} ${styles.seeWhyBtn}`}
+                onClick={handleSubmit}
+              >
+                See Why? <img src={AngleRightIcon} />
+              </button>
+            </div>
           </div>
         </div>
-      </div> */}
+      )}
       {/* CORRECT-ANSWER-MESSAGE */}
 
-        {/* WRONG-ANSWER-MESSAGE */}
-        {/* <div className={`${styles.error} ${styles.messageContainer}`}>
+      {/* WRONG-ANSWER-MESSAGE */}
+      {submitted && !isAnswerCorrect && (
+        <div className={`${styles.error} ${styles.messageContainer}`}>
           <div className={styles.leftContent}>
-            <div className={styles.audioBtn}><img width={'17px'} height={'14px'} src={SoundIcon} /></div>
-            <div className={styles.wrongIcon}><img src={WrongIcon} /></div>
-            <div className={styles.successMsg}>Oops, almost there. Try one more time.</div>
+            <div className={styles.audioBtn}>
+              <img width={'17px'} height={'14px'} src={SoundIcon} />
+            </div>
+            <div className={styles.wrongIcon}>
+              <img src={WrongIcon} />
+            </div>
+            <div className={styles.successMsg}>{renderFeedback()}</div>
           </div>
           <div className={`${styles.error} ${styles.rightContent}`}>
             <div className={styles.btnContent}>
-              <button className={`${styles.successMsg} ${styles.showAnswersBtn}`} onClick={handleSubmit}>Show Answers  <img src={RedRightIcon} /></button>
+              <button
+                className={`${styles.successMsg} ${styles.showAnswersBtn}`}
+                onClick={handleSubmit}
+              >
+                Show Answers <img src={RedRightIcon} />
+              </button>
             </div>
           </div>
-        </div> */}
-        {/* WRONG-ANSWER-MESSAGE */}
+        </div>
+      )}
+      {/* WRONG-ANSWER-MESSAGE */}
 
-        {/* {submitted && renderFeedback()} */}
-        {/* {submitted && (
+      {isAnswerCorrect}
+      {/* {submitted && (
           <div dangerouslySetInnerHTML={parseHtmlContent(seeWhyContent)} />
         )} */}
 
       <button className={`${styles.btn} ${styles.btnSecondary}`}>
         <div className={styles.btnContent}>
-          <button onClick={handleSubmit} disabled={!selectedOption}>Submit Answer  <img src={AngleRightIcon} /></button>
+          <button onClick={handleSubmit} disabled={!selectedOption}>
+            Submit Answer <img src={AngleRightIcon} />
+          </button>
         </div>
       </button>
     </div>

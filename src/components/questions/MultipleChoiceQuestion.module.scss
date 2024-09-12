@@ -19,7 +19,7 @@
   color: #485465;
 }
 
-.contentLabelStmt{
+.contentLabelStmt {
   min-height: 24px;
 }
 
@@ -195,13 +195,26 @@
   color: #f44336;
   margin-left: 10px;
 } */
-
+.symbol {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .correctSymbol {
-  font-size: 15px;
+  font-size: 20px;
   color: green;
 }
 
 .incorrectSymbol {
   font-size: 20px;
   color: #ff6d6d;
+}
+.imageDiv {
+  display: flex;
+  justify-content: center;
+}
+.image {
+  width: 510px;
+  height: 287px;
 }

@@ -14,11 +14,11 @@ function fetchWithTimeout(url, options = {}, timeoutPercentage = 10) {
     }, timeout);
 
     fetch(url, options)
-      .then(response => {
+      .then((response) => {
         clearTimeout(timeoutId);
         resolve(response);
       })
-      .catch(err => {
+      .catch((err) => {
         clearTimeout(timeoutId);
         reject(err);
       });
@@ -34,7 +34,6 @@ function waitForUpdate(template, resolve) {
     }
   });
 }
-
 
 async function processResponse(response, template) {
   try {
@@ -56,24 +55,25 @@ export async function fetchJSONData() {
   let result = false;
 
   const templates = [
-    'page',
-    'image'
+    'mcq',
+    'html',
     // rest of the json files
   ];
 
-
   let dataPath = import.meta.env.VITE_DATA_PATH; // should be changed for LCMS build //
-  const pageIdRef = document.getElementById("page_id");
-  let pageId = ""
-  if(pageIdRef && pageIdRef!=""){
+  const pageIdRef = document.getElementById('page_id');
+  let pageId = '';
+  if (pageIdRef && pageIdRef != '') {
     pageId = `_${pageIdRef.innerHTML}`;
   }
   const responses = await Promise.all(
-    templates.map(template =>
-      fetchWithTimeout(`${dataPath}${template}${pageId}.json`).catch(error => {
-        console.error(`Error fetching ${template}:`, error);
-        return null; // Return null if fetching fails
-      })
+    templates.map((template) =>
+      fetchWithTimeout(`${dataPath}${template}${pageId}.json`).catch(
+        (error) => {
+          console.error(`Error fetching ${template}:`, error);
+          return null; // Return null if fetching fails
+        }
+      )
     )
   );
 
@@ -82,7 +82,9 @@ export async function fetchJSONData() {
       if (response) {
         return processResponse(response, templates[index]);
       } else {
-        console.warn(`Skipping processing for ${templates[index]} due to fetch failure.`);
+        console.warn(
+          `Skipping processing for ${templates[index]} due to fetch failure.`
+        );
       }
     })
   );
