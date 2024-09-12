@@ -47,28 +47,28 @@ export const dummyData = {
         },
       ],
     },
-    // {
-    //   option_id: 3,
-    //   is_correct: false,
-    //   content: [
-    //     {
-    //       component_name: 'html',
-    //       component_id: 'opt3_id',
-    //       file_name: ['<p>Berlin</p>'],
-    //     },
-    //   ],
-    // },
-    // {
-    //   option_id: 4,
-    //   is_correct: false,
-    //   content: [
-    //     {
-    //       component_name: 'html',
-    //       component_id: 'opt4_id',
-    //       file_name: ['<p>Madrid</p>'],
-    //     },
-    //   ],
-    // },
+    {
+      option_id: 3,
+      is_correct: false,
+      content: [
+        {
+          component_name: 'html',
+          component_id: 'opt3_id',
+          file_name: ['<p>Berlin</p>'],
+        },
+      ],
+    },
+    {
+      option_id: 4,
+      is_correct: false,
+      content: [
+        {
+          component_name: 'html',
+          component_id: 'opt4_id',
+          file_name: ['<p>Madrid</p>'],
+        },
+      ],
+    },
   ],
   feedback: {
     correct: {

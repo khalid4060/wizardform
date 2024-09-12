@@ -70,7 +70,7 @@ const MultipleChoiceQuestion = ({
       {/* Question Statement */}
       <div className={style.contentBox}>
         <h2>{statement}</h2>
-        {ste_image_url && (
+        {/* {ste_image_url && (
           <CustomImage
             src={ste_image_url} // Change this to a real image URL
             alt="Example Image"
@@ -80,7 +80,7 @@ const MultipleChoiceQuestion = ({
             className={style.imageDiv}
             primeryClass={style.image}
           />
-        )}
+        )} */}
       </div>
 
       {/* Question Statement */}
