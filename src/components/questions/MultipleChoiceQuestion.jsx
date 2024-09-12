@@ -14,6 +14,7 @@ const selectTemplateData = createSelector(
   (state) => state.templateData,
   (templateData) => templateData
 );
+fetchJSONData();
 const MultipleChoiceQuestion = ({
   submitted,
   statementContent,
@@ -30,52 +31,47 @@ const MultipleChoiceQuestion = ({
   const [finalData, setfinalData] = useState([]);
 
   useEffect(() => {
-    fetchJSONData();
     if (Object.keys(data).length > 1) {
       console.log(data, 'data');
-      // const {
-      //   mcq: {
-      //     statement: {
-      //       content: [
-      //         {
-      //           component_name,
-      //           component_id,
-      //           file_name: [stm_filename],
-      //         },
-      //       ],
-      //     },
-      //     stem_image: {
-      //       component_name: stemImageComponentName,
-      //       component_id: stemImageComponentId,
-      //       file_name: stemImageFileName,
-      //     },
-      //     options,
-      //   },
-      // } = data;
-      const { mcq } = data;
-      const temp = mcq['statement']['content'][0]['file_name'][0];
-      const tem2 = data[temp];
-      const finalobj = {
-        stament: tem2[mcq['statement']['content'][0]['component_id']]['data'],
-        stemImage: tem2[mcq['stem_image']['component_id']]['url'],
-        options: mcq['options'],
-      };
+      const {
+        mcq: {
+          statement: {
+            content: [
+              {
+                component_name,
+                component_id,
+                file_name: [stm_filename],
+              },
+            ],
+          },
+          stem_image: {
+            component_name: stemImageComponentName,
+            component_id: stemImageComponentId,
+            file_name: stemImageFileName,
+          },
+          options,
+        },
+      } = data;
 
-      // setStatement(data[stm_filename][component_id].data);
-      // setStem_image_url(data[stm_filename][stemImageComponentId]?.url);
+      const finalobj = {
+        statement: data[stm_filename][component_id].data,
+        stem_image: data[stm_filename][stemImageComponentId]?.url,
+      };
+      setStatement(data[stm_filename][component_id].data);
+      setStem_image_url(data[stm_filename][stemImageComponentId]?.url);
       setfinalData(finalobj);
       setOption(options);
     }
-  }, []);
+  }, [data]);
 
   console.log(finalData, 'template data');
   return (
     <div className={style.mulitpleChoiceContainer}>
       {/* Question Statement */}
       <div className={style.contentBox}>
-        <h2>{finalData.stament}</h2>
+        <h2>{statement}</h2>
       </div>
-      {ste_image_url && (
+      {/* {ste_image_url && (
         <CustomImage
           src={ste_image_url} // Change this to a real image URL
           alt="Example Image"
@@ -85,7 +81,7 @@ const MultipleChoiceQuestion = ({
           className={style.imageDiv}
           primeryClass={style.image}
         />
-      )}
+      )} */}
 
       {/* Question Statement */}
 

@@ -6,6 +6,9 @@ import Footer from '@components/templates/Footer/Footer';
 import styles from './Questions.module.scss';
 import MultipleChoiceQuestion from '../../questions/MultipleChoiceQuestion';
 import { dummyData } from '../../../utils/const';
+const parseHtmlContent = (htmlString) => {
+  return { __html: htmlString };
+};
 const Questions = () => {
   const [statementContent, setStatementContent] = useState('');
   const [seeWhyContent, setSeeWhyContent] = useState('');
@@ -51,22 +54,28 @@ const Questions = () => {
   };
 
   const handleSubmit = () => {
-    if (submitted) return;
-    setAttempts(attempts + 1);
-    setSubmitted(true);
+    if (attempts <= 3) {
+      setAttempts(attempts + 1);
+      setSubmitted(true);
+    }
     setisAnswerCorrect(selectedOption === correctOption.option_id);
   };
 
   const renderFeedback = () => {
+    const correctOption = options.find((opt) => opt.is_correct);
     if (selectedOption === correctOption.option_id) {
       return (
-        <div className="feedback-correct">Correct! {feedback.correct}</div>
+        <div dangerouslySetInnerHTML={parseHtmlContent(feedback.correct)} />
       );
     } else {
       return (
-        <div className="feedback-incorrect">Oops, almost there. Try again.</div>
+        <div dangerouslySetInnerHTML={parseHtmlContent(feedback.incorrect)} />
       );
     }
+  };
+  const handleTryAgain = () => {
+    setSelectedOption(null);
+    setSubmitted(false);
   };
   return (
     <div>
@@ -94,6 +103,8 @@ const Questions = () => {
             seeWhyContent={seeWhyContent}
             selectedOption={selectedOption}
             isAnswerCorrect={isAnswerCorrect}
+            attempts={attempts}
+            handleTryAgain={handleTryAgain}
           />
         </div>
       </div>

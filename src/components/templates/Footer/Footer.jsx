@@ -15,6 +15,8 @@ const Footer = ({
   seeWhyContent,
   selectedOption,
   isAnswerCorrect,
+  attempts,
+  handleTryAgain,
 }) => {
   const parseHtmlContent = (htmlString) => {
     return { __html: htmlString };
@@ -34,7 +36,7 @@ const Footer = ({
       </button>
 
       {/* CORRECT-ANSWER-MESSAGE */}
-      {isAnswerCorrect && (
+      {submitted && isAnswerCorrect && (
         <div className={`${styles.success} ${styles.messageContainer}`}>
           <div className={styles.leftContent}>
             <div className={styles.audioBtn}>
@@ -43,9 +45,7 @@ const Footer = ({
             <div className={styles.correctIcon}>
               <img src={CorrectIcon} />
             </div>
-            <div className={styles.successMsg}>
-              {submitted && renderFeedback()}
-            </div>
+            <div className={styles.successMsg}>{renderFeedback()}</div>
           </div>
           <div className={styles.rightContent}>
             <div className={styles.btnContent}>
@@ -94,8 +94,20 @@ const Footer = ({
 
       <button className={`${styles.btn} ${styles.btnSecondary}`}>
         <div className={styles.btnContent}>
-          <button onClick={handleSubmit} disabled={!selectedOption}>
-            Submit Answer <img src={AngleRightIcon} />
+          <button
+            onClick={
+              submitted && attempts < 3 && !isAnswerCorrect
+                ? handleTryAgain
+                : handleSubmit
+            }
+            disabled={!selectedOption}
+          >
+            {submitted && attempts < 3 && !isAnswerCorrect
+              ? 'Try Again'
+              : isAnswerCorrect
+              ? 'Next'
+              : 'Submit Answer'}{' '}
+            <img src={AngleRightIcon} />
           </button>
         </div>
       </button>
