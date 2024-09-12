@@ -85,9 +85,10 @@ const MultipleChoiceQuestion = ({
 
       {/* Question Statement */}
 
-      <div className={style.contentLabelStmt}>
+      {/* <div className={style.contentLabelStmt}>
         <p className={'instructionHeading'}></p>
-      </div>
+      </div> */}
+      <h3 className={style.subHeading}>Select the Correct Answer:</h3>
 
       <div className={style.optionsContainer}>
         {options.map((opt) => (

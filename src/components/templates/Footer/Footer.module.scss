@@ -1,13 +1,14 @@
 .footerContainer {
-  min-height: 108px;
-  max-height: 145px;
   border-top: 2px solid #ecedef;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 3rem 0.5rem 3rem;
-  flex-wrap: wrap;
-  gap: 5px;
+  padding: 1.5rem 1.5rem;
+
+  @media (max-width: 767px) {
+    padding: 1rem;
+    gap: 0 1rem;
+  }
 
   .btnPrimary {
     width: 136px;
@@ -27,7 +28,7 @@
   .btnSecondary {
     width: 195px;
     height: 56px;
-    background: #e8f8f7;
+    background: #bceae9;
     border: 1px solid #a6e4e2;
     border-radius: 8px;
     color: #14716d;
@@ -57,17 +58,18 @@
       display: flex;
       align-items: center;
       gap: 0.8rem;
+      color: #14716d;
     }
   }
 
   .success {
-    color: #2D4C1A;
-    background-color: #E8F5E8;
+    color: #2d4c1a;
+    background-color: #e8f5e8;
   }
 
   .error {
-    color: #662C2C;
-    background-color: #FFE2E2;
+    color: #662c2c;
+    background-color: #ffe2e2;
   }
 
   .messageContainer {
@@ -88,18 +90,18 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 0.8rem;
-  
+
       .audioBtn {
         width: 32px;
         height: 32px;
-        border: 1px solid #B6BBC1;
+        border: 1px solid #b6bbc1;
         border-radius: 8px;
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: white;
       }
-  
+
       .correctIcon {
         width: 34px;
         height: 34px;
@@ -108,7 +110,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #D4EBC6;
+        background-color: #d4ebc6;
       }
 
       .wrongIcon {
@@ -119,9 +121,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #FFD3D3;
+        background-color: #ffd3d3;
       }
-    
+
       .successMsg {
         //styleName: Heading/Small/bold;
         font-size: 18px;
@@ -129,12 +131,12 @@
         text-align: left;
         // color: #2D4C1A;
       }
-      
+
       .successText {
         font-weight: bold;
       }
     }
-  
+
     .rightContent {
       gap: 16px;
       //styleName: Heading/Small/bold;
@@ -143,20 +145,20 @@
         width: 137px;
         height: 40px;
         padding: 0px 16px 0px 16px;
-        border: 1px solid #5A9935;
+        border: 1px solid #5a9935;
         border-radius: 8px;
-        background: #F1F9EC;
-        color: #2D4C1A;
+        background: #f1f9ec;
+        color: #2d4c1a;
       }
 
       .showAnswersBtn {
         width: 137px;
         height: 40px;
         padding: 0px 16px 0px 16px;
-        border: 1px solid #CC5757;
+        border: 1px solid #cc5757;
         border-radius: 8px;
-        background: #FFF0F0;
-        color: #662C2C;
+        background: #fff0f0;
+        color: #662c2c;
       }
     }
   }
