@@ -1,0 +1,13 @@
+.dropdownContainer {
+   width: 160px;
+    // height: 35px;
+    border: 1px solid #485465;
+    border-radius: 5px;
+    padding: 8px;
+    gap: 1rem;
+    font-size: 22px;
+    &:focus-visible {
+      outline: none;
+    }
+
+}

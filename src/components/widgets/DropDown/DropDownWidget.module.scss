@@ -1,0 +1,114 @@
+.mainContainer {
+  min-height: 350px;
+  padding: 1rem 6rem 2rem 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  h2 {
+    width: 640px;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0px;
+    margin-bottom: 16px;
+    @media (max-width: 768px) {
+       width: 100%;
+       padding: 0px !important;
+      }
+  }
+  .contentContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 6rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      justify-content: center;
+    }
+
+    .firstContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      gap: 16px;
+
+      span {
+        font-size: 20px;
+        font-weight: 600;
+        color: #006e8e;
+      }
+      h4 {
+        gap: 10px;
+        font-size: 24px;
+        font-weight: 300;
+        line-height: 40px;
+        margin: 0px;
+      }
+
+      .selectList {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        li {
+          font-size: 24px;
+          font-weight: 300;
+          line-height: 40px;
+        }
+        select {
+          margin-inline: 10px;
+        }
+      }
+    }
+
+    .secondContainer {
+      display: flex;
+      justify-content: center;
+      width: 472px;
+      height: 362px;
+      padding: 16px;
+      border-radius: 16px;
+      gap: 10px;
+      background: #f4f5f7;
+
+      @media (max-width: 768px) {
+        width: 288px;
+        height: 224px;
+      }
+
+      .imageBox {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 440px;
+        height: 323px;
+        background: #485465;
+        padding: 16px;
+        border-radius: 16px;
+        @media (max-width: 768px) {
+          width: 256px;
+          height: 192px;
+        }
+        span {
+          width: 150px;
+          height: 64px;
+          font-size: 24px;
+          font-weight: 300;
+          color: #b6bbc1;
+        }
+        .iconBox {
+          position: absolute;
+          width: 32px;
+          height: 32px;
+          // background-color: white;
+          border-radius: 6px;
+          bottom: 5px;
+          right: 10px;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+}

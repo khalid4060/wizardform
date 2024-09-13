@@ -1,0 +1,102 @@
+{
+  "dropdown": {
+    "alphanumericalid": {
+      "type": "dropdown",
+      "dropdownType": "dropdownSentence",
+      "submit_limit": 1,
+      "allow_show_answer": true,
+      "shuffled": true,
+      "side_image": {
+        "component_name": "image",
+        "component_id": "Ov8mnRj2M",
+        "filename": ["image"]
+      },
+      "statement": {
+        "component_name": "html",
+        "component_id": "dropdown_statement",
+        "filename": ["html"]
+      },
+      "sentence": {
+        "component_name": "html",
+        "component_id": "dropdown_questions",
+        "filename": ["html"]
+      },
+      "items": [
+        {
+          "id": 0,
+          "title": "title",
+          "subtitle": "subtitle",
+          "image": {
+            "component_name": "image",
+            "component_id": "Ov8mnRj2M",
+            "filename": ["image"]
+          },
+          "answer_id": 0,
+          "options": [
+            {
+              "id": 0,
+              "content": {
+                "component_name": "html",
+                "component_id": "dropdownOptions",
+                "filename": ["html"]
+              }
+            }
+          ]
+        }
+      ],
+      "feedback": {
+        "correct": {
+          "content": [
+            {
+              "component_name": "html",
+              "component_id": "correctFeedback",
+              "file_name": ["html"]
+            }
+          ],
+          "audio": {
+            "component_name": "audio",
+            "component_id": "correctAudio",
+            "file_name": ["correct.mp3"]
+          }
+        },
+        "incorrect": {
+          "content": [
+            {
+              "component_name": "html",
+              "component_id": "incorrectFeedback",
+              "file_name": ["html"]
+            }
+          ],
+          "audio": {
+            "component_name": "audio",
+            "component_id": "incorrectAudio",
+            "file_name": ["incorrect.mp3"]
+          }
+        },
+        "partial": {
+          "content": [
+            {
+              "component_name": "html",
+              "component_id": "partialFeedback",
+              "file_name": ["html"]
+            }
+          ],
+          "audio": {
+            "component_name": "audio",
+            "component_id": "partialAudio",
+            "file_name": ["partial.mp3"]
+          }
+        }
+      },
+      "see_why": {
+        "content": [
+          {
+            "component_name": "container",
+            "component_id": "id",
+            "filename": ["container"]
+          }
+        ]
+      }
+    }
+  }
+}

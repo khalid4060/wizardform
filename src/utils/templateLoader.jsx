@@ -61,7 +61,9 @@ export async function fetchJSONData() {
     'image',
     'fib',
     'html',
-    'thinking_organizer'
+    'thinking_organizer',
+    'dropdown',
+    'html'
     // rest of the json files
   ];
 
