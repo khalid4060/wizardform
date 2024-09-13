@@ -1,197 +1,198 @@
-import React, { useEffect, useState } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import DragAndDrop from './DragAndDrop';
+import React, { useEffect, useState, useRef } from 'react';
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
+import DragItem from './DragItem';
+import DropZone from './DropZone';
 import '../../styles/scss/components/thinking-organizer/thinking-organizer.scss';
-
-const sampleData = {
-  thinkingOrganizer: {
-    allow_download: true,
-    allow_add_card: true,
-    items: [
-      {
-        id: 1,
-        name: 'Solar Panel Installation',
-        editable: false,
-      },
-      {
-        id: 2,
-        name: 'Battery Storage Solutions',
-        editable: false,
-      },
-      {
-        id: 3,
-        name: 'Solar Energy Benefits',
-        editable: false,
-      },
-    ],
-    droppedItemsColumn1: [
-      {
-        id: 4,
-        name: 'Government Incentives gg',
-        editable: false,
-      },
-    ],
-    droppedItemsColumn2: [
-      {
-        id: 5,
-        name: 'Cost Savings Analysis',
-        editable: false,
-      },
-      {
-        id: 6,
-        name: 'Environmental Impact',
-        editable: false,
-      },
-    ],
-  },
-};
+import addCardIcon from '../../assets/icons/add-card.svg';
+import saveCardIcon from '../../assets/icons/Save.svg';
 
 const ThinkingOrganizer = ({ templateData, setThinkingOrganizerTitle }) => {
   const { thinking_organizer: thinkingOrganizer } = templateData;
   const [dataSets, setDataSets] = useState([]);
-  const [error, setError] = useState(null);
-
-  const [items, setItems] = useState(sampleData.thinkingOrganizer.items);
-  const [droppedItemsColumn1, setDroppedItemsColumn1] = useState(
-    sampleData.thinkingOrganizer.droppedItemsColumn1
-  );
-  const [droppedItemsColumn2, setDroppedItemsColumn2] = useState(
-    sampleData.thinkingOrganizer.droppedItemsColumn2
-  );
+  const [optionsData, setOptionsData] = useState({
+    items: [],
+    column1: [],
+    column2: [],
+  });
   const [newItemName, setNewItemName] = useState('');
-  const [editItem, setEditItem] = useState(null);
-  const [isAddingCard, setIsAddingCard] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
+  const inputRef = useRef(null);
+
+  const [dragTitle, column1Title, column2Title] = dataSets[0]?.itemTitles || [];
 
   useEffect(() => {
-    const initializeDataSets = () => {
-      try {
-        if (!thinkingOrganizer.alphanumericalid) return;
+    const initializeData = () => {
+      if (!thinkingOrganizer?.alphanumericalid) return;
+      const { items, options_label, options } =
+        thinkingOrganizer.alphanumericalid;
 
-        const {
-          options_label: optionsLabel,
-          items,
-          options,
-        } = thinkingOrganizer?.alphanumericalid;
+      const extractData = (fileKey, componentId) =>
+        templateData[fileKey]?.[componentId]?.data || '';
 
-        const extractData = (fileKey, componentId) =>
-          templateData[fileKey]?.[componentId]?.data || '';
+      const title = extractData(
+        options_label.filename[0],
+        options_label.component_id
+      );
+      const itemTitles = extractData(
+        items[0]?.title.filename[0],
+        items[0]?.title.component_id
+      )
+        .split('<br>')
+        .map((title) => title.trim());
+      const itemOptions = extractData(
+        options[0]?.content.filename[0],
+        options[0]?.content.component_id
+      )
+        .split('<br>')
+        .map((option) => option.trim());
 
-        const obtionTitle = extractData(
-          optionsLabel.filename[0],
-          optionsLabel.component_id
-        );
+      setThinkingOrganizerTitle(title);
 
-        const itemTitle = extractData(
-          items[0]?.title.filename[0],
-          items[0].title.component_id
-        )
-          ?.split('<br>')
-          .map((q) => q.trim());
-        setError(null);
+      const initialItems = itemOptions.map((title, index) => ({
+        id: index + 1,
+        name: title,
+        editable: false,
+      }));
 
-        const itmeOptions = extractData(
-          options[0].content.filename[0],
-          options[0].content.component_id
-        )
-          ?.split('<br>')
-          .map((q) => q.trim());
-
-        const initialData = {
-          itemTitle: itemTitle,
-          itmeOptions,
-        };
-        setThinkingOrganizerTitle(obtionTitle);
-        setDataSets([initialData]);
-        setError(null);
-      } catch (err) {
-        console.error(err.message);
-        setError(err.message);
-      }
+      setOptionsData((prev) => ({ ...prev, items: initialItems }));
+      setDataSets([{ itemTitles, itemOptions }]);
     };
-    initializeDataSets();
+
+    initializeData();
   }, [thinkingOrganizer]);
 
-  const handleInputChange = (e) => {
-    setNewItemName(e.target.value);
-  };
-
-  const addItem = () => {
-    if (newItemName.trim() === '') return;
-
-    const newItem = {
-      id: items.length + 1,
-      name: newItemName,
-    };
-    setItems([...items, newItem]);
+  const handleAddItem = () => {
+    if (!newItemName.trim()) return;
+    const newItem = { id: optionsData.items.length + 1, name: newItemName };
+    setOptionsData((prev) => ({ ...prev, items: [...prev.items, newItem] }));
     setNewItemName('');
-    setIsAddingCard(false);
+    setIsAdding(false);
   };
 
-  const handleDrop = (item, column) => {
-    setItems((currentItems) => currentItems.filter((i) => i.id !== item.id));
-    if (column === 1) {
-      setDroppedItemsColumn1((currentItems) => [...currentItems, item]);
-    } else {
-      setDroppedItemsColumn2((currentItems) => [...currentItems, item]);
+  const handleToggleAdd = () => {
+    setIsAdding(!isAdding);
+    if (isAdding) {
+      setNewItemName('');
     }
   };
 
-  const deleteDroppedItem = (id, column) => {
-    if (column === 1) {
-      setDroppedItemsColumn1((prevItems) =>
-        prevItems.filter((item) => item.id !== id)
+  const handleDrop = ({ active, over }) => {
+    if (!over || active.id === over.id) return;
+
+    const sourceId = active.id;
+    const destinationId = over.id;
+
+    const sourceColumn = optionsData.items.find((item) => item.id === sourceId)
+      ? 'items'
+      : optionsData.column1.find((item) => item.id === sourceId)
+      ? 'column1'
+      : 'column2';
+
+    const destinationColumn =
+      destinationId === column1Title ? 'column1' : 'column2';
+
+    setOptionsData((prev) => {
+      const draggedItem = prev[sourceColumn].find(
+        (item) => item.id === sourceId
       );
-    } else {
-      setDroppedItemsColumn2((prevItems) =>
-        prevItems.filter((item) => item.id !== id)
-      );
-    }
+      return {
+        ...prev,
+        [sourceColumn]: prev[sourceColumn].filter(
+          (item) => item.id !== sourceId
+        ),
+        [destinationColumn]: [...prev[destinationColumn], draggedItem],
+      };
+    });
   };
 
-  const saveEditedItem = (editedItem) => {
-    setItems((prevItems) =>
-      prevItems.map((item) => (item.id === editedItem.id ? editedItem : item))
-    );
-    setEditItem(null);
-    setNewItemName('');
-    setIsAddingCard(false);
+  const handleDeleteItem = (id) => {
+    setOptionsData((prev) => ({
+      ...prev,
+      items: prev.items.filter((item) => item.id !== id),
+      column1: prev.column1.filter((item) => item.id !== id),
+      column2: prev.column2.filter((item) => item.id !== id),
+    }));
   };
 
-  const deleteItem = (id) => {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
-    setDroppedItemsColumn1((prevItems) =>
-      prevItems.filter((item) => item.id !== id)
-    );
-    setDroppedItemsColumn2((prevItems) =>
-      prevItems.filter((item) => item.id !== id)
-    );
+  const handleEditItem = (id, newName) => {
+    setOptionsData((prev) => ({
+      ...prev,
+      items: prev.items.map((item) =>
+        item.id === id ? { ...item, name: newName } : item
+      ),
+    }));
   };
 
-  console.log('dataSets', dataSets);
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   return (
-    <DndProvider backend={HTML5Backend}>
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDrop}
+    >
       <div className="app-container">
-        <div className="content">
-          <DragAndDrop
-            items={items}
-            saveEditedItem={saveEditedItem}
-            deleteItem={deleteItem}
-            newItemName={newItemName}
-            handleInputChange={handleInputChange}
-            isAddingCard={isAddingCard}
-            setIsAddingCard={setIsAddingCard}
-            editItem={editItem}
-            addItem={addItem}
-            droppedItemsColumn1={droppedItemsColumn1}
-            droppedItemsColumn2={droppedItemsColumn2}
-            handleDrop={handleDrop}
-            deleteDroppedItem={deleteDroppedItem}
-          />
+        <div className="drag-area">
+          <h3>{dragTitle}</h3>
+
+          {optionsData.items.map((item) => (
+            <DragItem
+              key={item.id}
+              item={item}
+              onDeleteItem={handleDeleteItem}
+              onEditItem={handleEditItem}
+            />
+          ))}
+
+          <div className={isAdding ? 'input-container' : 'add-input-container'}>
+            {isAdding && (
+              <input
+                type="text"
+                value={newItemName}
+                onChange={(e) => setNewItemName(e.target.value)}
+                placeholder="Type card name..."
+                ref={inputRef}
+              />
+            )}
+            <div
+              className="save-btn"
+              onClick={isAdding ? handleAddItem : handleToggleAdd}
+            >
+              <img
+                src={isAdding ? saveCardIcon : addCardIcon}
+                alt="add-save-card"
+              />
+            </div>
+          </div>
         </div>
+
+        <DropZone
+          title={column1Title}
+          items={optionsData.column1}
+          onDelete={handleDeleteItem}
+          style={{ backgroundColor: '#e5f8f0', border: '2px solid #5dd3a0' }}
+        />
+        <DropZone
+          title={column2Title}
+          items={optionsData.column2}
+          onDelete={handleDeleteItem}
+          style={{ backgroundColor: '#fff5e5', border: '2px solid #ffc563' }}
+        />
       </div>
-    </DndProvider>
+    </DndContext>
   );
 };
 

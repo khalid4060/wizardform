@@ -1,67 +1,71 @@
-import React, { useState, useRef, useEffect } from 'react';  
-import { useDrag } from 'react-dnd';  
+import React, { useState, useRef, useEffect } from 'react';
+import { useDraggable } from '@dnd-kit/core';
+import deleteIcon from '../../assets/icons/Delete.svg';
 
-const DragItem = ({ item, onDeleteItem }) => {  
-    const [{ isDragging }, drag] = useDrag(() => ({  
-        type: 'item',  
-        item,  
-        collect: (monitor) => ({  
-            isDragging: monitor.isDragging(),  
-        }),  
-    }));  
+const DragItem = ({ item, onDeleteItem, onEditItem }) => {
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: item.id,
+  });
 
-    const [isEditing, setIsEditing] = useState(false);  
-    const inputRef = useRef(null);  
+  const [isEditing, setIsEditing] = useState(false);
+  const [newName, setNewName] = useState(item.name);
+  const inputRef = useRef(null);
 
-    const handleClick = () => {  
-        setIsEditing(true);  
-    };  
+  const style = transform
+    ? {
+        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+      }
+    : undefined;
 
-    const handleDelete = () => {  
-        onDeleteItem(item.id);  
-    };  
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
 
-    const handleClickOutside = (event) => {  
-        if (inputRef.current && !inputRef.current.contains(event.target)) {  
-            setIsEditing(false);  
-        }  
-    };  
+  const handleDelete = () => {
+    onDeleteItem(item.id);
+  };
 
-    useEffect(() => {  
-        document.addEventListener('mousedown', handleClickOutside);  
-        return () => {  
-            document.removeEventListener('mousedown', handleClickOutside);  
-        };  
-    }, []);  
+  const handleSaveEdit = () => {
+    onEditItem(item.id, newName);
+    setIsEditing(false);
+  };
 
-    return (  
-        <div  
-            ref={drag}  
-            style={{  
-                opacity: isDragging ? 0.5 : 1,  
-            }}  
-        >  
-            {isEditing ? (  
-                <div className="input-container" ref={inputRef}>  
-                    <input  
-                        type="text"  
-                        value={item.name}  
-                        disabled  
-                    />  
-                    <div className='delete-image-container' onClick={handleDelete}>  
-                        <img className='delete-image' src={`${process.env.PUBLIC_URL}/delete.png`} alt='delete' />   
-                    </div>  
-                </div>  
-            ) : (  
-                <div  
-                    className="drag-item"  
-                    onClick={handleClick}  
-                >  
-                    {item.name}  
-                </div>  
-            )}  
-        </div>  
-    );  
-};  
+  const handleClickOutside = (event) => {
+    if (inputRef.current && !inputRef.current.contains(event.target)) {
+      handleSaveEdit();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  return (
+    <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
+      {isEditing ? (
+        <div className="input-container" ref={inputRef}>
+          <input
+            type="text"
+            value={newName}
+            onChange={(e) => setNewName(e.target.value)}
+          />
+          <div className="delete-image-container" onClick={handleDelete}>
+            <img className="delete-image" src={deleteIcon} alt="delete" />
+          </div>
+        </div>
+      ) : (
+        <div className="drag-item" onClick={handleEdit}>
+          {item.name}
+          {/* <div className="delete-image-container" onClick={handleDelete}>
+            <img className="delete-image" src={deleteIcon} alt="delete" />
+          </div> */}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default DragItem;

@@ -1,14 +1,20 @@
 .app-container {
+  display: flex;
+  flex-direction: row;
   padding: 0 3rem;
   max-width: 1600px;
   margin: 0 auto;
+  gap: 2rem;
+  height: 100vh;
+  overflow: auto;
 
-  @media(max-width:767px){
-    padding: 0 1rem;
+  @media (max-width: 768px) {
+    padding: 1rem;
+    flex-direction: column;
   }
 }
 
-.title-containe {
+.title-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,9 +57,7 @@
 
 .drag-area {
   padding: 20px;
-  width: auto;
-  // max-width: 300px;
-  // border: 1px solid lighten(#007bff, 30%);
+  height: fit-content;
   border-radius: 10px;
   background-color: #e7f3ff;
   width: 100%;
@@ -94,18 +98,37 @@
 
     .save-btn {
       width: fit-content;
-      border-radius: 5px;
-      background-color: #fff;
-      border: 2px solid rgb(107, 105, 105);
       align-self: flex-end;
-      color: black;
       font-weight: 500;
-      padding: 5px 10px;
       cursor: pointer;
+    }
+  }
 
-      &:hover {
-        background-color: #c3dcf0;
+  .add-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 15px;
+    padding-top: 1rem;
+
+    input {
+      background-color: #fff;
+      border: none;
+      flex-grow: 1;
+      margin-right: 10px;
+      outline: none;
+      transition: border-color 0.3s;
+
+      &:focus {
+        border-color: #007bff;
       }
+    }
+
+    .save-btn {
+      width: fit-content;
+      align-self: flex-end;
+      font-weight: 500;
+      cursor: pointer;
     }
   }
 
@@ -120,8 +143,8 @@
     cursor: move;
     transition: all 0.5s;
 
-    &:hover{
-      border-color: #047FFF;
+    &:hover {
+      border-color: #047fff;
     }
   }
 
@@ -155,17 +178,17 @@
     }
   }
 
-  &:nth-child(02){
-    .drop-here-container{
-      h3{
-        color: #004A2A;
+  &:nth-child(02) {
+    .drop-here-container {
+      h3 {
+        color: #004a2a;
       }
     }
   }
 
-  &:nth-child(03){
-    .drop-here-container{
-      h3{
+  &:nth-child(03) {
+    .drop-here-container {
+      h3 {
         color: #996000;
       }
     }
@@ -215,7 +238,7 @@
     border-radius: 8px;
     text-align: center;
 
-    span{
+    span {
       display: block;
     }
   }
@@ -223,7 +246,7 @@
 
 .add-card-btn {
   border-radius: 5px;
-  border: 1px solid #B6BBC1;
+  border: 1px solid #b6bbc1;
   background-color: #ffffff;
   color: rgba(0, 0, 0, 0.651);
   font-weight: 600;
@@ -292,6 +315,7 @@
   border-radius: 8px;
   border: 1px solid rgb(107, 105, 105);
   align-self: flex-end;
+  cursor: pointer;
 
   &:hover {
     background-color: #c3dcf0;
