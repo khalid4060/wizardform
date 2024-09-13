@@ -71,7 +71,7 @@ const WizardProgressBar = ({ formData, currentSlide }) => {
           <div className={styles.screenTitle}>
             Screen {currentSlide.index + 1}
           </div>
-          <div className={styles.screenSubtitle}>MCQ</div>
+          {/* <div className={styles.screenSubtitle}>MCQ</div> */}
         </div>
         <div className={styles.helpBtnContainer}>
           <div>Need Help?</div>
