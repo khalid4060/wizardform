@@ -63,6 +63,7 @@
     "react-responsive-spritesheet": "^2.3.9",
     "react-router": "^6.15.0",
     "react-router-dom": "^6.15.0",
+    "react-select": "^5.8.0",
     "reactstrap": "^9.2.1",
     "redux": "^4.2.1",
     "redux-first-history": "^5.1.1",
