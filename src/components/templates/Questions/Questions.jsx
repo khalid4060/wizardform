@@ -54,7 +54,6 @@ const Questions = () => {
   const [options, setOptions] = useState([]);
   const [feedback, setFeedback] = useState({});
   const [feedbackMessage, setFeedbackMessage] = useState('');
-  const [feedbackType, setFeedbackType] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const [attempts, setAttempts] = useState(0);
@@ -134,7 +133,6 @@ const Questions = () => {
       let allCorrect = newFeedback.every((val) => val === true);
       let feedbackType = allCorrect ? 'correct' : 'incorrect';
       setisAnswerCorrect(feedbackType === 'correct');
-      setFeedbackType(feedbackType);
       setFeedbackMessage(
         allCorrect
           ? currentDataSet.feedbackContent.correct
@@ -225,24 +223,6 @@ const Questions = () => {
     if (currentSlide.type === 'fib') {
       return (
         <div dangerouslySetInnerHTML={parseHtmlContent(feedbackMessage)} />
-        // <div
-        //   className={`feedback-message ${
-        //     feedbackType === 'correct' ? 'correct' : 'incorrect'
-        //   }`}
-        // >
-        //   <div className="icon">{feedbackType === 'correct' ? '✔️' : '❌'}</div>
-        //   <div className="message-text">{feedbackMessage}</div>
-        //   {feedbackType === 'correct' ? (
-        //     <button className="see-why-btn">
-        //       See Why?
-        //       <span className="arrow">❯</span>
-        //     </button>
-        //   ) : (
-        //     <button className="show-answer-btn">
-        //       Show Answer <span className="arrow">❯</span>
-        //     </button>
-        //   )}
-        // </div>
       );
     }
   };

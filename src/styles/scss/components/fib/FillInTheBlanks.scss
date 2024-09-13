@@ -1,10 +1,9 @@
 .fill-in-the-blanks {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: 0px 5rem;
-  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
 
   .fib-content {
     display: flex;
@@ -93,6 +92,8 @@
   .fill-in-the-blanks {
     overflow: scroll;
     margin: 0px;
+    padding: 20px;
+    height: calc(100dvh - 320px);
 
     .fib-content {
       flex-direction: column;
@@ -107,7 +108,7 @@
   min-width: 25%;
 
   @media (max-width: 768px) {
-    width: 100%;
+    width: 90%;
     margin-top: 20px;
   }
 
@@ -130,135 +131,6 @@
       font-size: 14px;
       color: #3f3f3f;
       padding: 5px 0;
-    }
-  }
-}
-
-.feedback-message {
-  display: flex;
-  align-items: center;
-  padding: 8px;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 14px;
-  width: 100%;
-  margin: 0px 15px;
-  box-sizing: border-box;
-
-  .icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 25px;
-    height: 25px;
-    border-radius: 8px;
-    margin-right: 10px;
-    font-size: 12px;
-  }
-
-  .message-text {
-    flex-grow: 1;
-  }
-
-  &.correct {
-    border: 1px solid #a6f8a6;
-    background-color: #e6ffe6;
-    color: #206b20;
-
-    .icon {
-      background-color: #d3ffd3;
-      color: #56ff56;
-    }
-
-    .see-why-btn {
-      border: 1px solid #a6f8a6;
-      background-color: #e6ffe6;
-      border-radius: 8px;
-      color: #2c662c;
-      padding: 10px;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      cursor: pointer;
-    }
-  }
-
-  &.incorrect {
-    border: 1px solid #f8a6a6;
-    background-color: #ffe6e6;
-    color: #6b2020;
-
-    .icon {
-      background-color: #ffd3d3;
-      color: #ff5656;
-    }
-
-    .show-answer-btn {
-      border: 1px solid #f8a6a6;
-      border-radius: 8px;
-      background-color: #ffe6e6;
-      color: #662c2c;
-      padding: 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-    }
-  }
-
-  @media (max-width: 600px) {
-    flex-direction: column;
-    align-items: flex-start;
-    font-size: 12px;
-    padding: 8px;
-
-    .icon {
-      width: 20px;
-      height: 20px;
-      font-size: 10px;
-    }
-
-    .see-why-btn,
-    .show-answer-btn {
-      padding: 8px;
-      font-size: 12px;
-      width: 100%;
-      justify-content: center;
-    }
-
-    .message-text {
-      margin-top: 5px;
-      width: 100%;
-    }
-  }
-
-  @media (max-width: 900px) {
-    font-size: 13px;
-    padding: 8px;
-
-    .icon {
-      width: 22px;
-      height: 22px;
-      font-size: 11px;
-    }
-
-    .see-why-btn,
-    .show-answer-btn {
-      padding: 9px;
-      font-size: 13px;
-    }
-  }
-
-  @media (max-width: 1200px) {
-    font-size: 14px;
-    .icon {
-      width: 24px;
-      height: 24px;
-    }
-    .see-why-btn,
-    .show-answer-btn {
-      padding: 10px;
-      font-size: 14px;
     }
   }
 }
