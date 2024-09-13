@@ -317,7 +317,7 @@ const Questions = () => {
               formData={formData}
               currentSlide={currentSlide}
             />
-            <form data-multi-step class="multi-step-form">
+            <form data-multi-step class="multi-step-form" className={styles.wizardContainer}>
               {renderWizards()}
             </form>
           </div>
