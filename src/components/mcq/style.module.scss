@@ -71,8 +71,6 @@
   width: 100%;
   border: 1px solid #6d7684;
   display: flex;
-  flex-wrap: wrap;
-  text-wrap: wrap;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
@@ -200,6 +198,7 @@
   p{
     margin: 0;
     width: 100%;
+    word-break: break-all;
   }
 }
 
