@@ -89,6 +89,8 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 0.8rem;
+    padding-top: 0px;
+    padding-bottom: 0px;
 
     .leftContent {
       display: flex;
@@ -158,12 +160,14 @@
       }
 
       .showAnswersBtn {
-        width: 137px;
+        width: 160px;
         height: 40px;
         padding: 0px 16px 0px 16px;
         border: 1px solid #cc5757;
         border-radius: 8px;
         background: #fff0f0;
+        white-space: nowrap;
+        cursor: pointer;
         color: #662c2c;
       }
     }
