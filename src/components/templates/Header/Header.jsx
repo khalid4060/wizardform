@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MenuIcon from '../../../assets/icons/menu-icon.svg';
-import ResizerIcon from '../../../assets/icons/compress-alt-solid.svg';
+import MinimizeIcon from '../../../assets/icons/minimize-icon.svg';
+import MaximizeIcon from '../../../assets/icons/maximize-icon.svg';
 import styles from './Header.module.scss';
 
 const Header = ({ onAction,setOnAction }) => {
-  const handleclick=()=>{
-    var element = document.getElementById("root");
+  const [isScreenMax, setScreenSizeStatus] = useState(false);
+  const handleScreenSize=()=>{
+    const element = document.getElementById("root");
+    if (!isScreenMax) {
+      setScreenSizeStatus(true);
     if (element.requestFullscreen) {
       element.requestFullscreen();
     } else if (element.mozRequestFullScreen) { // For Firefox
@@ -14,6 +18,18 @@ const Header = ({ onAction,setOnAction }) => {
       element.webkitRequestFullscreen();
     } else if (element.msRequestFullscreen) { // For IE/Edge
       element.msRequestFullscreen();
+    }
+    } else {
+      setScreenSizeStatus(false);
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+      }
     }
   }
   return (
@@ -24,8 +40,8 @@ const Header = ({ onAction,setOnAction }) => {
       <div className={styles.surveyTitle}>
         Solar Energy
       </div>
-      <div onClick={handleclick}>
-        <img src={ResizerIcon} />
+      <div style={{ padding: '4px'}} onClick={() => handleScreenSize(isScreenMax)}>
+        <img width={'14px'} src={isScreenMax? MinimizeIcon : MaximizeIcon} />
       </div>
     </div>
   )
