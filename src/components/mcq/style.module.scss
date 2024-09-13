@@ -67,13 +67,10 @@
 }
 
 .cardBox {
-  height: 120px;
+  height: auto;
   width: 100%;
   border: 1px solid #6d7684;
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  text-wrap: wrap;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
@@ -97,6 +94,7 @@
   border-right: 1px solid #6d7684;
   display: flex;
   justify-content: center;
+  align-items: center;
 
   /* display: flex;
   align-items: center;
@@ -118,22 +116,21 @@
   &::before {
     content: '';
     display: inline-block;
-    width: 15px;
-    height: 15px;
+    min-width: 15px;
+    min-height: 15px;
     border-radius: 50%;
     border: 1px solid #485465;
-    position: absolute;
-    top: 55px;
-    left: 14px;
     background-color: transparent;
+    position: relative;
+    left: 0.875rem;
   }
 
   &.selected {
     &::before {
       border: 5px solid #047fff;
       background: #fff;
-      width: 8px;
-      height: 8px;
+      min-width: 8px;
+      min-height: 8px;
     }
   }
 }
@@ -187,14 +184,21 @@
 } */
 
 .optionLabel {
-  padding: 1.5rem 2rem 1.5rem 2rem;
-  width: 90%;
-  /* // font-family: 'English Signika'; */
+  padding: 0.625rem 1rem;
   font-size: 22px;
   font-weight: 300;
-  line-height: 27.1px;
   letter-spacing: var(--Sizes0);
   text-align: left;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  color: #485465;
+
+  p {
+    margin: 0;
+    width: 100%;
+    word-break: break-all;
+  }
 }
 
 /* Feedback message for correct answer */
@@ -250,12 +254,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-left: 2rem;
 }
 .correctSymbol {
   font-size: 20px;
   color: green;
   position: absolute;
-  top: 2.8rem;
+  top: 2.4rem;
   right: 1rem;
 }
 
@@ -263,7 +268,7 @@
   font-size: 20px;
   color: #ff6d6d;
   position: absolute;
-  top: 2.8rem;
+  top: 2.4rem;
   right: 1rem;
 }
 .imageDiv {

@@ -3,28 +3,28 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  padding: 2rem 3rem 12rem;
-  max-height: calc(100dvh - 150px);
+  padding: 0 3rem 5rem;
+  max-height: calc(100dvh - 210px);
   overflow-y: auto;
   scrollbar-width: none;
 
   .fib-content {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: space-between;
+    align-items: start;
     width: 100%;
 
     form {
-      flex: 1;
-      min-width: 60%;
-      max-width: 100%;
+      width: 100%;
+      margin-right: 2rem;
 
       h2 {
         font-size: 1.75rem;
         color: #485465;
         line-height: 40px;
         letter-spacing: var(--Sizes0);
+        margin-top: 0;
       }
 
       h3 {
@@ -34,25 +34,36 @@
       }
 
       .question {
-        font-size: 22px;
         font-weight: 300;
         color: #000000;
-        line-height: 30px;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         letter-spacing: var(--Sizes0);
+
+        label{
+          font-size: 24px;
+
+          @media(max-width:767px){
+            line-height: 32px;
+          }
+        }
 
         .input-container {
           position: relative;
           display: inline-block;
+          margin: .5rem 0;
 
           input {
-            border: 1px solid #ccc;
+            border: 1px solid #485465;
             border-radius: 4px;
             padding: 8px;
             padding-right: 30px;
             font-size: 14px;
             margin: 0 5px;
-            width: 10rem;
+            width: 100%;
+            max-width: 10rem;
+            height: 2.5rem;
+            outline: none;
+            background-color: #FAFBFF;
 
             &.correct {
               border: 1px solid green;
@@ -90,7 +101,6 @@
     overflow: scroll;
     margin: 0px;
     padding: 20px;
-    height: calc(100dvh - 320px);
 
     .fib-content {
       flex-direction: column;
@@ -101,12 +111,14 @@
   background-color: #e6f2ff;
   padding: 20px;
   border-radius: 15px;
-  min-width: 25%;
+  width: 100%;
+  max-width: 18.125rem;
 
   @media (max-width: 768px) {
-    width: 90%;
-    margin-top: 20px;
+    width: 100%;
+    margin-top: 0;
   }
+  
 
   .word-bank-title {
     display: flex;
@@ -114,6 +126,8 @@
     font-size: 20px;
     font-weight: 600;
     color: #023366;
+    margin: 0;
+    margin-bottom: .625rem;
   }
 
   h3 {
@@ -125,14 +139,28 @@
   ul {
     list-style: none;
     padding: 0;
+    margin: 0;
+
+    @media(max-width:767px){
+      display: grid;
+      grid-template-columns: repeat(2, 2fr);
+    }
 
     li {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 300;
-      line-height: 30px;
       letter-spacing: var(--Sizes0);
       color: #023366;
-      padding: 5px 0;
+      padding: 10px 0;
+
+      @media(max-width:767px){
+        font-size: 18px;
+        padding: 8px 0;
+      }
+
+      &:last-child{
+        padding-bottom: 0;
+      }
     }
   }
 }

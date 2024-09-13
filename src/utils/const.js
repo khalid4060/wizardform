@@ -37,7 +37,9 @@ export const dummyData = [
           {
             component_name: 'html',
             component_id: 'opt1_id',
-            file_name: ['<p>Paris</p>'],
+            file_name: [
+              '<p>Paris- Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s</p>',
+            ],
           },
         ],
       },
@@ -48,7 +50,9 @@ export const dummyData = [
           {
             component_name: 'html',
             component_id: 'opt2_id',
-            file_name: ['<p>London</p>'],
+            file_name: [
+              '<p>London -Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s</p>',
+            ],
           },
         ],
       },
@@ -59,7 +63,9 @@ export const dummyData = [
           {
             component_name: 'html',
             component_id: 'opt3_id',
-            file_name: ['<p>Berlin</p>'],
+            file_name: [
+              '<p>Berlin-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s</p>',
+            ],
           },
         ],
       },
@@ -70,7 +76,9 @@ export const dummyData = [
           {
             component_name: 'html',
             component_id: 'opt4_id',
-            file_name: ['<p>Madrid</p>'],
+            file_name: [
+              '<p>Madrid- Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s</p>',
+            ],
           },
         ],
       },

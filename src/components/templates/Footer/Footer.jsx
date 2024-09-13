@@ -101,31 +101,24 @@ const Footer = ({
           <div dangerouslySetInnerHTML={parseHtmlContent(seeWhyContent)} />
         )} */}
 
-      <button className={`${styles.btn} ${styles.btnSecondary}`}>
+      <button
+        onClick={
+          submitted && attempts < 3 && !isAnswerCorrect
+            ? () => handleSubmit('tryagain')
+            : isAnswerCorrect && submitted
+            ? () => handleSubmit('next')
+            : () => handleSubmit('submit')
+        }
+        disabled={!selectedOption}
+        className={`${styles.btn} ${styles.btnSecondary}`}
+      >
         <div className={styles.btnContent}>
-          {console.log('check', {
-            submitted,
-            attempts,
-            isAnswerCorrect,
-            isValid: submitted && attempts < 3 && !isAnswerCorrect,
-          })}
-          <button
-            onClick={
-              submitted && attempts < 3 && !isAnswerCorrect
-                ? () => handleSubmit('tryagain')
-                : isAnswerCorrect && submitted
-                ? () => handleSubmit('next')
-                : () => handleSubmit('submit')
-            }
-            disabled={!selectedOption}
-          >
-            {submitted && attempts < 3 && !isAnswerCorrect
-              ? 'Try Again'
-              : isAnswerCorrect && submitted
-              ? 'Next'
-              : 'Submit Answer'}{' '}
-            <img src={AngleRightIcon} />
-          </button>
+          {submitted && attempts < 3 && !isAnswerCorrect
+            ? 'Try Again'
+            : isAnswerCorrect && submitted
+            ? 'Next'
+            : 'Submit Answer'}{' '}
+          <img src={AngleRightIcon} />
         </div>
       </button>
     </div>
