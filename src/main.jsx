@@ -9,7 +9,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { Provider } from 'react-redux';
 import { store } from '@store';
-import MultipleChoiceQuestion from './components/questions/MultipleChoiceQuestion';
+import MultipleChoiceQuestion from './components/mcq/MultipleChoiceQuestion';
 import { dummyData } from './utils/const';
 import FillInTheBlanks from './components/fib/FillInTheBlanks';
 

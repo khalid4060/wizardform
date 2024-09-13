@@ -40,7 +40,7 @@ const Header = ({ onAction,setOnAction }) => {
       <div className={styles.surveyTitle}>
         Solar Energy
       </div>
-      <div style={{ padding: '4px'}} onClick={() => handleScreenSize(isScreenMax)}>
+      <div className={styles.zoomTrigger} onClick={() => handleScreenSize(isScreenMax)}>
         <img width={'14px'} src={isScreenMax? MinimizeIcon : MaximizeIcon} />
       </div>
     </div>

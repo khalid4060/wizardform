@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import style from './MultipleChoiceQuestion.module.scss'; // Add CSS styles here
+import style from './style.module.scss'; // Add CSS styles here
 import CustomImage from '../elements/CustomImage/CustomImage';
 import { createSelector } from 'reselect';
 import { useSelector, useDispatch } from 'react-redux';

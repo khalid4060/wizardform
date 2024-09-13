@@ -29,6 +29,10 @@
     font-family: var(--TypefaceLayout);
     font-size: 20px;
     font-weight: 400;
+
+    @media(max-width:767px){
+      font-size: 16px;
+    }
   }
 
   .btnSecondary {

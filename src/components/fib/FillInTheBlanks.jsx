@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import WordBank from './WordBank';
-import '../../styles/scss/components/fib/FillInTheBlanks.scss';
+import './FillInTheBlanks.scss';
 
 const FillInTheBlanks = ({ setFibData, templateData }) => {
   const { fib } = templateData;
