@@ -8,7 +8,7 @@ import axios from 'axios';
 import { saveTranslation } from '@store/actions/translation';
 import { fetchJSONData } from '@utils/templateLoader';
 import '@assets/js/global-jquery.js';
-import MultipleChoiceQuestion from './components/questions/MultipleChoiceQuestion';
+import MultipleChoiceQuestion from './components/mcq/MultipleChoiceQuestion';
 import { dummyData } from './utils/const';
 const selectTemplateData = createSelector(
   (state) => state.templateData,

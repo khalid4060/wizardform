@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import WordBank from './WordBank';
-import '../../styles/scss/components/fib/FillInTheBlanks.scss';
+import './FillInTheBlanks.scss';
 
 const FillInTheBlanks = ({ setFibData, templateData }) => {
   const { fib } = templateData;
@@ -89,8 +89,7 @@ const FillInTheBlanks = ({ setFibData, templateData }) => {
                       className={
                         dataSets[0].feedback[questionIndex] === true
                           ? 'correct'
-                          : dataSets[0].feedback[questionIndex] ===
-                            false
+                          : dataSets[0].feedback[questionIndex] === false
                           ? 'incorrect'
                           : ''
                       }
@@ -100,8 +99,7 @@ const FillInTheBlanks = ({ setFibData, templateData }) => {
                         &#10004;
                       </span>
                     )}
-                    {dataSets[0].feedback[questionIndex] ===
-                      false && (
+                    {dataSets[0].feedback[questionIndex] === false && (
                       <span className="feedback-symbol incorrect-symbol">
                         &#10060;
                       </span>

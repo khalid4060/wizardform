@@ -3,7 +3,7 @@ import SoundIcon from '../../../assets/icons/volume-up.svg';
 import LightBulbIcon from '../../../assets/icons/lightbulb.svg';
 import DownloadIcon from '../../../assets/icons/download.svg';
 import ReadPassageIcon from '../../../assets/icons/read-passage.svg';
-import styles from './WizardProgressBar.module.scss';
+import styles from './style.module.scss';
 
 const WizardProgressBar = ({ formData, currentSlide }) => {
   return (
