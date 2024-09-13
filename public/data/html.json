@@ -48,6 +48,30 @@
         "component_id": "id",
         "filename": ["audio"]
       }
+    },
+    "thinking_organizer_options_lable": {
+      "data": "Solar Energy Thinking Organizer",
+      "audio": {
+        "component_name": "audio",
+        "component_id": "id",
+        "filename": ["audio"]
+      }
+    },
+    "thinking_organizer_items": {
+      "data": "Drag the examples to each step. <br> Steps in converting sunlight. <br> How solar applications might grow.",
+      "audio": {
+        "component_name": "audio",
+        "component_id": "id",
+        "filename": ["audio"]
+      }
+    },
+    "thinking_organizer_options": {
+      "data": "Sunlight hits cells. <br> Solar in vehicles. <br> Generates DC power. <br> Solar in smart cities.",
+      "audio": {
+        "component_name": "audio",
+        "component_id": "id",
+        "filename": ["audio"]
+      }
     }
   }
 }

@@ -60,7 +60,8 @@ export async function fetchJSONData() {
     'page',
     'image',
     'fib',
-    'html'
+    'html',
+    'thinking_organizer'
     // rest of the json files
   ];
 

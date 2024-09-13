@@ -9,6 +9,7 @@ import MultipleChoiceQuestion from '../../mcq/MultipleChoiceQuestion';
 import { dummyData } from '../../../utils/const';
 import { fetchJSONData } from '../../../utils/templateLoader';
 import FillInTheBlanks from '../../fib/FillInTheBlanks';
+import ThinkingOrganizer from '../../thinking-organizer/ThinkingOrganizer';
 
 const selectTemplateData = createSelector(
   (state) => state.templateData,
@@ -59,6 +60,7 @@ const Questions = () => {
   const [attempts, setAttempts] = useState(0);
   const [onAction, setOnAction] = useState(false);
   const [fibData, setFibData] = useState([]);
+  const [thinkingOrganizerTitle, setThinkingOrganizerTitle] = useState('');
 
   const [isAnswerCorrect, setisAnswerCorrect] = useState();
   const correctOption = options.find((opt) => opt.is_correct);
@@ -252,6 +254,13 @@ const Questions = () => {
             templateData={templateData}
           />
         ));
+      case 'thinking-organizer':
+        return (component = (
+          <ThinkingOrganizer
+            setThinkingOrganizerTitle={setThinkingOrganizerTitle}
+            templateData={templateData}
+          />
+        ));
     }
     return component;
   };
@@ -316,8 +325,13 @@ const Questions = () => {
             <WizardProgressBar
               formData={formData}
               currentSlide={currentSlide}
+              thinkingOrganizerTitle={thinkingOrganizerTitle}
             />
-            <form data-multi-step class="multi-step-form">
+            <form
+              data-multi-step
+              class="multi-step-form"
+             
+            >
               {renderWizards()}
             </form>
           </div>

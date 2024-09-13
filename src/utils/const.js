@@ -1,6 +1,6 @@
 export const dummyData = [
   {
-    id: 's1',
+    id: 's3',
     type: 'mcq',
     visited: false,
     submitted: false,
@@ -202,8 +202,8 @@ export const dummyData = [
     },
   },
   {
-    id: 's3',
-    type: 'mcq',
+    id: 's1',
+    type: 'thinking-organizer',
     visited: false,
     submitted: false,
     statement: {
