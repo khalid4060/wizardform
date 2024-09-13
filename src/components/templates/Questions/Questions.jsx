@@ -259,8 +259,10 @@ const Questions = () => {
       case 'thinking-organizer':
         return (component = (
           <ThinkingOrganizer
-            setThinkingOrganizerTitle={setThinkingOrganizerTitle}/>
-        ))
+            setThinkingOrganizerTitle={setThinkingOrganizerTitle}
+            templateData={templateData}
+          />
+        ));
       case 'dropdown':
         return (component = (
           <DropDownWidget
@@ -334,7 +336,11 @@ const Questions = () => {
               currentSlide={currentSlide}
               thinkingOrganizerTitle={thinkingOrganizerTitle}
             />
-            <form data-multi-step class="multi-step-form" className={styles.wizardContainer}>
+            <form
+              data-multi-step
+              class="multi-step-form"
+              className={styles.wizardContainer}
+            >
               {renderWizards()}
             </form>
           </div>
