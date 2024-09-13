@@ -221,9 +221,7 @@ const Questions = () => {
     }
 
     if (currentSlide.type === 'fib') {
-      return (
-        <div dangerouslySetInnerHTML={parseHtmlContent(feedbackMessage)} />
-      );
+      return feedbackMessage;
     }
   };
 
@@ -332,6 +330,7 @@ const Questions = () => {
             selectedOption={currentSlide.type === 'fib' ? true : selectedOption}
             isAnswerCorrect={isAnswerCorrect}
             attempts={attempts}
+            slideType={currentSlide.type === 'fib'}
           />
         </div>
       </div>

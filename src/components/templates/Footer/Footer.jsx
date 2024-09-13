@@ -17,6 +17,7 @@ const Footer = ({
   isAnswerCorrect,
   attempts,
   handleTryAgain,
+  slideType,
 }) => {
   const parseHtmlContent = (htmlString) => {
     return { __html: htmlString };
@@ -37,7 +38,11 @@ const Footer = ({
 
       {/* CORRECT-ANSWER-MESSAGE */}
       {submitted && isAnswerCorrect && (
-        <div className={`${styles.success} ${styles.messageContainer}`}>
+        <div
+          className={`${styles.success} ${styles.messageContainer} ${
+            slideType ? styles.fibstyle : ''
+          }`}
+        >
           <div className={styles.leftContent}>
             <div className={styles.audioBtn}>
               <img width={'17px'} height={'14px'} src={SoundIcon} />
@@ -63,7 +68,11 @@ const Footer = ({
 
       {/* WRONG-ANSWER-MESSAGE */}
       {submitted && !isAnswerCorrect && (
-        <div className={`${styles.error} ${styles.messageContainer}`}>
+        <div
+          className={`${styles.error} ${styles.messageContainer} ${
+            slideType ? styles.fibstyle : ''
+          }`}
+        >
           <div className={styles.leftContent}>
             <div className={styles.audioBtn}>
               <img width={'17px'} height={'14px'} src={SoundIcon} />
@@ -94,7 +103,12 @@ const Footer = ({
 
       <button className={`${styles.btn} ${styles.btnSecondary}`}>
         <div className={styles.btnContent}>
-          {console.log('check', {submitted, attempts, isAnswerCorrect, isValid: submitted && attempts < 3 && !isAnswerCorrect})}
+          {console.log('check', {
+            submitted,
+            attempts,
+            isAnswerCorrect,
+            isValid: submitted && attempts < 3 && !isAnswerCorrect,
+          })}
           <button
             onClick={
               submitted && attempts < 3 && !isAnswerCorrect

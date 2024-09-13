@@ -80,7 +80,7 @@
 
   .messageContainer {
     width: 70%;
-    padding: 10px;
+    padding: 0px 10px;
     // background-color: #E8F5E8;
     // background-color: #FFE2E2;
     border-radius: 5px;
@@ -89,8 +89,6 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 0.8rem;
-    padding-top: 0px;
-    padding-bottom: 0px;
 
     .leftContent {
       display: flex;
@@ -171,5 +169,8 @@
         color: #662c2c;
       }
     }
+  }
+  .fibstyle {
+    padding: 10px;
   }
 }
