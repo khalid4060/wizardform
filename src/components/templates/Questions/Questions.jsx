@@ -9,6 +9,7 @@ import MultipleChoiceQuestion from '../../questions/MultipleChoiceQuestion';
 import { dummyData } from '../../../utils/const';
 import { fetchJSONData } from '../../../utils/templateLoader';
 import FillInTheBlanks from '../../fib/FillInTheBlanks';
+import DropDownWidget from '../../widgets/DropDown/DropDownWidget';
 
 const selectTemplateData = createSelector(
   (state) => state.templateData,
@@ -59,6 +60,7 @@ const Questions = () => {
   const [attempts, setAttempts] = useState(0);
   const [onAction, setOnAction] = useState(false);
   const [fibData, setFibData] = useState([]);
+  const [dropDownData, setDropDownData] = useState([]);
 
   const [isAnswerCorrect, setisAnswerCorrect] = useState();
   const correctOption = options.find((opt) => opt.is_correct);
@@ -249,6 +251,13 @@ const Questions = () => {
         return (component = (
           <FillInTheBlanks
             setFibData={setFibData}
+            templateData={templateData}
+          />
+        ));
+      case 'dropdown':
+        return (component = (
+          <DropDownWidget
+            setDropDownData={setDropDownData}
             templateData={templateData}
           />
         ));

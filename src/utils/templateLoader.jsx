@@ -60,6 +60,7 @@ export async function fetchJSONData() {
     'page',
     'image',
     'fib',
+    'dropdown',
     'html'
     // rest of the json files
   ];

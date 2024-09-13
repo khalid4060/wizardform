@@ -33,6 +33,34 @@
         "filename": ["audio"]
       }
     },
+    "dropdown_statement": {
+      "data": "Fill in the blanks with the correct key aspects of Solar Energy.",
+      "audio": {
+        "component_name": "audio",
+        "component_id": "id",
+        "filename": ["audio"]
+      }
+    },
+    "dropdown_questions": {
+      "data": "The _____ process converts sunlight to DC, then to AC for various uses. <br> Solar energy helps lower maintenance _____ costs. <br> Solar energy powers _____, businesses, and satellites efficiently. <br> Solar energy reduces emissions and pollution, combating _____.",
+      "audio": {
+        "component_name": "audio",
+        "component_id": "id",
+        "filename": ["audio"]
+      }
+    },
+    "stm1_dropdownOption_1": {
+      "data": "Effecient"
+    },
+    "stm1_dropdownOption_2": {
+      "data": "sky"
+    },
+    "stm2_dropdownOption_1": {
+      "data": "Effecient"
+    },
+    "stm2_dropdownOption_2": {
+      "data": "sky"
+    },
     "correctFeedback": {
       "data": "Well done, it’s a correct answer.",
       "audio": {
