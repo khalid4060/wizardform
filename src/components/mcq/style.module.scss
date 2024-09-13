@@ -67,11 +67,10 @@
 }
 
 .cardBox {
-  height: 120px;
+  height: auto;
   width: 100%;
   border: 1px solid #6d7684;
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
   text-wrap: wrap;
   border-radius: 5px;
@@ -97,6 +96,7 @@
   border-right: 1px solid #6d7684;
   display: flex;
   justify-content: center;
+  align-items: center;
 
   /* display: flex;
   align-items: center;
@@ -110,6 +110,7 @@
 }
 
 .option {
+
   input[type='radio'] {
     margin-right: 10px;
     opacity: 0;
@@ -118,22 +119,21 @@
   &::before {
     content: '';
     display: inline-block;
-    width: 15px;
-    height: 15px;
+    min-width: 15px;
+    min-height: 15px;
     border-radius: 50%;
     border: 1px solid #485465;
-    position: absolute;
-    top: 55px;
-    left: 14px;
     background-color: transparent;
+    position: relative;
+    left: .875rem;
   }
 
   &.selected {
     &::before {
       border: 5px solid #047fff;
       background: #fff;
-      width: 8px;
-      height: 8px;
+      min-width: 8px;
+      min-height: 8px;
     }
   }
 }
@@ -187,14 +187,20 @@
 } */
 
 .optionLabel {
-  padding: 1.5rem 2rem 1.5rem 2rem;
-  width: 90%;
-  /* // font-family: 'English Signika'; */
+  padding: .625rem 1rem;
   font-size: 22px;
   font-weight: 300;
-  line-height: 27.1px;
   letter-spacing: var(--Sizes0);
   text-align: left;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  color: #485465;
+
+  p{
+    margin: 0;
+    width: 100%;
+  }
 }
 
 /* Feedback message for correct answer */

@@ -41,11 +41,16 @@
 
         label{
           font-size: 24px;
+
+          @media(max-width:767px){
+            line-height: 32px;
+          }
         }
 
         .input-container {
           position: relative;
           display: inline-block;
+          margin: .5rem 0;
 
           input {
             border: 1px solid #485465;
@@ -110,8 +115,8 @@
   max-width: 18.125rem;
 
   @media (max-width: 768px) {
-    width: 90%;
-    margin-top: 20px;
+    width: 100%;
+    margin-top: 0;
   }
   
 
@@ -136,12 +141,22 @@
     padding: 0;
     margin: 0;
 
+    @media(max-width:767px){
+      display: grid;
+      grid-template-columns: repeat(2, 2fr);
+    }
+
     li {
       font-size: 22px;
       font-weight: 300;
       letter-spacing: var(--Sizes0);
       color: #023366;
       padding: 10px 0;
+
+      @media(max-width:767px){
+        font-size: 18px;
+        padding: 8px 0;
+      }
 
       &:last-child{
         padding-bottom: 0;
