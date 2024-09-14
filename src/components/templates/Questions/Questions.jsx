@@ -110,7 +110,7 @@ const Questions = () => {
       questions.forEach(({ selectField }, index) => {
         const isAnswerMatched = inputs[index] === selectField.answer_id;
         isVerified = isVerified && isAnswerMatched;
-        newFeedback.push(isAnswerMatched);
+        newFeedback[index] = isAnswerMatched;
       });
       currentDataSet.feedback = newFeedback;
       setisAnswerCorrect(isVerified);
