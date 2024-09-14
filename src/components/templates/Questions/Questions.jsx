@@ -144,6 +144,46 @@ const Questions = () => {
     }
   };
 
+  const resetDropdownForm = () => {
+    const updatedDataSets = [...dropDownData];
+    const dataSet = updatedDataSets[0];
+
+    dataSet.inputs = Array(dataSet.questions.length).fill('');
+    dataSet.feedback = Array(dataSet.questions.length).fill(null);
+    dataSet.isSubmitted = false;
+
+    setDropDownData(updatedDataSets);
+    setFeedbackMessage('');
+  };
+
+  const handleDropDownSubmit = () => {
+    const updatedDataSets = [...dropDownData];
+    const currentDataSet = updatedDataSets[0];
+    if (currentDataSet.isSubmitted && currentDataSet.feedback.includes(false)) {
+      setSubmitted(false);
+      resetDropdownForm();
+    } else {
+      const { feedback, inputs, questions } = currentDataSet;
+      const newFeedback = [ ...feedback ];
+      let isVerified = true;
+      questions.forEach(({ selectField }, index) => {
+        const isAnswerMatched = inputs[index] === selectField.answer_id;
+        isVerified = isVerified && isAnswerMatched;
+        newFeedback.push(isAnswerMatched);
+      });
+      currentDataSet.feedback = newFeedback;
+      setisAnswerCorrect(isVerified);
+      setFeedbackMessage(
+        isVerified
+          ? currentDataSet.feedbackContent.correct
+          : currentDataSet.feedbackContent.incorrect
+      );
+      currentDataSet.isSubmitted = true;
+      setSubmitted(true);
+      setDropDownData(updatedDataSets);
+    }
+  };
+
   const handleSubmit = (actionType) => {
     if (actionType === 'next') {
       const nextIndex = currentSlide.index + 1;
@@ -179,6 +219,10 @@ const Questions = () => {
       if (currentSlide.type === 'fib') {
         handleFIBSubmit();
       }
+
+      if (currentSlide.type === 'dropdown') {
+        handleDropDownSubmit();
+      }
     }
     if (actionType === 'tryagain') {
       if (currentSlide.type === 'mcq') {
@@ -188,6 +232,10 @@ const Questions = () => {
       if (currentSlide.type === 'fib') {
         setSubmitted(false);
         resetFibForm();
+      }
+      if (currentSlide.type === 'dropdown') {
+        setSubmitted(false);
+        resetDropdownForm();
       }
     }
     if (actionType === 'back') {
@@ -336,7 +384,7 @@ const Questions = () => {
             feedback={feedback}
             renderFeedback={renderFeedback}
             seeWhyContent={seeWhyContent}
-            selectedOption={currentSlide.type === 'fib' ? true : selectedOption}
+            selectedOption={currentSlide.type === 'fib' || currentSlide.type === 'dropdown' ? true : selectedOption}
             isAnswerCorrect={isAnswerCorrect}
             attempts={attempts}
             slideType={currentSlide.type === 'fib'}

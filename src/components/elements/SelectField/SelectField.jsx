@@ -2,8 +2,8 @@ import React from 'react';
 import Select from 'react-select';
 import { dropdownContainer } from './SelectField.module.scss';
 
-function Dropdown() {
-  const options = [
+function SelectField({ field, options }) {
+  const options2 = [
     { value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true },
     { value: 'blue', label: 'Blue', color: '#0052CC', isDisabled: true },
     { value: 'purple', label: 'Purple', color: '#5243AA' },
@@ -19,16 +19,18 @@ function Dropdown() {
     <Select
     className="basic-single"
     classNamePrefix="select"
-    defaultValue={options[0]}
+    // defaultValue={options[0]}
     isDisabled={false}
     isLoading={false}
-    isClearable={true}
+    isClearable={false}
     isRtl={false}
     isSearchable={true}
     name="color"
     options={options}
+    value={options?.find((c) => c.value === field.value) ?? ''}
+    onChange={(val) => field.onChange(val?.value)}
     /> 
   );
 }
 
-export default Dropdown;
+export default SelectField;
