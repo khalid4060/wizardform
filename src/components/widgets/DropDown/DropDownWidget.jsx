@@ -89,7 +89,7 @@ function DropDownWidget({ setDropDownData, templateData }) {
     const updatedDataSets = [...dataSets];
     updatedDataSets[0].inputs[questionIndex] = value;
     setDataSets(updatedDataSets);
-    setFibData(updatedDataSets);
+    setDropDownData(updatedDataSets);
   };
 
   return (

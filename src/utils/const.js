@@ -209,6 +209,7 @@ export const dummyData = [
       },
     },
   },
+
   {
     id: 's2',
     type: 'fib',
@@ -308,7 +309,7 @@ export const dummyData = [
   },
   {
     id: 's3',
-    type: 'mcq',
+    type: 'thinking-organizer',
     visited: false,
     submitted: false,
     statement: {

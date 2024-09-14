@@ -1,0 +1,33 @@
+{
+  "thinking_organizer": {
+    "alphanumericalid": {
+      "allow_download": true,
+      "allow_add_card": true,
+      "options_label": {
+        "component_name": "html",
+        "component_id": "thinking_organizer_options_lable",
+        "filename": ["html"]
+      },
+      "items": [
+        {
+          "id": 0,
+          "title": {
+            "component_name": "html",
+            "component_id": "thinking_organizer_items",
+            "filename": ["html"]
+          }
+        }
+      ],
+      "options": [
+        {
+          "id": 0,
+          "content": {
+            "component_name": "html",
+            "component_id": "thinking_organizer_options",
+            "filename": ["html"]
+          }
+        }
+      ]
+    }
+  }
+}

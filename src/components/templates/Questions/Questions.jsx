@@ -9,6 +9,7 @@ import MultipleChoiceQuestion from '../../mcq/MultipleChoiceQuestion';
 import { dummyData } from '../../../utils/const';
 import { fetchJSONData } from '../../../utils/templateLoader';
 import FillInTheBlanks from '../../fib/FillInTheBlanks';
+import ThinkingOrganizer from '../../thinking-organizer/ThinkingOrganizer';
 import DropDownWidget from '../../widgets/DropDown/DropDownWidget';
 
 const selectTemplateData = createSelector(
@@ -32,6 +33,7 @@ const Questions = () => {
   const [onAction, setOnAction] = useState(false);
   const [fibData, setFibData] = useState([]);
   const [mcqData, setMcqData] = useState([]);
+  const [thinkingOrganizerTitle, setThinkingOrganizerTitle] = useState('');
   const [dropDownData, setDropDownData] = useState([]);
 
   const [isAnswerCorrect, setisAnswerCorrect] = useState();
@@ -223,6 +225,13 @@ const Questions = () => {
             templateData={templateData}
           />
         ));
+      case 'thinking-organizer':
+        return (component = (
+          <ThinkingOrganizer
+            setThinkingOrganizerTitle={setThinkingOrganizerTitle}
+            templateData={templateData}
+          />
+        ));
       case 'dropdown':
         return (component = (
           <DropDownWidget
@@ -294,6 +303,7 @@ const Questions = () => {
             <WizardProgressBar
               formData={formData}
               currentSlide={currentSlide}
+              thinkingOrganizerTitle={thinkingOrganizerTitle}
             />
             <form
               data-multi-step

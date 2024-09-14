@@ -5,7 +5,11 @@ import DownloadIcon from '../../../assets/icons/download.svg';
 import ReadPassageIcon from '../../../assets/icons/read-passage.svg';
 import styles from './style.module.scss';
 
-const WizardProgressBar = ({ formData, currentSlide }) => {
+const WizardProgressBar = ({
+  formData,
+  currentSlide,
+  thinkingOrganizerTitle,
+}) => {
   return (
     <div>
       <div className={styles.wizardContainer}>
@@ -69,7 +73,9 @@ const WizardProgressBar = ({ formData, currentSlide }) => {
         </div>
         <div className={styles.screenHeadingContainer}>
           <div className={styles.screenTitle}>
-            Screen {currentSlide.index + 1}
+            {currentSlide.type === 'thinking-organizer'
+              ? thinkingOrganizerTitle
+              : `Screen ${currentSlide.index + 1}`}
           </div>
           {/* <div className={styles.screenSubtitle}>MCQ</div> */}
         </div>
