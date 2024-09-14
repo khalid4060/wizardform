@@ -3,7 +3,7 @@
     "type": "mcq",
     "mcqType": "text",
     "multiple_answer": false,
-    "submit_limit": 2,
+    "submit_limit": 3,
     "columns": 2,
     "shuffled": true,
     "allow_tryagain": true,
@@ -75,7 +75,8 @@
             "file_name": ["html"]
           }
         ]
-      },{
+      },
+      {
         "option_id": 4,
         "is_correct": false,
         "content": [

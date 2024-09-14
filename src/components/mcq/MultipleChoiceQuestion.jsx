@@ -39,7 +39,14 @@ const MultipleChoiceQuestion = ({
     const initializeDataSets = () => {
       try {
         if (!mcq) return;
-        const { statement, stem_image, see_why, feedback, options } = mcq;
+        const {
+          statement,
+          stem_image,
+          see_why,
+          feedback,
+          options,
+          submit_limit,
+        } = mcq;
         const extractData = (fileKey, componentId) =>
           templateData[fileKey]?.[componentId]?.data || '';
         const questions = extractData(
@@ -62,6 +69,7 @@ const MultipleChoiceQuestion = ({
             })
           ),
           selectedOption: '',
+          submit_limit: submit_limit,
           feedbackContent: {
             correct: extractData(
               feedback.correct.content[0].file_name[0],
