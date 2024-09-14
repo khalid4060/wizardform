@@ -42,24 +42,48 @@
       }
     },
     "dropdown_questions": {
-      "data": "The _____ process converts sunlight to DC, then to AC for various uses. <br> Solar energy helps lower maintenance _____ costs. <br> Solar energy powers _____, businesses, and satellites efficiently. <br> Solar energy reduces emissions and pollution, combating _____.",
+      "data": "The _____ process converts sunlight to DC, then to AC for various uses. <br> Solar energy helps lower maintenance _____ costs. <br> Solar energy powers _____, businesses, and satellites efficiently.",
       "audio": {
         "component_name": "audio",
         "component_id": "id",
         "filename": ["audio"]
       }
     },
-    "stm1_dropdownOption_1": {
-      "data": "Effecient"
+    "stm_0_opt_0": {
+      "data": "Conversion"
     },
-    "stm1_dropdownOption_2": {
-      "data": "sky"
+    "stm_0_opt_1": {
+      "data": "Efficiency"
     },
-    "stm2_dropdownOption_1": {
-      "data": "Effecient"
+    "stm_0_opt_2": {
+      "data": "Homes"
     },
-    "stm2_dropdownOption_2": {
-      "data": "sky"
+    "stm_0_opt_3": {
+      "data": "Impact"
+    },
+    "stm_1_opt_0": {
+      "data": "Conversion"
+    },
+    "stm_1_opt_1": {
+      "data": "Efficiency"
+    },
+    "stm_1_opt_2": {
+      "data": "Homes"
+    },
+    "stm_1_opt_3": {
+      "data": "Impact"
+    },
+    "stm_2_opt_0": {
+      "data": "Conversion"
+    },
+    "stm_2_opt_1": {
+      "data": "Efficiency"
+    },
+    "stm_2_opt_2": {
+      "data": "Homes"
+    },
+    "stm_2_opt_3": {
+      "data": "Impact"
     },
     "correctFeedback": {
       "data": "Well done, it’s a correct answer.",

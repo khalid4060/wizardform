@@ -88,7 +88,6 @@ const Footer = ({
       {/* {submitted && (
           <div dangerouslySetInnerHTML={parseHtmlContent(seeWhyContent)} />
         )} */}
-
       <button
         onClick={
           submitted && attempts < 3 && !isAnswerCorrect

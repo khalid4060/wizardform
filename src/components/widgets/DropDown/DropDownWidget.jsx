@@ -6,21 +6,19 @@ import {
   secondContainer,
   imageBox,
   iconBox,
-  selectList
+  selectList,
 } from './DropDownWidget.module.scss';
 import SelectField from '../../elements/SelectField/SelectField';
 import SearchIcon from '../../../assets/icons/search-icon.svg';
 
 function DropDownWidget({ setDropDownData, templateData }) {
   const { dropdown } = templateData;
-  console.log('DropDownWidget', templateData)
   const [dataSets, setDataSets] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const initializeDataSets = () => {
       try {
-        console.log('outsidetry', templateData)
         if (!dropdown?.alphanumericalid) return;
 
         const { statement, sentence, feedback, items, wordbank_distractor } =
@@ -35,6 +33,22 @@ function DropDownWidget({ setDropDownData, templateData }) {
         )
           ?.split('<br>')
           .map((q) => q.trim());
+
+        const questionsState = questions.map((question, index) => {
+          return {
+            question,
+            selectField: {
+              ...items[index],
+              options: items[index].options.map((optionObj) => ({
+                ...optionObj,
+                content: extractData(
+                  optionObj.content.filename[0],
+                  optionObj.content.component_id
+                ),
+              })),
+            },
+          };
+        });
 
         const feedbackContent = {
           correct: extractData(
@@ -54,15 +68,14 @@ function DropDownWidget({ setDropDownData, templateData }) {
         const initialData = {
           title: extractData(statement.filename[0], statement.component_id),
           wordBankWords: wordbank_distractor,
-          questions,
-          correctAnswers: items.map((item) => item.answer),
-          // inputs: Array(items.length).fill(''),
+          questions: questionsState,
+          // correctAnswers: items.map((item) => item.answer_id),
+          inputs: Array(items.length).fill(''),
           feedback: Array(items.length).fill(null),
           feedbackContent,
         };
-        console.log('initialData', initialData)
         setDataSets([initialData]);
-        setFibData([initialData]);
+        setDropDownData([initialData]);
         setError(null);
       } catch (err) {
         console.error(err.message);
@@ -72,40 +85,49 @@ function DropDownWidget({ setDropDownData, templateData }) {
     initializeDataSets();
   }, [dropdown]);
 
-  // const handleInputChange = (questionIndex, value) => {
-  //   const updatedDataSets = [...dataSets];
-  //   updatedDataSets[0].inputs[questionIndex] = value;
-  //   setDataSets(updatedDataSets);
-  //   setFibData(updatedDataSets);
-  // };
+  const handleInputChange = (questionIndex, value) => {
+    const updatedDataSets = [...dataSets];
+    updatedDataSets[0].inputs[questionIndex] = value;
+    setDataSets(updatedDataSets);
+    setFibData(updatedDataSets);
+  };
 
   return (
-    <div className={mainContainer}>
-      <h2>Complete each Solar Energy sentence with the correct term.</h2>
-      <div className={contentContainer}>
-        <div className={firstContainer}>
-          <span>Select the correct option.</span>
-
-          <ul className={selectList}>
-            <li>
-              The<SelectField />
-              span process converts sunlight to DC, then to AC for various uses.
-            </li>
-            <li>
-              The<SelectField />
-              span process converts sunlight to DC, then to AC for various uses.
-            </li>
-          </ul>
+    <div className="fill-in-the-blanks">
+      {error && <p className="error">{error}</p>}
+      {dataSets.length > 0 && (
+        <div className="fib-content">
+          <form className="fib-form">
+            <h2>{dataSets[0].title}</h2>
+            <h3>Type the correct option.</h3>
+            {dataSets[0].questions.map(
+              ({ question, selectField, inputs }, questionIndex) => (
+                <div className="question" key={questionIndex}>
+                  <label>
+                    {question.split('_____')[0]}
+                    <div className="input-container">
+                      <SelectField
+                        field={{
+                          value: dataSets[0].inputs[questionIndex],
+                          onChange: (value) =>
+                            handleInputChange(questionIndex, value),
+                        }}
+                        options={selectField.options.map((option) => ({
+                          ...option,
+                          value: option.id,
+                          label: option.content,
+                        }))}
+                      />
+                    </div>
+                    {question.split('_____')[1]}
+                  </label>
+                </div>
+              )
+            )}
+          </form>
+          {/* <WordBank wordBankWords={dataSets[0]?.wordBankWords} /> */}
         </div>
-        <div className={secondContainer}>
-          <div className={imageBox}>
-            <span>Image here 4:3 440 x 330 px</span>
-            <div className={iconBox}>
-              <img width={'32px'} height={'32px'} src={SearchIcon} />
-            </div>
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

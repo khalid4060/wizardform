@@ -123,7 +123,7 @@ const MultipleChoiceQuestion = ({
           <label
             for={`option-${opt.option_id}`}
             className={`${style.cardBox} ${
-              finalData.selectedOption === opt.option_id ? style.selected : ''
+              mcqData.selectedOption === opt.option_id ? style.selected : ''
             } ${
               submitted &&
               finalData.selectedOption === opt.option_id &&
@@ -141,7 +141,7 @@ const MultipleChoiceQuestion = ({
             <div
               key={opt.option_id}
               className={`${style.option} ${
-                finalData.selectedOption === opt.option_id ? style.selected : ''
+                mcqData.selectedOption === opt.option_id ? style.selected : ''
               } ${
                 submitted &&
                 finalData.selectedOption === opt.option_id &&

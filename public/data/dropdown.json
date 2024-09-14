@@ -37,7 +37,121 @@
               "id": 0,
               "content": {
                 "component_name": "html",
-                "component_id": "dropdownOptions",
+                "component_id": "stm_0_opt_0",
+                "filename": ["html"]
+              }
+            },
+            {
+              "id": 1,
+              "content": {
+                "component_name": "html",
+                "component_id": "stm_0_opt_1",
+                "filename": ["html"]
+              }
+            },
+            {
+              "id": 2,
+              "content": {
+                "component_name": "html",
+                "component_id": "stm_0_opt_2",
+                "filename": ["html"]
+              }
+            },
+            {
+              "id": 3,
+              "content": {
+                "component_name": "html",
+                "component_id": "stm_0_opt_3",
+                "filename": ["html"]
+              }
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "title": "title",
+          "subtitle": "subtitle",
+          "image": {
+            "component_name": "image",
+            "component_id": "Ov8mnRj2M",
+            "filename": ["image"]
+          },
+          "answer_id": 1,
+          "options": [
+            {
+              "id": 0,
+              "content": {
+                "component_name": "html",
+                "component_id": "stm_1_opt_0",
+                "filename": ["html"]
+              }
+            },
+            {
+              "id": 1,
+              "content": {
+                "component_name": "html",
+                "component_id": "stm_1_opt_1",
+                "filename": ["html"]
+              }
+            },
+            {
+              "id": 2,
+              "content": {
+                "component_name": "html",
+                "component_id": "stm_1_opt_2",
+                "filename": ["html"]
+              }
+            },
+            {
+              "id": 3,
+              "content": {
+                "component_name": "html",
+                "component_id": "stm_1_opt_3",
+                "filename": ["html"]
+              }
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "title",
+          "subtitle": "subtitle",
+          "image": {
+            "component_name": "image",
+            "component_id": "Ov8mnRj2M",
+            "filename": ["image"]
+          },
+          "answer_id": 2,
+          "options": [
+            {
+              "id": 0,
+              "content": {
+                "component_name": "html",
+                "component_id": "stm_2_opt_0",
+                "filename": ["html"]
+              }
+            },
+            {
+              "id": 1,
+              "content": {
+                "component_name": "html",
+                "component_id": "stm_2_opt_1",
+                "filename": ["html"]
+              }
+            },
+            {
+              "id": 2,
+              "content": {
+                "component_name": "html",
+                "component_id": "stm_2_opt_2",
+                "filename": ["html"]
+              }
+            },
+            {
+              "id": 3,
+              "content": {
+                "component_name": "html",
+                "component_id": "stm_2_opt_3",
                 "filename": ["html"]
               }
             }
