@@ -135,8 +135,6 @@ function DropDownWidget({ setDropDownData, templateData }) {
             </div>
           </div>
           </div>
-         
-          {/* <WordBank wordBankWords={dataSets[0]?.wordBankWords} /> */}
         </div>
       )}
     </div>
