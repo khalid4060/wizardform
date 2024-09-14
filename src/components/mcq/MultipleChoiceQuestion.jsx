@@ -6,73 +6,101 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchJSONData } from '@utils/templateLoader';
 
 // Utility function to parse HTML content
-const parseHtmlContent = (htmlString) => {
-  return { __html: htmlString };
+const shuffleArray = (array) => {
+  let currentIndex = array.length,
+    randomIndex;
+
+  // While there remain elements to shuffle...
+  while (currentIndex !== 0) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
 };
 
-const selectTemplateData = createSelector(
-  (state) => state.templateData,
-  (templateData) => templateData
-);
-fetchJSONData();
 const MultipleChoiceQuestion = ({
   submitted,
-  statementContent,
-  selectedOption,
-  options,
-  handleOptionChange,
-  stem_image,
+  setMcqData,
+  templateData,
+  mcqData,
 }) => {
-  const data = useSelector(selectTemplateData);
-
-  const [statement, setStatement] = useState();
-  const [ste_image_url, setStem_image_url] = useState();
-  const [option, setOption] = useState();
   const [finalData, setfinalData] = useState([]);
-
+  const { mcq } = templateData;
   useEffect(() => {
-    if (Object.keys(data).length > 1) {
-      console.log(data, 'data');
-      const {
-        mcq: {
-          statement: {
-            content: [
-              {
-                component_name,
-                component_id,
-                file_name: [stm_filename],
-              },
-            ],
+    console.log(mcqData, finalData, 'alldata');
+    const initializeDataSets = () => {
+      try {
+        if (!mcq) return;
+        const { statement, stem_image, see_why, feedback, options } = mcq;
+        const extractData = (fileKey, componentId) =>
+          templateData[fileKey]?.[componentId]?.data || '';
+        const questions = extractData(
+          statement.content[0].file_name[0],
+          statement.content[0].component_id
+        );
+        const finalobj = {
+          statement: questions,
+          stem_image: '',
+          option_data: shuffleArray(
+            options.map((option) => {
+              return {
+                option_id: option.option_id,
+                is_correct: option.is_correct,
+                content: extractData(
+                  option.content[0].file_name[0],
+                  option.content[0].component_id
+                ),
+              };
+            })
+          ),
+          selectedOption: '',
+          feedbackContent: {
+            correct: extractData(
+              feedback.correct.content[0].file_name[0],
+              feedback.correct.content[0].component_id
+            ),
+            incorrect: extractData(
+              feedback.incorrect.content[0].file_name[0],
+              feedback.incorrect.content[0].component_id
+            ),
+            partial: extractData(
+              feedback.partial?.content[0]?.file_name[0],
+              feedback.partial?.content[0]?.component_id
+            ),
           },
-          stem_image: {
-            component_name: stemImageComponentName,
-            component_id: stemImageComponentId,
-            file_name: stemImageFileName,
-          },
-          options,
-        },
-      } = data;
+          correctOption: options.find((option) => option.is_correct === true)
+            .option_id,
+        };
+        setfinalData(finalobj); //internal
+        setMcqData(finalobj); //external
+      } catch (error) {
+        console.error(err.message);
+      }
+    };
+    initializeDataSets();
+  }, [mcq]);
 
-      const finalobj = {
-        statement: data[stm_filename][component_id].data,
-        stem_image: data[stm_filename][stemImageComponentId]?.url,
-      };
-      setStatement(data[stm_filename][component_id].data);
-      setStem_image_url(data[stm_filename][stemImageComponentId]?.url);
-      setfinalData(finalobj);
-      setOption(options);
-    }
-  }, [data]);
+  const handleOptionChange = (id) => {
+    setfinalData({ ...finalData, selectedOption: id });
+    setMcqData({ ...finalData, selectedOption: id });
+  };
 
-  console.log(finalData, 'template data');
   return (
     <div className={style.mulitpleChoiceContainer}>
       {/* Question Statement */}
       <div className={style.contentBox}>
-        <h2>{statement}</h2>
+        <h2>{finalData.statement}</h2>
         {/* {ste_image_url && (
           <CustomImage
-            src={ste_image_url} // Change this to a real image URL
+            src={finalData.stem_image} // Change this to a real image URL
             alt="Example Image"
             fallbackSrc="https://via.placeholder.com/150" // Fallback image URL
             loader={<p>Loading image...</p>} // Custom loader text
@@ -91,17 +119,21 @@ const MultipleChoiceQuestion = ({
       <h3 className={style.subHeading}>Select the Correct Answer:</h3>
 
       <div className={style.optionsContainer}>
-        {options.map((opt) => (
+        {finalData?.option_data?.map((opt) => (
           <label
             for={`option-${opt.option_id}`}
             className={`${style.cardBox} ${
-              selectedOption === opt.option_id ? style.selected : ''
+              finalData.selectedOption === opt.option_id ? style.selected : ''
             } ${
-              submitted && selectedOption === opt.option_id && !opt.is_correct
+              submitted &&
+              finalData.selectedOption === opt.option_id &&
+              !opt.is_correct
                 ? style.incorrect
                 : ''
             } ${
-              submitted && selectedOption === opt.option_id && opt.is_correct
+              submitted &&
+              finalData.selectedOption === opt.option_id &&
+              opt.is_correct
                 ? style.correct
                 : ''
             }`}
@@ -109,13 +141,17 @@ const MultipleChoiceQuestion = ({
             <div
               key={opt.option_id}
               className={`${style.option} ${
-                selectedOption === opt.option_id ? style.selected : ''
+                finalData.selectedOption === opt.option_id ? style.selected : ''
               } ${
-                submitted && selectedOption === opt.option_id && !opt.is_correct
+                submitted &&
+                finalData.selectedOption === opt.option_id &&
+                !opt.is_correct
                   ? style.incorrect
                   : ''
               } ${
-                submitted && selectedOption === opt.option_id && opt.is_correct
+                submitted &&
+                finalData.selectedOption === opt.option_id &&
+                opt.is_correct
                   ? style.correct
                   : ''
               }`}
@@ -126,7 +162,7 @@ const MultipleChoiceQuestion = ({
                 id={`option-${opt.option_id}`}
                 name="options"
                 value={opt.option_id}
-                checked={selectedOption === opt.option_id}
+                checked={finalData.selectedOption === opt.option_id}
                 onChange={() => handleOptionChange(opt.option_id)}
                 disabled={submitted}
               />
@@ -134,11 +170,13 @@ const MultipleChoiceQuestion = ({
             <div
               className={style.optionLabel}
               htmlFor={`option-${opt.option_id}`}
-              dangerouslySetInnerHTML={parseHtmlContent(opt.html)}
-            />
+              onClick={() => handleOptionChange(opt.option_id)}
+            >
+              {opt.content}
+            </div>
 
             {submitted &&
-              selectedOption === opt.option_id &&
+              finalData.selectedOption === opt.option_id &&
               opt.is_correct && (
                 <div className={style.symbol}>
                   <span className={style.correctSymbol}>&#10004;</span>
@@ -146,7 +184,7 @@ const MultipleChoiceQuestion = ({
               )}
 
             {submitted &&
-              selectedOption === opt.option_id &&
+              finalData.selectedOption === opt.option_id &&
               !opt.is_correct && (
                 <div className={style.symbol}>
                   <span className={style.incorrectSymbol}>&#10060;</span>

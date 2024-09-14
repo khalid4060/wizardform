@@ -16,30 +16,6 @@ const selectTemplateData = createSelector(
   (templateData) => templateData
 );
 
-const parseHtmlContent = (htmlString) => {
-  return { __html: htmlString };
-};
-
-const shuffleArray = (array) => {
-  let currentIndex = array.length,
-    randomIndex;
-
-  // While there remain elements to shuffle...
-  while (currentIndex !== 0) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
-  }
-
-  return array;
-};
-
 const Questions = () => {
   const templateData = useSelector(selectTemplateData);
   const [formData, setFormData] = useState(dummyData);
@@ -50,52 +26,15 @@ const Questions = () => {
     wizard: null,
   }));
   const [btnActionType, setBtnActionType] = useState('submit');
-  const [statementContent, setStatementContent] = useState('');
-  const [seeWhyContent, setSeeWhyContent] = useState('');
-  const [options, setOptions] = useState([]);
-  const [feedback, setFeedback] = useState({});
   const [feedbackMessage, setFeedbackMessage] = useState('');
-  const [selectedOption, setSelectedOption] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const [onAction, setOnAction] = useState(false);
   const [fibData, setFibData] = useState([]);
+  const [mcqData, setMcqData] = useState([]);
   const [dropDownData, setDropDownData] = useState([]);
 
   const [isAnswerCorrect, setisAnswerCorrect] = useState();
-  const correctOption = options.find((opt) => opt.is_correct);
-
-  const {
-    statement,
-    stem_image,
-    see_why,
-    options: optionsData,
-    feedback: feedbackData,
-  } = dummyData[0];
-
-  useEffect(() => {
-    // Load statement content
-    // setStatementContent(statement.content[0].file_name[0]);
-
-    // Load see why content
-    // setSeeWhyContent(see_why.content[0].file_name[0]);
-
-    // Load options
-    const shuffledOptions = shuffleArray(
-      optionsData.map((opt) => ({
-        ...opt,
-        html: opt.content[0].file_name[0],
-      }))
-    );
-    setOptions(shuffledOptions);
-
-    // Load feedback
-    const feedbacks = {
-      correct: feedbackData.correct.content[0].file_name[0],
-      incorrect: feedbackData.incorrect.content[0].file_name[0],
-    };
-    setFeedback(feedbacks);
-  }, [statement, see_why, optionsData, feedbackData]);
 
   const resetFibForm = () => {
     const updatedDataSets = [...fibData];
@@ -162,7 +101,7 @@ const Questions = () => {
       });
       setBtnActionType('submit');
 
-      setSelectedOption(null);
+      setMcqData({ ...mcqData, selectedOption: null });
       setSubmitted(false);
       setAttempts(-1);
     }
@@ -173,7 +112,12 @@ const Questions = () => {
           setAttempts(attempts + 1);
           setSubmitted(true);
         }
-        setisAnswerCorrect(selectedOption === correctOption.option_id);
+        setisAnswerCorrect(mcqData.selectedOption === mcqData.correctOption);
+        setFeedbackMessage(
+          mcqData.selectedOption === mcqData.correctOption
+            ? mcqData.feedbackContent.correct
+            : mcqData.feedbackContent.incorrect
+        );
       }
 
       if (currentSlide.type === 'fib') {
@@ -182,7 +126,7 @@ const Questions = () => {
     }
     if (actionType === 'tryagain') {
       if (currentSlide.type === 'mcq') {
-        setSelectedOption(null);
+        setMcqData([]);
         setSubmitted(false);
       }
       if (currentSlide.type === 'fib') {
@@ -207,28 +151,9 @@ const Questions = () => {
       setBtnActionType('back');
     }
   };
-
+  console.log(mcqData, 'mcqData');
   const renderFeedback = () => {
-    if (currentSlide.type === 'mcq') {
-      const correctOption = options.find((opt) => opt.is_correct);
-      if (selectedOption === correctOption.option_id) {
-        return (
-          <div dangerouslySetInnerHTML={parseHtmlContent(feedback.correct)} />
-        );
-      } else {
-        return (
-          <div dangerouslySetInnerHTML={parseHtmlContent(feedback.incorrect)} />
-        );
-      }
-    }
-
-    if (currentSlide.type === 'fib') {
-      return feedbackMessage;
-    }
-  };
-
-  const handleOptionChange = (optionId) => {
-    setSelectedOption(optionId);
+    return feedbackMessage;
   };
 
   const renderSlide = (slide) => {
@@ -237,14 +162,10 @@ const Questions = () => {
       case 'mcq':
         return (component = (
           <MultipleChoiceQuestion
-            questionData={dummyData}
             submitted={submitted}
-            attempts={attempts}
-            statementContent={statementContent}
-            options={options}
-            selectedOption={selectedOption}
-            handleOptionChange={handleOptionChange}
-            stem_image={stem_image}
+            setMcqData={setMcqData}
+            templateData={templateData}
+            mcqData={mcqData}
           />
         ));
       case 'fib':
@@ -326,20 +247,23 @@ const Questions = () => {
               formData={formData}
               currentSlide={currentSlide}
             />
-            <form data-multi-step class="multi-step-form" className={styles.wizardContainer}>
+            <form
+              data-multi-step
+              class="multi-step-form"
+              className={styles.wizardContainer}
+            >
               {renderWizards()}
             </form>
           </div>
           <Footer
             handleSubmit={handleSubmit}
             submitted={submitted}
-            feedback={feedback}
             renderFeedback={renderFeedback}
-            seeWhyContent={seeWhyContent}
-            selectedOption={currentSlide.type === 'fib' ? true : selectedOption}
+            selectedOption={
+              currentSlide.type === 'fib' ? true : mcqData.selectedOption
+            }
             isAnswerCorrect={isAnswerCorrect}
             attempts={attempts}
-            slideType={currentSlide.type === 'fib'}
           />
         </div>
       </div>

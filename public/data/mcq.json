@@ -64,6 +64,27 @@
             "file_name": ["html"]
           }
         ]
+      },
+      {
+        "option_id": 3,
+        "is_correct": false,
+        "content": [
+          {
+            "component_name": "html",
+            "component_id": "opt2_id",
+            "file_name": ["html"]
+          }
+        ]
+      },{
+        "option_id": 4,
+        "is_correct": false,
+        "content": [
+          {
+            "component_name": "html",
+            "component_id": "opt2_id",
+            "file_name": ["html"]
+          }
+        ]
       }
     ],
     "feedback": {
@@ -71,8 +92,8 @@
         "content": [
           {
             "component_name": "html",
-            "component_id": "correct_fb_id",
-            "file_name": ["correct_feedback.html"]
+            "component_id": "correctFeedback",
+            "file_name": ["html"]
           }
         ]
       },
@@ -80,8 +101,8 @@
         "content": [
           {
             "component_name": "html",
-            "component_id": "incorrect_fb_id",
-            "file_name": ["incorrect_feedback.html"]
+            "component_id": "incorrectFeedback",
+            "file_name": ["html"]
           }
         ]
       },
@@ -90,7 +111,7 @@
           {
             "component_name": "html",
             "component_id": "partial_fb_id",
-            "file_name": ["partial_feedback.html"]
+            "file_name": ["html"]
           }
         ]
       }
