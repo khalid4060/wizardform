@@ -73,9 +73,9 @@ const WizardProgressBar = ({
         </div>
         <div className={styles.screenHeadingContainer}>
           <div className={styles.screenTitle}>
-            {currentSlide.type === 'thinking-organizer'
-              ? thinkingOrganizerTitle
-              : `Screen ${currentSlide.index + 1}`}
+            {currentSlide.type === 'thinking-organizer' || currentSlide.type === "dropdown"
+              ? `Lorem Ipsum`
+              : null}
           </div>
           {/* <div className={styles.screenSubtitle}>MCQ</div> */}
         </div>
