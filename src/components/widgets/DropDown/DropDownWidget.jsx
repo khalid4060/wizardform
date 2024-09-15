@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  mainContainer,
-  contentContainer,
-  firstContainer,
-  secondContainer,
-  imageBox,
-  iconBox,
-  selectList,
-} from './DropDownWidget.module.scss';
+import style from './DropDownWidget.module.scss';
 import SelectField from '../../elements/SelectField/SelectField';
 import SearchIcon from '../../../assets/icons/search-icon.svg';
 
@@ -97,6 +89,7 @@ function DropDownWidget({ setDropDownData, templateData }) {
       {error && <p className="error">{error}</p>}
       {dataSets.length > 0 && (
         <div className="fib-content">
+          <div className={style.contentContainer}>
           <form className="fib-form">
             <h2>{dataSets[0].title}</h2>
             <h3>Type the correct option.</h3>
@@ -117,6 +110,13 @@ function DropDownWidget({ setDropDownData, templateData }) {
                           value: option.id,
                           label: option.content,
                         }))}
+                        isError={
+                          dataSets[0].feedback[questionIndex] === true
+                          ? false
+                          : dataSets[0].feedback[questionIndex] === false
+                          ? true
+                          : null
+                          }
                       />
                     </div>
                     {question.split('_____')[1]}
@@ -125,7 +125,16 @@ function DropDownWidget({ setDropDownData, templateData }) {
               )
             )}
           </form>
-          {/* <WordBank wordBankWords={dataSets[0]?.wordBankWords} /> */}
+          <div className={style.secondContainer}>
+            <div className={style.imageBox}>
+            <span>Image here 4:3
+            440 x 330 px</span>
+            <div className={style.iconBox}>
+              <img src={SearchIcon} alt="" />
+            </div>
+            </div>
+          </div>
+          </div>
         </div>
       )}
     </div>

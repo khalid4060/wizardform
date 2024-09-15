@@ -1,35 +1,101 @@
 import React from 'react';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 import { dropdownContainer } from './SelectField.module.scss';
+function SelectField({ field, options, isError }) {
+  const customStyles = {
+    // Customize the control (input area)
+    control: (provided) => ({
+      ...provided,
+      width: '100%', // Remove padding
+      height: '30px', // Set a fixed height for centering purposes
+      display: 'flex', // Ensure flexbox for centering
+      justifyContent: 'center', // Center horizontally
+      alignItems: 'center', // Center vertically
+      textAlign: 'center', // Align text in the center
+      fontSize: '20px',
+      padding: '0 10px 0 10px', // Customize the border color
+      borderColor:`${isError === null? 'black' : isError === true? 'red' : 'green'}`,
+      ':hover': {
+        borderColor: '#888', // Border color on hover
+      },
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      textAlign: 'center', // Center the selected value text
+      width: '100%',
+      fontSize: '20px', // Make the text take the full width for centering
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      padding: '5px 20px 5px 5px',
+      backgroundColor: state.isSelected ? '#ddd' : '#fff',
+      ':hover': {
+        backgroundColor: '#f0f0f0',
+      },
+    }),
+    menu: (provided) => ({
+      ...provided,
+      width: '260px',
+      zIndex: 999999, // Set z-index to ensure menu appears above other elements
+      position: 'absolute',
+    }),
+    menuPortal: (provided) => ({
+      ...provided,
+      zIndex: 999999, // Set z-index to ensure menu appears above other elements
+      position: 'absolute', // Set z-index for the menu portal
+    }),
 
-function SelectField({ field, options }) {
-  const options2 = [
-    { value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true },
-    { value: 'blue', label: 'Blue', color: '#0052CC', isDisabled: true },
-    { value: 'purple', label: 'Purple', color: '#5243AA' },
-    { value: 'red', label: 'Red', color: '#FF5630', isFixed: true },
-    { value: 'orange', label: 'Orange', color: '#FF8B00' },
-    { value: 'yellow', label: 'Yellow', color: '#FFC400' },
-    { value: 'green', label: 'Green', color: '#36B37E' },
-    { value: 'forest', label: 'Forest', color: '#00875A' },
-    { value: 'slate', label: 'Slate', color: '#253858' },
-    { value: 'silver', label: 'Silver', color: '#666666' },
-  ];
+    input: (provided) => ({
+      ...provided,
+      width: '60px',
+      fontSize: '20px',
+      height: '30px',
+      display: 'flex', // Ensure flexbox for centering
+      justifyContent: 'center', // Center horizontally
+      alignItems: 'center', // Center vertically
+      textAlign: 'center',
+    }),
+  };
+  const IndicatorsContainer = ({ children, ...props }) => {
+    const preventDefault = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      console.log('clicked');
+    };
+    return (
+      <components.IndicatorsContainer {...props}>
+        {children}
+        {isError === null ? null : isError === true ? (
+          <span
+            style={{ marginLeft: '10px' }}
+            className="feedback-symbol incorrect-symbol"
+          >
+            &#10060;
+          </span>
+        ) : (
+          <span className="feedback-symbol correct-symbol">&#10004;</span>
+        )}
+      </components.IndicatorsContainer>
+    );
+  };
   return (
     <Select
-    className="basic-single"
-    classNamePrefix="select"
-    // defaultValue={options[0]}
-    isDisabled={false}
-    isLoading={false}
-    isClearable={false}
-    isRtl={false}
-    isSearchable={true}
-    name="color"
-    options={options}
-    value={options?.find((c) => c.value === field.value) ?? ''}
-    onChange={(val) => field.onChange(val?.value)}
-    /> 
+      className="basic-single"
+      classNamePrefix="select"
+      styles={customStyles}
+      // defaultValue={options[0]}
+      isDisabled={false}
+      isLoading={false}
+      isClearable={false}
+      isRtl={false}
+      isSearchable={true}
+      name="color"
+      options={options}
+      value={options?.find((c) => c.value === field.value) ?? ''}
+      onChange={(val) => field.onChange(val?.value)}
+      components={{ IndicatorsContainer }}
+    />
   );
 }
 
