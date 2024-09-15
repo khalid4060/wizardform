@@ -7,6 +7,7 @@ const DropZone = ({ title, items, onDelete, style }) => {
   const { setNodeRef } = useDroppable({
     id: title,
   });
+  console.log('setNodeRef', setNodeRef)
 
   return (
     <div className="drop-zone-container">
@@ -14,14 +15,6 @@ const DropZone = ({ title, items, onDelete, style }) => {
         <h3>{title}</h3>
       </div>
       <div className="drop-zone" ref={setNodeRef}>
-        {items.length === 0 && (
-          <p className="drop-here-style">
-            <span>
-              <img src={dragIcon} alt="drag-icon" />
-            </span>
-            Drop Here
-          </p>
-        )}
         {items.map((item, index) => (
           <div key={index} className="dropped-item">
             {item.name}
@@ -33,6 +26,14 @@ const DropZone = ({ title, items, onDelete, style }) => {
             </div>
           </div>
         ))}
+        {(
+          <p className="drop-here-style">
+            <span>
+              <img src={dragIcon} alt="drag-icon" />
+            </span>
+            Drop Here
+          </p>
+        )}
       </div>
     </div>
   );

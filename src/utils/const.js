@@ -1,7 +1,7 @@
 export const dummyData = [
   {
     id: 's0',
-    type: 'dropdown',
+    type: 'mcq',
     visited: false,
     submitted: false,
     statement: {
@@ -106,7 +106,7 @@ export const dummyData = [
   },
   {
     id: 's1',
-    type: 'mcq',
+    type: 'fib',
     visited: false,
     submitted: false,
     statement: {
@@ -209,10 +209,9 @@ export const dummyData = [
       },
     },
   },
-
   {
     id: 's2',
-    type: 'fib',
+    type: 'dropdown',
     visited: false,
     submitted: false,
     statement: {
@@ -309,7 +308,7 @@ export const dummyData = [
   },
   {
     id: 's3',
-    type: 'dropdown',
+    type: 'thinking-organizer',
     visited: false,
     submitted: false,
     statement: {

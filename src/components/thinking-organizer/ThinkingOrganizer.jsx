@@ -181,12 +181,14 @@ const ThinkingOrganizer = ({ templateData, setThinkingOrganizerTitle }) => {
         </div>
 
         <DropZone
+          key={column1Title}
           title={column1Title}
           items={optionsData.column1}
           onDelete={handleDeleteItem}
           style={{ backgroundColor: '#e5f8f0', border: '2px solid #5dd3a0' }}
         />
         <DropZone
+          key={column2Title}
           title={column2Title}
           items={optionsData.column2}
           onDelete={handleDeleteItem}
