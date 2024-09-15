@@ -72,6 +72,8 @@
   h3 {
     margin: 0 0 25px;
     text-align: center;
+    font-size: 20px;
+    font-weight: 600;
   }
 
   .input-container {
@@ -82,6 +84,8 @@
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
+    margin-top: 8px;
+    border: 2px solid #B6BBC1;
 
     input {
       background-color: #fff;
@@ -90,6 +94,8 @@
       margin-right: 10px;
       outline: none;
       transition: border-color 0.3s;
+      font-size: 22px;
+      font-weight: 300;
 
       &:focus {
         border-color: #007bff;
@@ -140,6 +146,8 @@
     border-radius: 5px;
     background-color: #cde5ff;
     border: 2px solid #8bc5ff;
+    font-size: 22px;
+    font-weight: 300;
     cursor: move;
     transition: all 0.5s;
 
@@ -182,6 +190,8 @@
     .drop-here-container {
       h3 {
         color: #004a2a;
+        font-size: 20px;
+        font-weight: 600;
       }
     }
   }
@@ -190,12 +200,14 @@
     .drop-here-container {
       h3 {
         color: #996000;
+        font-size: 20px;
+        font-weight: 600;
       }
     }
   }
 
   .drop-zone {
-    min-height: 417px;
+    min-height: 461px;
     border: 2px solid #ccc;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -225,6 +237,8 @@
 
     p {
       color: #999;
+      font-size: 20px;
+      font-weight: 300;
     }
   }
 
