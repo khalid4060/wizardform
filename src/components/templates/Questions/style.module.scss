@@ -1,5 +1,6 @@
 .container {
   width: 100%;
+  max-width: 1600px;
   margin: auto;
   height: 100%;
   background-color: white;
@@ -9,4 +10,11 @@
 }
 .wizardContainer {
   padding-top: 2rem;
+  height: calc(100dvh - 263px);
+  overflow-y: auto;
+}
+
+
+.wizardContainer::-webkit-scrollbar {
+  width: 0px;
 }

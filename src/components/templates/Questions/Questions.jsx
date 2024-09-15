@@ -145,12 +145,12 @@ const Questions = () => {
 
       setMcqData({ ...mcqData, selectedOption: null });
       setSubmitted(false);
-      setAttempts(-1);
+      setAttempts(0);
     }
 
     if (actionType === 'submit') {
       if (currentSlide.type === 'mcq') {
-        if (attempts <= 3) {
+        if (attempts <= mcqData.submit_limit) {
           setAttempts(attempts + 1);
           setSubmitted(true);
         }
