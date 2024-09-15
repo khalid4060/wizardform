@@ -1,7 +1,23 @@
 import React from 'react';
 import Select, { components } from 'react-select';
-import { dropdownContainer } from './SelectField.module.scss';
-function SelectField({ field, options, isError,questionIndex }) {
+import DownArrowIcon from '../../../assets/icons/down-arrow-icon.svg';
+import UpArrowIcon from '../../../assets/icons/up-arrow-icon.svg';
+import styles from './SelectField.module.scss';
+
+const DropDownIcon = ({ isFocused }) => {
+  console.log('isFocused', isFocused)
+  return !isFocused ? (
+    <div className={styles.dropDownIcon}>
+      <img width={'11.97px'} height={'6.79px'} src={DownArrowIcon} />
+    </div>
+  ) : (
+    <div className={styles.dropDownIcon}>
+      <img width={'11.97px'} height={'6.79px'} src={UpArrowIcon} />
+    </div>
+  );
+};
+
+function SelectField({ field, options, isError, questionIndex }) {
   const customStyles = {
     // Customize the control (input area)
     control: (provided) => ({
@@ -14,7 +30,9 @@ function SelectField({ field, options, isError,questionIndex }) {
       textAlign: 'center', // Align text in the center
       fontSize: '20px',
       padding: '0 10px 0 10px', // Customize the border color
-      borderColor:`${isError === null? 'black' : isError === true? 'red' : 'green'}`,
+      borderColor: `${
+        isError === null ? 'black' : isError === true ? 'red' : 'green'
+      }`,
       ':hover': {
         borderColor: '#888', // Border color on hover
       },
@@ -84,7 +102,6 @@ function SelectField({ field, options, isError,questionIndex }) {
       classNamePrefix="select"
       styles={customStyles}
       // defaultValue={options[0]}
-      isDisabled={false}
       isLoading={false}
       isClearable={false}
       isRtl={false}
@@ -93,8 +110,17 @@ function SelectField({ field, options, isError,questionIndex }) {
       options={options}
       value={options?.find((c) => c.value === field.value) ?? ''}
       onChange={(val) => field.onChange(val?.value)}
-      components={{ IndicatorsContainer }}
-      menuPlacement={questionIndex < 2? 'auto' : 'top'}
+      components={{
+        IndicatorsContainer,
+        IndicatorSeparator: () => null,
+        DropdownIndicator: (props) => {
+          return isError === null ? (
+            <DropDownIcon isFocused={props.isFocused} />
+          ) : null;
+        },
+      }}
+      isDisabled={isError === null ? false : true}
+      menuPlacement={questionIndex < 2 ? 'auto' : 'top'}
     />
   );
 }

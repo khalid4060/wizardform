@@ -309,7 +309,7 @@ export const dummyData = [
   },
   {
     id: 's3',
-    type: 'thinking-organizer',
+    type: 'dropdown',
     visited: false,
     submitted: false,
     statement: {
