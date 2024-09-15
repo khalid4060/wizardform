@@ -85,6 +85,7 @@ const ThinkingOrganizer = ({ templateData, setThinkingOrganizerTitle }) => {
   };
 
   const handleDrop = ({ active, over }) => {
+    console.log('handleDrop', { active, over })
     if (!over || active.id === over.id) return;
 
     const sourceId = active.id;
