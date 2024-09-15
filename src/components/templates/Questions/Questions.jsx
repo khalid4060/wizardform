@@ -236,6 +236,7 @@ const Questions = () => {
         return (component = (
           <DropDownWidget
             setDropDownData={setDropDownData}
+            dropDownData={dropDownData}
             templateData={templateData}
           />
         ));

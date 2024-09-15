@@ -3,9 +3,8 @@ import style from './DropDownWidget.module.scss';
 import SelectField from '../../elements/SelectField/SelectField';
 import SearchIcon from '../../../assets/icons/search-icon.svg';
 
-function DropDownWidget({ setDropDownData, templateData }) {
+function DropDownWidget({ dropDownData, setDropDownData, templateData }) {
   const { dropdown } = templateData;
-  const [dataSets, setDataSets] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -66,7 +65,7 @@ function DropDownWidget({ setDropDownData, templateData }) {
           feedback: Array(items.length).fill(null),
           feedbackContent,
         };
-        setDataSets([initialData]);
+        setDropDownData([initialData]);
         setDropDownData([initialData]);
         setError(null);
       } catch (err) {
@@ -78,22 +77,22 @@ function DropDownWidget({ setDropDownData, templateData }) {
   }, [dropdown]);
 
   const handleInputChange = (questionIndex, value) => {
-    const updatedDataSets = [...dataSets];
+    const updatedDataSets = [...dropDownData];
     updatedDataSets[0].inputs[questionIndex] = value;
-    setDataSets(updatedDataSets);
+    setDropDownData(updatedDataSets);
     setDropDownData(updatedDataSets);
   };
 
   return (
     <div className="fill-in-the-blanks">
       {error && <p className="error">{error}</p>}
-      {dataSets.length > 0 && (
+      {dropDownData.length > 0 && (
         <div className="fib-content">
           <div className={style.contentContainer}>
             <form className={`fib-form`}>
-              <h2>{dataSets[0].title}</h2>
+              <h2>{dropDownData[0].title}</h2>
               <h3>Type the correct option.</h3>
-              {dataSets[0].questions.map(
+              {dropDownData[0].questions.map(
                 ({ question, selectField, inputs }, questionIndex) => (
                   <div className="question" key={questionIndex}>
                     <label>
@@ -101,7 +100,7 @@ function DropDownWidget({ setDropDownData, templateData }) {
                       <div className="input-container">
                         <SelectField
                           field={{
-                            value: dataSets[0].inputs[questionIndex],
+                            value: dropDownData[0].inputs[questionIndex],
                             onChange: (value) =>
                               handleInputChange(questionIndex, value),
                           }}
@@ -111,9 +110,9 @@ function DropDownWidget({ setDropDownData, templateData }) {
                             label: option.content,
                           }))}
                           isError={
-                            dataSets[0].feedback[questionIndex] === true
+                            dropDownData[0].feedback[questionIndex] === true
                               ? false
-                              : dataSets[0].feedback[questionIndex] === false
+                              : dropDownData[0].feedback[questionIndex] === false
                               ? true
                               : null
                           }
