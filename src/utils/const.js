@@ -1,7 +1,7 @@
 export const dummyData = [
   {
     id: 's0',
-    type: 'dropdown',
+    type: 'mcq',
     visited: false,
     submitted: false,
     statement: {
