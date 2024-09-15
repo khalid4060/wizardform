@@ -5,7 +5,6 @@ import UpArrowIcon from '../../../assets/icons/up-arrow-icon.svg';
 import styles from './SelectField.module.scss';
 
 const DropDownIcon = ({ isFocused }) => {
-  console.log('isFocused', isFocused)
   return !isFocused ? (
     <div className={styles.dropDownIcon}>
       <img width={'11.97px'} height={'6.79px'} src={DownArrowIcon} />
@@ -115,11 +114,11 @@ function SelectField({ field, options, isError, questionIndex }) {
         IndicatorSeparator: () => null,
         DropdownIndicator: (props) => {
           return isError === null ? (
-            <DropDownIcon isFocused={props.isFocused} />
+            <DropDownIcon isFocused={false} />
           ) : null;
         },
       }}
-      isDisabled={isError === null ? false : true}
+      // isDisabled={isError === null ? false : true}
       menuPlacement={questionIndex < 2 ? 'auto' : 'top'}
     />
   );
