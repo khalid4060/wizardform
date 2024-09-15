@@ -1,12 +1,12 @@
 import React from 'react';
 import Select, { components } from 'react-select';
 import { dropdownContainer } from './SelectField.module.scss';
-function SelectField({ field, options, isError }) {
+function SelectField({ field, options, isError,questionIndex }) {
   const customStyles = {
     // Customize the control (input area)
     control: (provided) => ({
       ...provided,
-      width: '100%', // Remove padding
+      width: '160px', // Remove padding
       height: '30px', // Set a fixed height for centering purposes
       display: 'flex', // Ensure flexbox for centering
       justifyContent: 'center', // Center horizontally
@@ -47,7 +47,6 @@ function SelectField({ field, options, isError }) {
 
     input: (provided) => ({
       ...provided,
-      width: '60px',
       fontSize: '20px',
       height: '30px',
       display: 'flex', // Ensure flexbox for centering
@@ -95,6 +94,7 @@ function SelectField({ field, options, isError }) {
       value={options?.find((c) => c.value === field.value) ?? ''}
       onChange={(val) => field.onChange(val?.value)}
       components={{ IndicatorsContainer }}
+      menuPlacement={questionIndex < 2? 'auto' : 'top'}
     />
   );
 }

@@ -90,50 +90,50 @@ function DropDownWidget({ setDropDownData, templateData }) {
       {dataSets.length > 0 && (
         <div className="fib-content">
           <div className={style.contentContainer}>
-          <form className="fib-form">
-            <h2>{dataSets[0].title}</h2>
-            <h3>Type the correct option.</h3>
-            {dataSets[0].questions.map(
-              ({ question, selectField, inputs }, questionIndex) => (
-                <div className="question" key={questionIndex}>
-                  <label>
-                    {question.split('_____')[0]}
-                    <div className="input-container">
-                      <SelectField
-                        field={{
-                          value: dataSets[0].inputs[questionIndex],
-                          onChange: (value) =>
-                            handleInputChange(questionIndex, value),
-                        }}
-                        options={selectField.options.map((option) => ({
-                          ...option,
-                          value: option.id,
-                          label: option.content,
-                        }))}
-                        isError={
-                          dataSets[0].feedback[questionIndex] === true
-                          ? false
-                          : dataSets[0].feedback[questionIndex] === false
-                          ? true
-                          : null
+            <form className={`fib-form`}>
+              <h2>{dataSets[0].title}</h2>
+              <h3>Type the correct option.</h3>
+              {dataSets[0].questions.map(
+                ({ question, selectField, inputs }, questionIndex) => (
+                  <div className="question" key={questionIndex}>
+                    <label>
+                      {question.split('_____')[0]}
+                      <div className="input-container">
+                        <SelectField
+                          field={{
+                            value: dataSets[0].inputs[questionIndex],
+                            onChange: (value) =>
+                              handleInputChange(questionIndex, value),
+                          }}
+                          options={selectField.options.map((option) => ({
+                            ...option,
+                            value: option.id,
+                            label: option.content,
+                          }))}
+                          isError={
+                            dataSets[0].feedback[questionIndex] === true
+                              ? false
+                              : dataSets[0].feedback[questionIndex] === false
+                              ? true
+                              : null
                           }
-                      />
-                    </div>
-                    {question.split('_____')[1]}
-                  </label>
+                          questionIndex={questionIndex}
+                        />
+                      </div>
+                      {question.split('_____')[1]}
+                    </label>
+                  </div>
+                )
+              )}
+            </form>
+            <div className={style.secondContainer}>
+              <div className={style.imageBox}>
+                <span>Image here 4:3 440 x 330 px</span>
+                <div className={style.iconBox}>
+                  <img src={SearchIcon} alt="" />
                 </div>
-              )
-            )}
-          </form>
-          <div className={style.secondContainer}>
-            <div className={style.imageBox}>
-            <span>Image here 4:3
-            440 x 330 px</span>
-            <div className={style.iconBox}>
-              <img src={SearchIcon} alt="" />
+              </div>
             </div>
-            </div>
-          </div>
           </div>
         </div>
       )}
